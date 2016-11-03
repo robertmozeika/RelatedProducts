@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+      <head>
+
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+
+
+
+      <link rel='stylesheet' href='/stylesheets/bootstrap.min.css' />
+    	<link rel='stylesheet' href='/stylesheets/style.css' />
+    	<title><%= title %></title>
+
+      </head>
+      <body>
+        <div class="row">
+      <div class="large-6 columns">
+        <h1><%= title %></h1>
+        <div class="row collapse">
+          <div class="small-12 columns">
+            <a href="/addLiquid">Add Liquid</a>
+          </div>
+          <div class="small-12 columns">
+            <a href="/addProduct">Add A Product</a>
+          </div>
+        </div>
+      </div>
+    </div>
+        <h2>Products</h2>
+        <p>
+
+        </p>
+        <div id="insert-products">
+          <%
+            dbresult.forEach(function(element){
+          %>
+          <%= element.name %>
+          <% 
+
+
+            })
+          %>
+        </div>
+
+
+
+      </body>
+    </html>
+
+
+
+
+  </body>
+</html>
