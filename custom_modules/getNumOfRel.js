@@ -27,8 +27,8 @@ function getNumOfRel(res){
        console.log(result)
        if(err) {
         console.log(err)
-      }else if (result.products !== undefined){
-
+      }else if (result[0].products !== undefined){
+        console.log('else if happened')
          result[0].products.forEach(function(element){
            var str1 = element.numOfRel.toString();
            var push1 = element.productID.concat(str1);
@@ -42,6 +42,7 @@ function getNumOfRel(res){
 
        }
      else {
+       console.log('passing nothing')
        var passPromise = [res, []]
 
        resolve(passPromise)

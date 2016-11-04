@@ -23,12 +23,12 @@ function renderPromises(res){
 
   resolve(values)
 
-})
+  })
 
-}).then(function(fromPromise){
-  return addProducts2DB(fromPromise)
-} ).catch(reason => {
-  console.log(reason)});
+  }).then(function(fromPromise){
+    return addProducts2DB(fromPromise)
+  } ).catch(reason => {
+    console.log(reason)});
 
 
 }
