@@ -48,18 +48,8 @@ var ShopifyObj = {
 
       ShopifyObj.Shopify.get('/admin/products.json',  function(err, data, headers){
               var stringdata = JSON.stringify(data.products);
-                    console.log(headers); // Headers returned from request
-                    console.log(data);
-                    console.log('numRelArr')
 
-                    console.log(numRelArr)
-                    response.render('layout', {
-                            title: 'Related Products',
-                            products: stringdata,
-                            numOfRelPass: numRelArr,
-
-
-                  });
+                    
     })
 
   },
