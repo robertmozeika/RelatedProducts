@@ -1,8 +1,8 @@
 var express = require('express');
 var router = express.Router();
-var ShopifyObj = require('./shopify.js');
+var ShopifyObj = require('../custom_modules/shopify.js');
 var mongodb = require('mongodb');
-var database = require('./database.js');
+var database = require('../custom_modules/database.js');
 var app = require('../app.js')
 // const EventEmitter = require('events');
 //

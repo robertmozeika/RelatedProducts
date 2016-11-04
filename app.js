@@ -8,7 +8,6 @@ var bodyParser = require('body-parser');
 var routes = require('./routes/index');
 var users = require('./routes/users');
 var finauth = require('./routes/finauth');
-var tester = require('./routes/test');
 var addProduct = require('./routes/addproduct.js');
 var addLiquid = require('./routes/addLiquid.js');
 var getJSON = require('./routes/getJSON.js');
@@ -23,7 +22,6 @@ const myEmitter = new MyEmitter();
 myEmitter.on('event', (inp) => {
   console.log('an event occurred! ' + inp);
 });
-myEmitter.emit('event', "jerry");
 
 var app = express();
 
@@ -42,7 +40,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', routes);
 app.use('/users', users);
 app.use('/finish_auth', finauth);
-app.use('/test', tester);
 app.use('/addProduct', addProduct);
 app.use('/addLiquid', addLiquid);
 app.use('/getJSON', getJSON);

@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var app = require('../app.js')
-var ShopifyObj = require('./shopify.js');
+var ShopifyObj = require('../custom_modules/shopify.js');
 // Again assuming you are using the express framework
 /* GET users listing. */
 

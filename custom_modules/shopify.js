@@ -1,5 +1,5 @@
 var shopifyAPI = require('shopify-node-api');
-var router = require('./index.js')
+var router = require('../routes/index.js')
 var random = 4322423 * Math.random()
 var randomstring = random.toString();
 var fs = require('fs');
@@ -42,23 +42,26 @@ var ShopifyObj = {
   },
 
   readAllProducts: function(response, numRelArr){
-    ShopifyObj.Shopify.get('/admin/products.json',  function(err, data, headers){
-            var stringdata = JSON.stringify(data.products);
-                  console.log(headers); // Headers returned from request
-                  console.log(data);
-                  console.log('numRelArr')
-
-                  console.log(numRelArr)
-                  response.render('layout', {
-                          title: 'Related Products',
-                          products: stringdata,
-                          numOfRelPass: numRelArr,
 
 
-          });
 
 
-});
+      ShopifyObj.Shopify.get('/admin/products.json',  function(err, data, headers){
+              var stringdata = JSON.stringify(data.products);
+                    console.log(headers); // Headers returned from request
+                    console.log(data);
+                    console.log('numRelArr')
+
+                    console.log(numRelArr)
+                    response.render('layout', {
+                            title: 'Related Products',
+                            products: stringdata,
+                            numOfRelPass: numRelArr,
+
+
+                  });
+    })
+
   },
   addScript: function(){
     var post_data = {

@@ -1,13 +1,16 @@
 var ShopifyObj = require('./shopify.js');
 
 var mongodb = require('mongodb');
-var index = require('./index.js');
+var index = require('../routes/index.js');
 var express = require('express');
 var fs = require('fs');
+var getShop = require('./getShopifyData.js');
+
 
 
 
  function getNumOfRel(res){
+   var numOfArr = [];
   var MongoClient = mongodb.MongoClient;
 
   var url = "mongodb://localhost:27017/shopify"
@@ -26,14 +29,30 @@ var fs = require('fs');
         if(err) {
 
         }else if (result.length){
-          var resultingArr = [];
+
           result[0].products.forEach(function(element){
             var str1 = element.numOfRel.toString();
             var push1 = element.productID.concat(str1);
-            resultingArr.push(push1);
+            numOfArr.push(push1);
           })
-          console.log(resultingArr)
-          ShopifyObj.readAllProducts(res, resultingArr)
+
+          var promise = getShop();
+
+          promise.then(function(fromResolve){
+            console.log("We got from resolve");
+            console.log(fromResolve);
+            var dog = "doggie"
+            return dog
+          }).catch(function(fromReject){
+            console.log("we got reject");
+            console.log(fromReject)
+          }).then(function(inp){
+            console.log(inp)
+          })
+
+
+          ShopifyObj.readAllProducts(res, numOfArr);
+
         }
       else {}
 

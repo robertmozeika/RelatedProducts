@@ -1,8 +1,7 @@
 var ShopifyObj = require('./shopify.js');
 
 var mongodb = require('mongodb');
-var index = require('./index.js');
-var shopifyAPI = require('shopify-node-api');
+var index = require('../routes/index.js');
 var express = require('express');
 var fs = require('fs');
 
