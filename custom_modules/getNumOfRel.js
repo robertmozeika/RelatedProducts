@@ -24,10 +24,10 @@ function getNumOfRel(res){
      collection.find({"name" : "test-store-1994-1994"}).toArray(function(err, result){
        console.log("lookhere")
        console.log(result[0].products)
-
+       console.log(result)
        if(err) {
-
-       }else if (result.length){
+        console.log(err)
+      }else if (result.products !== undefined){
 
          result[0].products.forEach(function(element){
            var str1 = element.numOfRel.toString();
@@ -41,7 +41,12 @@ function getNumOfRel(res){
         //  ShopifyObj.readAllProducts(res, numOfArr);
 
        }
-     else {}
+     else {
+       var passPromise = [res, []]
+
+       resolve(passPromise)
+
+     }
 
      db.close();
 

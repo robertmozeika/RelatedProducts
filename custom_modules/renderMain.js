@@ -1,6 +1,6 @@
 var getNumOfRel = require('./getNumOfRel.js');
 var getShop = require('./getShopifyData.js');
-
+var addProducts2DB = require('./addsProducts2DB')
 
 function renderPromises(res){
 
@@ -26,7 +26,7 @@ function renderPromises(res){
 })
 
 }).then(function(fromPromise){
-  console.log(fromPromise)
+  return addProducts2DB(fromPromise)
 } ).catch(reason => {
   console.log(reason)});
 
