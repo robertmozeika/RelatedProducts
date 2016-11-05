@@ -4,6 +4,8 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var mongo = require('mongodb');
+
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
@@ -12,7 +14,10 @@ var addProduct = require('./routes/addproduct.js');
 var addLiquid = require('./routes/addLiquid.js');
 var getJSON = require('./routes/getJSON.js');
 var exchangetoken = require('./routes/exchange.js');
-var mongo = require('mongodb');
+var changeNumOfRel = require('./routes/changeNumOfRel.js')
+
+
+
 
 const EventEmitter = require('events');
 
@@ -43,7 +48,8 @@ app.use('/finish_auth', finauth);
 app.use('/addProduct', addProduct);
 app.use('/addLiquid', addLiquid);
 app.use('/getJSON', getJSON);
-app.use('/exchange', exchangetoken)
+app.use('/exchange', exchangetoken);
+app.use ("/changeNumOfRel", changeNumOfRel)
 
 
 
