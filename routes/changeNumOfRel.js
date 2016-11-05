@@ -156,6 +156,8 @@ function getArrayIndexes(){
   promise.then((inp)=>{
     console.log('here is inp')
     return replaceNum(inp)
+}).then(()=>{
+  res.redirect('/finish_auth')
 }).catch((err) =>{
   console.log(err)
 })
