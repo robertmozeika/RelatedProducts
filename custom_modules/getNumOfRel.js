@@ -22,13 +22,11 @@ function getNumOfRel(res){
      var collection = db.collection('shops');
 
      collection.find({"name" : "test-store-1994-1994"}).toArray(function(err, result){
-       console.log("lookhere")
-       console.log(result[0].products)
-       console.log(result)
        if(err) {
+
         console.log(err)
       }else if (result[0].products !== undefined){
-        console.log('else if happened')
+        console.log("connection successful at getNumOfRel")
          result[0].products.forEach(function(element){
            var str1 = element.numOfRel.toString();
            var push1 = element.productID.concat(str1);
@@ -42,7 +40,7 @@ function getNumOfRel(res){
 
        }
      else {
-       console.log('passing nothing')
+       console.log('passing nothing at getNumRel')
        var passPromise = [res, []]
 
        resolve(passPromise)

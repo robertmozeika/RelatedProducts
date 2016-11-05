@@ -49,7 +49,7 @@ var ShopifyObj = {
       ShopifyObj.Shopify.get('/admin/products.json',  function(err, data, headers){
               var stringdata = JSON.stringify(data.products);
 
-                    
+
     })
 
   },
@@ -63,7 +63,7 @@ var ShopifyObj = {
     }
 
     ShopifyObj.Shopify.post('/admin/products.json', post_data, function(err, data, headers){
-      console.log(err, data);
+      // console.log(err, data);
     });
   }
 

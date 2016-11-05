@@ -46,10 +46,10 @@
             <div class="well">
 
 
-            <strong><%- element.title %></strong>
+            <p><strong><%- element.title %></strong></p>
             Number of Related Items:
 
-                <select id="select<%=element.id%>" name="numOfRel<%=element.id%>">
+                <select class="form-control" id="select<%=element.id%>" name="numOfRel<%=element.id%>">
                   <option id="option<%=element.id%>1" value="1" >
                     1
                   </option>
@@ -73,7 +73,7 @@
             </div>
         <%  })
           %>
-          <input id="submitNumOfRel" type="submit"></submit>
+          <button id="submitNumOfRel" class="btn btn-primary" type="submit">Submit</button>
           </form>
 
         </div>

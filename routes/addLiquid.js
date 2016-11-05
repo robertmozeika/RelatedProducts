@@ -33,7 +33,7 @@ router.get('/', function(req, res){
 }
 
 ShopifyObj.Shopify.post('/admin/products.json', post_data, function(err, data, headers){
-  console.log(err, data);
+  // console.log(err, data);
 });
 //
 

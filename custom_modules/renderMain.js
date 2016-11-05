@@ -12,7 +12,6 @@ function renderPromises(res){
 
   ]).then(function(values){
     return new Promise((resolve, reject) => {
-    console.log('made it here');
     values[0][0].render('layout', {
             title: 'Related Products',
             products: values[1],

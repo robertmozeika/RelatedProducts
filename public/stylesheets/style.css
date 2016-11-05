@@ -8,6 +8,7 @@ a {
 }
 
 
-.numRelForm {
-  
+.numRelForm select{
+  width: 5%;
+  display: inline-block;
 }

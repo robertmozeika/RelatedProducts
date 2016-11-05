@@ -18,16 +18,6 @@ var changeNumOfRel = require('./routes/changeNumOfRel.js')
 
 
 
-
-const EventEmitter = require('events');
-
-class MyEmitter extends EventEmitter {}
-
-const myEmitter = new MyEmitter();
-myEmitter.on('event', (inp) => {
-  console.log('an event occurred! ' + inp);
-});
-
 var app = express();
 
 // view engine setup

@@ -25,18 +25,16 @@ var dbObj = {
       if(err){
         console.log('Unable to connect' + err)
       } else {
-        console.log('Connection between Database Success');
+        console.log('Connection between Database Success at connectDB');
 
         var collection = db.collection('shops');
 
         collection.find({}).toArray(function(err, result){
-          console.log(result)
           if(err) {
             res.send(err)
           }else if (result.length){
-            console.log(result)
-            var shop_id = shopname.replace(".myshopify.com", "");
-            var nametest = {name: shop_id};
+            console.log("success getting result Length at database.js connectDB")
+            var nametest = {name: shopname};
             var foundmatch = false;
             for(var j = 0; j <result.length; ++j) {
                 if(result[j].name == nametest.name){
@@ -45,12 +43,12 @@ var dbObj = {
             };
             if (foundmatch){
               ShopifyObj.tempNeeded = false;
-              ShopifyObj.connectShopify(shop_id, foundmatch);
+              ShopifyObj.connectShopify(shopname, foundmatch);
               var auth_url = ShopifyObj.Shopify.buildAuthURL();
               res.redirect(auth_url);
             }
             else {
-              ShopifyObj.tempShopify(shop_id);
+              ShopifyObj.tempShopify(shopname);
               var auth_url = ShopifyObj.Shopify.buildAuthURL();
               res.redirect(auth_url);
             }
@@ -78,13 +76,11 @@ var dbObj = {
         var collection = db.collection('shops');
 
         collection.find({}).toArray(function(err, result){
-          console.log(result)
           if(err) {
             res.send(err)
           }else if (result.length){
             var shopname = shopArg;
-            var shop_id = shopname.replace(".myshopify.com", "");
-            var nametest = {name: shop_id};
+            var nametest = {name: shopname};
             var foundmatch = false;
             for(var j = 0; j <result.length; ++j) {
                 if(result[j].name == nametest.name){
@@ -92,11 +88,11 @@ var dbObj = {
                 }
             };
             if (foundmatch){
-              console.log(foundmatch)
+              console.log(" access token is already in DB " + foundmatch)
             }
             else {
-              collection.insert({"name": shop_id, "access_token": access_token});
-              res.redirect('/?shop=' + shop_id);
+              collection.insert({"name": shopname, "access_token": access_token});
+              res.redirect('/?shop=' + shopname);
 
             }
           }
@@ -117,13 +113,11 @@ var dbObj = {
       if(err){
         console.log('Unable to connect' + err)
       } else {
-        console.log('Connection between Database Success');
+        console.log('Connection between Database Success at getNumOfRel');
 
         var collection = db.collection('shops');
 
         collection.find({"name" : "test-store-1994-1994"}).toArray(function(err, result){
-          console.log("lookhere")
-          console.log(result[0].products)
 
           if(err) {
 
@@ -134,7 +128,6 @@ var dbObj = {
               var push1 = element.productID.concat(str1);
               resultingArr.push(push1);
             })
-            console.log(resultingArr)
             ShopifyObj.readAllProducts(res, resultingArr)
           }
         else {}
