@@ -17,6 +17,23 @@ var dbObj = {
         callback(error);
       });
   },
+  exportCollection: function(){
+    var MongoClient = mongodb.MongoClient;
+
+    var url = "mongodb://localhost:27017/shopify"
+    MongoClient.connect(url, function(err, db){
+      if(err){
+        console.log('Unable to connect' + err)
+      } else {
+        console.log('Connection between Database Success at connectDB');
+
+        var collection = db.collection('shops');
+
+        return collection
+
+      }
+    })
+  },
   connectDB: function(shopname, res){
     var MongoClient = mongodb.MongoClient;
 

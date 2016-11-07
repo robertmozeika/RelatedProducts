@@ -16,6 +16,7 @@ function renderPromises(res){
             title: 'Related Products',
             products: values[1],
             numOfRelPass: values[0][1],
+            defaultNum: "3",
 
 
     });

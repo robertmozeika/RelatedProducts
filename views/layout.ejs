@@ -56,7 +56,7 @@
                   <option id="option<%=element.id%>2" value="2">
                     2
                   </option>
-                  <option  id="option<%=element.id%>3"value="3">
+                  <option  selected="selected" id="option<%=element.id%>3"value="3">
                     3
                   </option>
                   <option  id="option<%=element.id%>4"value="4">
@@ -92,10 +92,16 @@
     		ShopifyApp.Bar.loadingOff();
     	});
       var newArr = [<%-numOfRelPass%>];
-      console.log(newArr)
+      var defaultNum = <%- defaultNum %>;
+      var strDef = defaultNum.toString();
       newArr.forEach(function(element){
-        console.log("did it")
-        $('#option' + element).attr('selected','selected')
+        var lastDigit = element.toString().slice(-1);
+        if (lastDigit !== strDef) {
+          var strEle = element.toString();
+          var removeDefault = strEle.substring(0, strEle.length - 1);
+          removeDefault = removeDefault + defaultNum;
+          $('#option' + removeDefault).removeAttr('selected')
+          $('#option' + element).attr('selected','selected') }
       });
 
       // var stringProducts = <%- JSON.stringify(products) %>

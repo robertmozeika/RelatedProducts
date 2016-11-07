@@ -5,6 +5,7 @@ var index = require('../routes/index.js');
 var express = require('express');
 var fs = require('fs');
 var getShop = require('./getShopifyData.js');
+var database = require('./database.js')
 
 
 function getNumOfRel(res){
