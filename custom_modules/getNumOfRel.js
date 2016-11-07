@@ -5,7 +5,6 @@ var index = require('../routes/index.js');
 var express = require('express');
 var fs = require('fs');
 var getShop = require('./getShopifyData.js');
-var database = require('./database.js')
 
 
 function getNumOfRel(res){
@@ -33,8 +32,8 @@ function getNumOfRel(res){
            var push1 = element.productID.concat(str1);
            numOfArr.push(push1);
          })
-
-         var passPromise = [res, numOfArr]
+         var defaultNum = result[0].defaultNumOfRelated;
+         var passPromise = [res, numOfArr, defaultNum]
 
          resolve(passPromise)
         //  ShopifyObj.readAllProducts(res, numOfArr);

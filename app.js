@@ -14,7 +14,8 @@ var addProduct = require('./routes/addproduct.js');
 var addLiquid = require('./routes/addLiquid.js');
 var getJSON = require('./routes/getJSON.js');
 var exchangetoken = require('./routes/exchange.js');
-var changeNumOfRel = require('./routes/changeNumOfRel.js')
+var changeNumOfRel = require('./routes/changeNumOfRel.js');
+var changeDefNum = require('./routes/changeDefaultNum.js');
 
 
 
@@ -39,7 +40,9 @@ app.use('/addProduct', addProduct);
 app.use('/addLiquid', addLiquid);
 app.use('/getJSON', getJSON);
 app.use('/exchange', exchangetoken);
-app.use ("/changeNumOfRel", changeNumOfRel)
+app.use ("/changeNumOfRel", changeNumOfRel);
+app.use ("/changeDefaultNum", changeDefNum)
+
 
 
 

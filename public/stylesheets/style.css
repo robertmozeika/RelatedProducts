@@ -12,3 +12,21 @@ a {
   width: 5%;
   display: inline-block;
 }
+
+#defNumSelect {
+  width: 35px;
+  display: inline-block;
+
+}
+
+#defNumForm {
+  display: inline-block;
+}
+
+#defNumForm button {
+  display: inline-block;
+}
+
+#defaultNum span{
+  font-size: 15px;
+}

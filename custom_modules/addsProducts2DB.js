@@ -39,7 +39,7 @@ return new Promise(function(resolve, reject){
 
          var errors = [];
          products2Add.forEach((element) => {
-           collection.update({"name": index.shop_id}, {$push:{"products": {"productID" : element.id.toString(), "productName": element.title, "numOfRel": 3}}},  function(err, result){
+           collection.update({"name": index.shop_id}, {$push:{"products": {"productID" : element.id.toString(), "productName": element.title, "numOfRel": values[0][2]}}},  function(err, result){
              if (err) {
               errors.push(err);
                console.log(" we got an error ");

@@ -21,6 +21,9 @@ var dbObj = {
     var MongoClient = mongodb.MongoClient;
 
     var url = "mongodb://localhost:27017/shopify"
+    var MongoClient = mongodb.MongoClient;
+
+    var url = "mongodb://localhost:27017/shopify"
     MongoClient.connect(url, function(err, db){
       if(err){
         console.log('Unable to connect' + err)
@@ -108,7 +111,7 @@ var dbObj = {
               console.log(" access token is already in DB " + foundmatch)
             }
             else {
-              collection.insert({"name": shopname, "access_token": access_token});
+              collection.insert({"name": shopname, "access_token": access_token, "defaultNumOfRelated": 3});
               res.redirect('/?shop=' + shopname);
 
             }

@@ -23,16 +23,38 @@
         <div class="row">
       <div class="large-6 columns">
         <h1><%= title %></h1>
-        <div class="row collapse">
-          <div class="small-12 columns">
-            <a href="/addLiquid">Add Liquid</a>
-          </div>
-          <div class="small-12 columns">
-            <a href="/addProduct">Add A Product</a>
-          </div>
-        </div>
+
       </div>
     </div>
+
+        <div id="defaultNum">
+          <span>Default Number of Related:</span>
+          <form id="defNumForm" action="/changeDefaultNum" method="get" onsubmit="return confirm('Do you really want to submit the form?');">
+            <select class="form-control" id="defNumSelect" name="defNum">
+              <option value="1" >
+                1
+              </option>
+              <option value="2">
+                2
+              </option>
+              <option value="3">
+                3
+              </option>
+              <option value="4">
+                4
+              </option>
+              <option value="5">
+                5
+              </option>
+              <option value="6">
+                6
+              </option>
+            </select>
+            <input type="checkbox" name="changeAll"> Change all products to default?
+            <button id="submitNumOfRel" class="btn btn-primary" type="submit">Submit</button>
+          </form>
+        </div>
+
         <h2>Products</h2>
         <p>
 
@@ -56,7 +78,7 @@
                   <option id="option<%=element.id%>2" value="2">
                     2
                   </option>
-                  <option  selected="selected" id="option<%=element.id%>3"value="3">
+                  <option id="option<%=element.id%>3"value="3">
                     3
                   </option>
                   <option  id="option<%=element.id%>4"value="4">
@@ -94,6 +116,11 @@
       var newArr = [<%-numOfRelPass%>];
       var defaultNum = <%- defaultNum %>;
       var strDef = defaultNum.toString();
+      $('option').each(function(){
+        if (this.value == strDef){
+          $(this).attr("selected", 'selected')
+        }
+      })
       newArr.forEach(function(element){
         var lastDigit = element.toString().slice(-1);
         if (lastDigit !== strDef) {
@@ -104,12 +131,21 @@
           $('#option' + element).attr('selected','selected') }
       });
 
-      // var stringProducts = <%- JSON.stringify(products) %>
-      // var parsedProducts = JSON.parse(stringProducts);
-      //   parsedProducts.forEach(function(element){
-      //     $('#insert-products').append("<p>" +
-      //     element.title + "</p>")
-      //   });
+
+      function validate(form) {
+
+          // validation code here ...
+
+
+          if(!valid) {
+              alert('Please correct the errors in the form!');
+              return false;
+          }
+          else {
+              return confirm('Do you really want to submit the form?');
+          }
+      }
+
     	</script>
 
       </body>
