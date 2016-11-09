@@ -56,7 +56,7 @@ return new Promise(function(resolve, reject){
          reject(errors)
        }
        else {
-         resolve(true)
+         resolve(values)
        }
        db.close();
 

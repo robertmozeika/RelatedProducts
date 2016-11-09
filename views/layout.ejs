@@ -64,34 +64,47 @@
           <% var stringProducts =  JSON.stringify(products);
           var parsedProducts = JSON.parse(products);
 
-          parsedProducts.forEach(function(element){ %>
+          numOfRelPass.forEach(function(element){ %>
             <div class="well">
+              <div class="main-well-info">
+
 
 
             <p><strong><%- element.title %></strong></p>
             Number of Related Items:
 
-                <select class="form-control" id="select<%=element.id%>" name="numOfRel<%=element.id%>">
-                  <option id="option<%=element.id%>1" value="1" >
+                <select class="form-control" id="select<%=element%>" name="numOfRel<%=element%>">
+                  <option id="option<%=element %>1" value="1" >
                     1
                   </option>
-                  <option id="option<%=element.id%>2" value="2">
+                  <option id="option<%=element %>2" value="2">
                     2
                   </option>
-                  <option id="option<%=element.id%>3"value="3">
+                  <option id="option<%=element %>3"value="3">
                     3
                   </option>
-                  <option  id="option<%=element.id%>4"value="4">
+                  <option  id="option<%=element %>4"value="4">
                     4
                   </option>
-                  <option  id="option<%=element.id%>5"value="5">
+                  <option  id="option<%=element %>5"value="5">
                     5
                   </option>
-                  <option  id="option<%=element.id%>6"value="6">
+                  <option  id="option<%=element %>6"value="6">
                     6
                   </option>
                 </select>
+                  </div>
+                  <ol>
+                    <%
+                      var slicedNum = element.toString().slice(-1);
 
+                      for (var i = 0; i < slicedNum; i++){
+                    %>
+                      <li>
+                        Product
+                      </li>
+                    <% } %>
+                  </ol>
             </div>
         <%  })
           %>

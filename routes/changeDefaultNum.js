@@ -48,9 +48,7 @@ router.get('/', function(req, res, next) {
 
     function setDefault4All(){
       return new Promise((resolve, reject)=> {
-        console.log("this tried")
         if (changeAll){
-          console.log("happened")
           var MongoClient = mongodb.MongoClient;
 
           var url = "mongodb://localhost:27017/shopify"
@@ -72,9 +70,7 @@ router.get('/', function(req, res, next) {
                     console.log(err);
                     reject(err);
                   } else {
-                    console.log("look1here")
-                  console.log(result)
-                resolve(); }
+                    resolve(); }
               })
 
 

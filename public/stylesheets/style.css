@@ -1,32 +1,30 @@
 body {
   padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-}
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif; }
 
 a {
-  color: #00B7FF;
-}
+  color: #00B7FF; }
 
-
-.numRelForm select{
-  width: 5%;
-  display: inline-block;
-}
+.numRelForm select {
+  width: 35px;
+  display: inline-block; }
 
 #defNumSelect {
   width: 35px;
-  display: inline-block;
-
-}
+  display: inline-block; }
 
 #defNumForm {
-  display: inline-block;
-}
+  display: inline-block; }
 
 #defNumForm button {
-  display: inline-block;
-}
+  display: inline-block; }
 
-#defaultNum span{
-  font-size: 15px;
-}
+#defaultNum span {
+  font-size: 15px; }
+
+#insert-products ol {
+  display: inline-block; }
+#insert-products .main-well-info {
+  display: inline-block; }
+
+/*# sourceMappingURL=style.css.map */
