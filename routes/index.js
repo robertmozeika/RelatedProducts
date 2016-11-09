@@ -6,6 +6,11 @@ var database = require('../custom_modules/database.js');
 router.get('/', function(req, res, next) {
   var toRouter = req.query.shop.replace('.myshopify.com', "");
   router.shop_id = toRouter;
+  var collectionName = toRouter + "StoreProducts"
+  var colNameFixed = collectionName.replace(/-/g,"_");
+  console.log(colNameFixed)
+  router.colName = colNameFixed.toString();
+
   database.connectDB(router.shop_id, res);
 });
 

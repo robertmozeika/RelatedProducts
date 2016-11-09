@@ -1,10 +1,5 @@
-var ShopifyObj = require('./shopify.js');
-
 var mongodb = require('mongodb');
 var index = require('../routes/index.js');
-var express = require('express');
-var fs = require('fs');
-var getShop = require('./getShopifyData.js');
 
 
 function getNumOfRel(res){
@@ -19,24 +14,25 @@ function getNumOfRel(res){
    } else {
      console.log('Connection between Database Success');
 
-     var collection = db.collection('shops');
+     var collectStr = index.shop_id + "StoreProducts"
+     var collection = db.collection(index.colName);
 
-     collection.find({"name" : "test-store-1994-1994"}).toArray(function(err, result){
+     collection.find({}).toArray(function(err, result){
        if(err) {
 
         console.log(err)
-      }else if (result[0].products !== undefined){
+      }else if (result !== undefined){
+        console.log(result)
         console.log("connection successful at getNumOfRel")
-         result[0].products.forEach(function(element){
+         result.forEach(function(element){
            var str1 = element.numOfRel.toString();
            var push1 = element.productID.concat(str1);
            numOfArr.push(push1);
          })
-         var defaultNum = result[0].defaultNumOfRelated;
-         var passPromise = [res, numOfArr, defaultNum]
+
+         var passPromise = [res, numOfArr]
 
          resolve(passPromise)
-        //  ShopifyObj.readAllProducts(res, numOfArr);
 
        }
      else {

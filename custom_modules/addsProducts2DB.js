@@ -35,14 +35,15 @@ return new Promise(function(resolve, reject){
        } else {
          console.log('Connection between Database Success at addProducts2Database');
 
-         var collection = db.collection('shops');
+         var collectStr = index.shop_id + "StoreProducts"
+         var collection = db.collection(index.colName);
 
          var errors = [];
          products2Add.forEach((element) => {
-           collection.update({"name": index.shop_id}, {$push:{"products": {"productID" : element.id.toString(), "productName": element.title, "numOfRel": values[0][2]}}},  function(err, result){
+           collection.insert({"productID" : element.id.toString(), "productName": element.title, "numOfRel": values[2]},  function(err, result){
              if (err) {
               errors.push(err);
-               console.log(" we got an error ");
+               console.log(" we got an error at addProducts2DB ");
                console.log(err)
              }
              else {

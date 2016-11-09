@@ -12,6 +12,9 @@ router.post('/', function(req, res, next) {
     productIDs.push(toPush);
   })
   var prodValues = Object.values(req.body);
+  console.log(req.body);
+  console.log(productIDs);
+  console.log(prodValues);
   var ready4DB = []
   for (var i = 0; i < productIDs.length ;i++){
     ready4DB.push({id : productIDs[i], num : Number(prodValues[i])})
@@ -23,40 +26,43 @@ router.post('/', function(req, res, next) {
 
 function getArrayIndexes(){
   return new Promise((resolve, reject)=> {
-      var MongoClient = mongodb.MongoClient;
+    var empty = []
+    resolve(empty)
 
-      var url = "mongodb://localhost:27017/shopify"
-      MongoClient.connect(url, function(err, db){
-        var indexEval = []
-        if(err){
-          console.log("error at connection getArrayIndexes")
-          console.log('Unable to connect ' + err);
-          reject(err)
-        } else {
-          console.log('Connection between Database Success');
-
-          var collection = db.collection('shops');
-          console.log("find for " + index.shop_id)
-          collection.find({"name" : index.shop_id, "products.productID" : {$exists: true}}, {"products": 1, "_id": 0}).toArray(function(err, result){
-            if (err){
-              console.log("Error getting productsID " + err)
-            }
-            else {
-              console.log("success finding connection at getArrayIndexes")
-              console.log(result)
-              result[0].products.forEach((element) => {
-                indexEval.push(element.productID)
-              })
-              resolve(indexEval)
-
-            }
-          })
-
-
-        db.close();
-
-            }
-          })
+      // var MongoClient = mongodb.MongoClient;
+      //
+      // var url = "mongodb://localhost:27017/shopify"
+      // MongoClient.connect(url, function(err, db){
+      //   var indexEval = []
+      //   if(err){
+      //     console.log("error at connection getArrayIndexes")
+      //     console.log('Unable to connect ' + err);
+      //     reject(err)
+      //   } else {
+      //     console.log('Connection between Database Success');
+      //
+      //     var collection = db.collection(index.colName);
+      //     console.log("find for " + index.shop_id)
+      //     collection.find({"name" : index.shop_id, "products.productID" : {$exists: true}}, {"products": 1, "_id": 0}).toArray(function(err, result){
+      //       if (err){
+      //         console.log("Error getting productsID " + err)
+      //       }
+      //       else {
+      //         console.log("success finding connection at getArrayIndexes")
+      //         console.log(result)
+      //         result[0].products.forEach((element) => {
+      //           indexEval.push(element.productID)
+      //         })
+      //         resolve(indexEval)
+      //
+      //       }
+      //     })
+      //
+      //
+      //   db.close();
+      //
+      //       }
+      //     })
     })
   };
 
@@ -73,14 +79,15 @@ function getArrayIndexes(){
             reject(err)
           } else {
             console.log('Connection between Database Success');
-
-            var collection = db.collection('shops');
-            ready4DB.forEach((element)=>{
-              var curIndex = arr.indexOf(element.id)
-              var productInsert = "products."+curIndex+".numOfRel"
-              var updater = {};
-              updater[productInsert] = element.num;
-              collection.update({"name" : "test-store-1994-1994"}, {$set:updater}, function(result, err){
+            console.log(ready4DB)
+            var collection = db.collection(index.colName);
+            console.log('ready4db there')
+            productIDs.forEach((element, index)=>{
+              // var curIndex = arr.indexOf(element.id)
+              // var productInsert = "products."+curIndex+".numOfRel"
+              // var updater = {};
+              // updater[productInsert] = element.num;
+              collection.update({"productID" : element}, {$set:{"numOfRel" : Number(prodValues[index])}}, function(result, err){
                 if (err){
                   console.log("error at update replaceNum" )
                   console.log(err)

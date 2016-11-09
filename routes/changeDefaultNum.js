@@ -32,26 +32,10 @@ router.get('/', function(req, res, next) {
               }
               else {
                 console.log("Updated default num of related successfully");
-
+                resolve();
 
               }
             });
-            if (changeAll){
-              collection.find({"name" : "test-store-1994-1994"}, {"products": 1}).toArray(function(err, result){
-                if (err){
-                  console.log(err);
-                  reject(err);
-                } else {
-                  console.log("look2here")
-                  console.log(result[0].products)
-                  resolve();
-                }
-              })
-            }
-
-            if (changeAll){
-
-            }
 
 
             db.close();
@@ -64,6 +48,9 @@ router.get('/', function(req, res, next) {
 
     function setDefault4All(){
       return new Promise((resolve, reject)=> {
+        console.log("this tried")
+        if (changeAll){
+          console.log("happened")
           var MongoClient = mongodb.MongoClient;
 
           var url = "mongodb://localhost:27017/shopify"
@@ -76,25 +63,29 @@ router.get('/', function(req, res, next) {
             } else {
               console.log('Connection between Database Success at setDefault4All');
 
-              var collection = db.collection('shops');
+              var collection = db.collection(index.colName);
 
-              if (changeAll){
-                collection.find({"name" : "test-store-1994-1994"}).toArray(function(err, result){
+                collection.update({"productID" : {$exists: true}}, {$set:{"numOfRel" : defNum}}, {multi: true}, function(err, result){
+                  console.log("update function ran $$")
                   if (err){
+                    console.log("got error updating defnum")
                     console.log(err);
                     reject(err);
                   } else {
                     console.log("look1here")
                   console.log(result)
                 resolve(); }
-                })
-              }
+              })
+
 
               db.close();
 
                 }
               });
-
+          }
+          else {
+            resolve();
+          }
         })
       };
 
@@ -104,12 +95,12 @@ router.get('/', function(req, res, next) {
 
 
     var promise = setDefaultNum();
-    promise.then((inp)=>{
+    promise.then(()=>{
       return setDefault4All();
     }).then(function(){
       res.redirect('/finish_auth');
     }).catch((err) =>{
-      console.log("error at changenum promises")
+      console.log("error at changeDefNum")
       console.log(err)
     })
 
@@ -117,3 +108,7 @@ router.get('/', function(req, res, next) {
 
 
 module.exports = router
+
+
+
+// {"name" : {$exists: {$exists: true}}}

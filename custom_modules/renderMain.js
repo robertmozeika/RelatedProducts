@@ -1,13 +1,15 @@
 var getNumOfRel = require('./getNumOfRel.js');
 var getShop = require('./getShopifyData.js');
-var addProducts2DB = require('./addsProducts2DB')
+var addProducts2DB = require('./addsProducts2DB.js');
+var getDefaultNum = require('./getDefaultNum.js')
 
 function renderPromises(res){
 
 
   Promise.all([
     getNumOfRel(res),
-    getShop()
+    getShop(),
+    getDefaultNum()
 
 
   ]).then(function(values){
@@ -16,7 +18,7 @@ function renderPromises(res){
             title: 'Related Products',
             products: values[1],
             numOfRelPass: values[0][1],
-            defaultNum: values[0][2],
+            defaultNum: values[2],
 
 
     });
