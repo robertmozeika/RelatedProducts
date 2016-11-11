@@ -17,12 +17,14 @@ function renderPromises(res){
 
 
   }).then(function(values){
+    // values[0][0].locals.inspect = inspect;
+    
 
       values[0][0].render('layout', {
               title: 'Related Products',
-              products: values[1],
               numOfRelPass: values[0][1],
-              defaultNum: values[2],
+              defaultNum: values[1],
+              relatedProducts: values[0][2]
 
     });
 

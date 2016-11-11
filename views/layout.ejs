@@ -1,35 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+
+<head>
     <script src="https://cdn.shopify.com/s/assets/external/app.js"></script>
-	<script type="text/javascript">
-	ShopifyApp.init({
-		apiKey: '55512454cd904b56d38a12c8573aa27a',
-		shopOrigin: 'https://test-store-1994-1994.myshopify.com'
-	});
-	</script>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script type="text/javascript">
+        ShopifyApp.init({
+            apiKey: '55512454cd904b56d38a12c8573aa27a',
+            shopOrigin: 'https://test-store-1994-1994.myshopify.com'
+        });
+    </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 
 
-  <link rel='stylesheet' href='/stylesheets/bootstrap.min.css' />
-  <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel='stylesheet' href='/stylesheets/bootstrap.min.css' />
+    <link rel='stylesheet' href='/stylesheets/style.css' />
 
-	<title><%= title %></title>
+    <title>
+        <%= title %>
+    </title>
 
-  </head>
-  <body>
+</head>
+
+<body>
 
 
-        <div class="row">
-      <div class="large-6 columns">
-        <h1><%= title %></h1>
+    <div class="row">
+        <div class="large-6 columns">
+            <h1><%= title %></h1>
 
-      </div>
+        </div>
     </div>
 
-        <div id="defaultNum">
-          <span>Default Number of Related:</span>
-          <form id="defNumForm" action="/changeDefaultNum" method="get" onsubmit="return confirm('Do you really want to submit the form?');">
+    <div id="defaultNum" class="well">
+        <span>Default Number of Related:</span>
+        <form id="defNumForm" action="/changeDefaultNum" method="get" onsubmit=" if (document.getElementById('changeAllCheck').checked) {return confirm('Do you really want to all your products number of related items? All your previous changes will not be saved.');}">
             <select class="form-control" id="defNumSelect" name="defNum">
               <option value="1" >
                 1
@@ -50,116 +54,158 @@
                 6
               </option>
             </select>
-            <input type="checkbox" name="changeAll"> Change all products to default?
+            <input id="changeAllCheck" type="checkbox" name="changeAll"> Change all products to default?
             <button id="submitNumOfRel" class="btn btn-primary" type="submit">Submit</button>
-          </form>
-        </div>
+        </form>
+    </div>
 
-        <h2>Products</h2>
-        <p>
+    <h2>Products</h2>
+    <p>
 
-        </p>
-        <div id="insert-products">
-          <form  class="numRelForm" action="/changeNumOfRel" method="post">
-          <% var stringProducts =  JSON.stringify(products);
-          var parsedProducts = JSON.parse(products);
-
-          numOfRelPass.forEach(function(element){ %>
-            <div class="well">
-              <div class="main-well-info">
-
+    </p>
+    <div id="insert-products">
+        <form class="numRelForm" action="/changeNumOfRel" method="post">
+            <% numOfRelPass.forEach(function(element){ %>
+                <div class="well">
+                    <div class="row">
+                        <div class="col-xs-6">
+                            <div class="main-well-info">
 
 
-            <p><strong><%- element.title %></strong></p>
-            Number of Related Items:
 
-                <select class="form-control" id="select<%=element%>" name="numOfRel<%=element%>">
-                  <option id="option<%=element %>1" value="1" >
+                                <p><strong><%- element.productName %></strong></p>
+                                Number of Related Items:
+
+                                <select class="form-control" id="select<%=element.productID%>" name="numOfRel<%=element.productID%>">
+                  <option id="option<%=element.productID %>1" value="1" >
                     1
                   </option>
-                  <option id="option<%=element %>2" value="2">
+                  <option id="option<%=element.productID %>2" value="2">
                     2
                   </option>
-                  <option id="option<%=element %>3"value="3">
+                  <option id="option<%=element.productID %>3"value="3">
                     3
                   </option>
-                  <option  id="option<%=element %>4"value="4">
+                  <option  id="option<%=element.productID %>4"value="4">
                     4
                   </option>
-                  <option  id="option<%=element %>5"value="5">
+                  <option  id="option<%=element.productID %>5"value="5">
                     5
                   </option>
-                  <option  id="option<%=element %>6"value="6">
+                  <option  id="option<%=element.productID %>6"value="6">
                     6
                   </option>
                 </select>
-                  </div>
-                  <ol>
-                    <%
-                      var slicedNum = element.toString().slice(-1);
+                            </div>
+                        </div>
+                        <div class="col-xs-6">
+                            <ol class="pull-right">
 
-                      for (var i = 0; i < slicedNum; i++){
+                                <%
+                      var eleNum = element.numOfRel;
+                      var eleID = element.productID;
+                      var arrOfRel = relatedProducts[eleID];
+                        for (var i = 0; i < eleNum; i++){
                     %>
-                      <li>
-                        Product
-                      </li>
-                    <% } %>
-                  </ol>
-            </div>
-        <%  })
+                                    <li>
+
+                                      <%
+                                      if (arrOfRel) { if(arrOfRel[i]){ %>
+
+                                        <%= arrOfRel[i] %>
+                                      <%} else{ %>
+                                        blank
+                                      <%} }else { console.log("not true")%>
+                                        blank
+                                      <% }
+                                      %>
+                                    </li>
+                                    <% } %>
+                            </ol>
+                            <a href="#" class="open-rp pull-right">Edit</a>
+                          </div>
+                            </div>
+                          </div>
+                            <%  })
           %>
-          <button id="submitNumOfRel" class="btn btn-primary" type="submit">Submit</button>
-          </form>
 
-        </div>
+                    <button id="submitNumOfRel" class="btn btn-primary" type="submit">Submit</button>
+        </form>
 
-        <script type="text/javascript">
-    	ShopifyApp.ready(function(){
-    		ShopifyApp.Bar.initialize({
-    			title: '<%= title %>',
-    			buttons: {
-    				primary: {
-    					label: "Save",
-    					message: 'bar_save'
-    				},
-    			}
-    		});
-    		ShopifyApp.Bar.loadingOff();
-    	});
-      var newArr = [<%-numOfRelPass%>];
-      var defaultNum = <%- defaultNum %>;
-      var strDef = defaultNum.toString();
-      $('option').each(function(){
-        if (this.value == strDef){
-          $(this).attr("selected", 'selected')
+    </div>
+    <div id='rpWindow'>
+    <span class="glyphicon glyphicon-remove close-rpWindow"></span>
+    </div>
+    <script type="text/javascript">
+        ShopifyApp.ready(function() {
+            ShopifyApp.Bar.initialize({
+                title: '<%= title %>',
+                buttons: {
+                    primary: {
+                        label: "Save",
+                        message: 'bar_save'
+                    },
+                }
+            });
+            ShopifyApp.Bar.loadingOff();
+        });
+
+
+        <% var stringPass =  JSON.stringify(numOfRelPass);
+      var parsedPass = JSON.parse(stringPass); %>
+        var newArr = <%-stringPass%>
+        var defaultNum = <%- defaultNum %>;
+        $('#defNumSelect > option').each(function() {
+            if (this.value == defaultNum) {
+                $(this).attr("selected", 'selected')
+            }
+        })
+        newArr.forEach(function(element) {
+            var numO = element.numOfRel;
+            // if (numO !== defaultNum) {
+            var optNumOfRel = element.productID + numO;
+            var removeDefault = element.productID + defaultNum;
+            $('#option' + removeDefault).removeAttr('selected')
+            $('#option' + optNumOfRel).attr('selected', 'selected')
+                // }
+        });
+
+
+        function showRPWindow(){
+          $('#rpWindow').css('left','50%');
+        };
+
+        function closeRPWindow(){
+          $('#rpWindow').css('left','-50%');
         }
-      })
-      newArr.forEach(function(element){
-        var lastDigit = element.toString().slice(-1);
-        if (lastDigit !== strDef) {
-          var strEle = element.toString();
-          var removeDefault = strEle.substring(0, strEle.length - 1);
-          removeDefault = removeDefault + defaultNum;
-          $('#option' + removeDefault).removeAttr('selected')
-          $('#option' + element).attr('selected','selected') }
-      });
+
+        $('.open-rp').on('click',function(){
+          showRPWindow();
+        })
+        $('.close-rpWindow').on('click',function(){
+          closeRPWindow();
+        })
 
 
-      function validate(form) {
+<% var string1Pass =  JSON.stringify(relatedProducts); %>
+var numOfRelPass = newArr;
+var relatedProducts = <%-string1Pass%>;
+numOfRelPass.forEach(function(element){
+  var eleNum = element.numOfRel;
+  var eleID = element.productID;
+  var arrOfRel = relatedProducts[eleID];
+    for (var i = 0; i < eleNum; i++){
+      if (arrOfRel) {
+        if(arrOfRel[i]){
 
-          // validation code here ...
-
-
-          if(!valid) {
-              alert('Please correct the errors in the form!');
-              return false;
-          }
-          else {
-              return confirm('Do you really want to submit the form?');
-          }
+       console.log(arrOfRel[i])}
+       }else {
+        console.log("blank")
       }
+}
+})
+    </script>
 
-    	</script>
+</body>
 
-      </body>
-    </html>
+</html>
