@@ -2,29 +2,31 @@ var express = require('express');
 var router = express.Router();
 var mongodb = require('mongodb');
 
-var myjson = {
-  author: "audrey hepborn",
-  book: [{title: "to kill a mockingbird"}, {title: "great gatsby"}]
-}
+
 /* GET users listing. */
 router.get('/', function(req, res, next) {
-
-  res.json(myjson)
-});
-
-router.get('/thelist', function(req, rest){
+  var shop_id = req.query.shop;
+  var product_id = req.query.product;
   var MongoClient = mongodb.MongoClient;
 
-  var url = "mongodb:localhost:27017/shopify"
+  var url = "mongodb://localhost:27017/shopify"
   MongoClient.connect(url, function(err, db){
     if(err){
       console.log('Unable to connect' + err)
     } else {
       console.log('Connection between Database Success');
 
-      var collection = "dog"
+
+      var collection = db.collection('RelatedProducts');
+      collection.find({"forStore":shop_id, "forProduct":product_id}).toArray(function(err, result){
+        res.json(result);
+      });
     }
   })
+});
+
+router.get('/thelist', function(req, rest){
+
 })
 
 module.exports = router;

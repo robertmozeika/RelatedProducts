@@ -31,180 +31,22 @@
         </div>
     </div>
 
-    <div id="defaultNum" class="well">
-        <span>Default Number of Related:</span>
-        <form id="defNumForm" action="/changeDefaultNum" method="get" onsubmit=" if (document.getElementById('changeAllCheck').checked) {return confirm('Do you really want to all your products number of related items? All your previous changes will not be saved.');}">
-            <select class="form-control" id="defNumSelect" name="defNum">
-              <option value="1" >
-                1
-              </option>
-              <option value="2">
-                2
-              </option>
-              <option value="3">
-                3
-              </option>
-              <option value="4">
-                4
-              </option>
-              <option value="5">
-                5
-              </option>
-              <option value="6">
-                6
-              </option>
-            </select>
-            <input id="changeAllCheck" type="checkbox" name="changeAll"> Change all products to default?
-            <button id="submitNumOfRel" class="btn btn-primary" type="submit">Submit</button>
-        </form>
-    </div>
+    <% include partials/defaultNum.ejs %>
 
     <h2>Products</h2>
     <p>
 
     </p>
-    <div id="insert-products">
-        <form class="numRelForm" action="/changeNumOfRel" method="post">
-            <% numOfRelPass.forEach(function(element){ %>
-                <div class="well">
-                    <div class="row">
-                        <div class="col-xs-6">
-                            <div class="main-well-info">
+
+    <% include partials/mainProductDisplay.ejs %>
+
+    <% include partials/rpWindow.ejs %>
+    <% include partials/mustache.ejs %>
 
 
-
-                                <p><strong><%- element.productName %></strong></p>
-                                Number of Related Items:
-
-                                <select class="form-control" id="select<%=element.productID%>" name="numOfRel<%=element.productID%>">
-                  <option id="option<%=element.productID %>1" value="1" >
-                    1
-                  </option>
-                  <option id="option<%=element.productID %>2" value="2">
-                    2
-                  </option>
-                  <option id="option<%=element.productID %>3"value="3">
-                    3
-                  </option>
-                  <option  id="option<%=element.productID %>4"value="4">
-                    4
-                  </option>
-                  <option  id="option<%=element.productID %>5"value="5">
-                    5
-                  </option>
-                  <option  id="option<%=element.productID %>6"value="6">
-                    6
-                  </option>
-                </select>
-                            </div>
-                        </div>
-                        <div class="col-xs-6">
-                            <ol class="pull-right">
-
-                                <%
-                      var eleNum = element.numOfRel;
-                      var eleID = element.productID;
-                      var arrOfRel = relatedProducts[eleID];
-                        for (var i = 0; i < eleNum; i++){
-                    %>
-                                    <li>
-
-                                      <%
-                                      if (arrOfRel) { if(arrOfRel[i]){ %>
-
-                                        <%= arrOfRel[i] %>
-                                      <%} else{ %>
-                                        blank
-                                      <%} }else { console.log("not true")%>
-                                        blank
-                                      <% }
-                                      %>
-                                    </li>
-                                    <% } %>
-                            </ol>
-                            <a href="#" class="open-rp pull-right">Edit</a>
-                          </div>
-                            </div>
-                          </div>
-                            <%  })
-          %>
-
-                    <button id="submitNumOfRel" class="btn btn-primary" type="submit">Submit</button>
-        </form>
-
-    </div>
-    <div id='rpWindow'>
-    <span class="glyphicon glyphicon-remove close-rpWindow"></span>
-    </div>
-    <script type="text/javascript">
-        ShopifyApp.ready(function() {
-            ShopifyApp.Bar.initialize({
-                title: '<%= title %>',
-                buttons: {
-                    primary: {
-                        label: "Save",
-                        message: 'bar_save'
-                    },
-                }
-            });
-            ShopifyApp.Bar.loadingOff();
-        });
+    <% include partials/mainJS.ejs %>
 
 
-        <% var stringPass =  JSON.stringify(numOfRelPass);
-      var parsedPass = JSON.parse(stringPass); %>
-        var newArr = <%-stringPass%>
-        var defaultNum = <%- defaultNum %>;
-        $('#defNumSelect > option').each(function() {
-            if (this.value == defaultNum) {
-                $(this).attr("selected", 'selected')
-            }
-        })
-        newArr.forEach(function(element) {
-            var numO = element.numOfRel;
-            // if (numO !== defaultNum) {
-            var optNumOfRel = element.productID + numO;
-            var removeDefault = element.productID + defaultNum;
-            $('#option' + removeDefault).removeAttr('selected')
-            $('#option' + optNumOfRel).attr('selected', 'selected')
-                // }
-        });
-
-
-        function showRPWindow(){
-          $('#rpWindow').css('left','50%');
-        };
-
-        function closeRPWindow(){
-          $('#rpWindow').css('left','-50%');
-        }
-
-        $('.open-rp').on('click',function(){
-          showRPWindow();
-        })
-        $('.close-rpWindow').on('click',function(){
-          closeRPWindow();
-        })
-
-
-<% var string1Pass =  JSON.stringify(relatedProducts); %>
-var numOfRelPass = newArr;
-var relatedProducts = <%-string1Pass%>;
-numOfRelPass.forEach(function(element){
-  var eleNum = element.numOfRel;
-  var eleID = element.productID;
-  var arrOfRel = relatedProducts[eleID];
-    for (var i = 0; i < eleNum; i++){
-      if (arrOfRel) {
-        if(arrOfRel[i]){
-
-       console.log(arrOfRel[i])}
-       }else {
-        console.log("blank")
-      }
-}
-})
-    </script>
 
 </body>
 

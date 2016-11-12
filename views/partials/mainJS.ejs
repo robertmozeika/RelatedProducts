@@ -1,0 +1,124 @@
+<script type="text/javascript" src="/javascripts/mustache.min.js"></script>
+<script type="text/javascript">
+    ShopifyApp.ready(function() {
+        ShopifyApp.Bar.initialize({
+            title: '<%= title %>',
+            buttons: {
+                primary: {
+                    label: "Save",
+                    message: 'bar_save'
+                },
+            }
+        });
+        ShopifyApp.Bar.loadingOff();
+    });
+
+
+    <% var stringPass =  JSON.stringify(numOfRelPass);
+  var parsedPass = JSON.parse(stringPass); %>
+    var newArr = <%-stringPass%>
+    var defaultNum = <%- defaultNum %>;
+    $('#defNumSelect > option').each(function() {
+        if (this.value == defaultNum) {
+            $(this).attr("selected", 'selected')
+        }
+    })
+    newArr.forEach(function(element) {
+        var numO = element.numOfRel;
+        // if (numO !== defaultNum) {
+        var optNumOfRel = element.productID + numO;
+        var removeDefault = element.productID + defaultNum;
+        $('#option' + removeDefault).removeAttr('selected')
+        $('#option' + optNumOfRel).attr('selected', 'selected')
+            // }
+    });
+
+
+
+    function changeProduct(inp){
+      console.log(inp.attr('forproduct'))
+      $.ajax({
+        type: "GET",
+        url: "http://localhost:3000/changeProduct?forproduct=" + inp.attr('forproduct') + "&product=" + inp.attr('productid') + "&shop=" + inp.attr('store') + "&oldproduct=" + inp.attr('oldproduct') + '&title=' + inp.attr('title'),
+        contentType: "application/json; charset=utf-8",
+        async: true,
+        dataType: "json",
+        success: function (data, textStatus, jqXHR) {
+            console.log(data);
+
+          }
+        })
+    }
+
+    function getAll(inp){
+      $.ajax({
+        type: "GET",
+        url: "http://localhost:3000/getAllProducts?shop=" + inp.attr("store"),
+        contentType: "application/json; charset=utf-8",
+        async: true,
+        dataType: "json",
+        success: function (data, textStatus, jqXHR) {
+
+            var template = $("#rpListAll").html();
+            var mObj = {
+              products: data,
+              forproduct: inp.attr("forproduct"),
+              store: inp.attr("store"),
+              oldproduct: inp.attr("productid")
+            }
+            $('#rpProductList').html(Mustache.render(template, mObj));
+            $('.listAllLink').on('click', function(){
+              changeProduct($(this))
+            })
+
+          }
+        })
+    }
+
+    function showRPWindow(inp){
+      $('#rpWindow').css('left','50%');
+      $.ajax({
+        type: "GET",
+        url: "http://localhost:3000/getRP?shop=<%=shop%>&product="+inp,
+        contentType: "application/json; charset=utf-8",
+        async: true,
+        dataType: "json",
+        success: function (data, textStatus, jqXHR) {
+
+            var template = $("#rpWinMain").html();
+            var mObj = {title: []};
+            data.forEach(function(element){
+              mObj.title.push(element)
+            });
+
+            $('#rpOL').html(Mustache.render(template, mObj));
+            $('.changeProductLink').on('click', function(){
+              getAll($(this));
+            })
+
+
+
+
+          }
+        })
+    };
+
+    function closeRPWindow(){
+      $('#rpWindow').css('left','-50%');
+    }
+
+    $('.open-rp').on('click',function(event){
+      showRPWindow($(this).attr('forproduct'));
+      event.preventDefault()
+    })
+    $('.close-rpWindow').on('click',function(){
+      closeRPWindow();
+      $('#rpProductList').html("");
+    })
+
+
+
+
+
+
+</script>

@@ -13,6 +13,9 @@ var finauth = require('./routes/finauth');
 var addProduct = require('./routes/addproduct.js');
 var addLiquid = require('./routes/addLiquid.js');
 var getJSON = require('./routes/getJSON.js');
+var getRP = require('./routes/getRP.js');
+var getAllProducts = require('./routes/getAllProducts.js');
+var changeProduct = require('./routes/changeProduct.js')
 var exchangetoken = require('./routes/exchange.js');
 var changeNumOfRel = require('./routes/changeNumOfRel.js');
 var changeDefNum = require('./routes/changeDefaultNum.js');
@@ -25,6 +28,15 @@ var app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
+
+var allowCrossDomain = function(req, res, next) {
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
+    res.header('Access-Control-Allow-Headers', 'Content-Type');
+
+    next();
+}
+
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
@@ -32,6 +44,8 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(allowCrossDomain);
+
 
 app.use('/', routes);
 app.use('/users', users);
@@ -39,6 +53,9 @@ app.use('/finish_auth', finauth);
 app.use('/addProduct', addProduct);
 app.use('/addLiquid', addLiquid);
 app.use('/getJSON', getJSON);
+app.use('/getRP', getRP);
+app.use('/getAllProducts', getAllProducts);
+app.use('/changeProduct', changeProduct);
 app.use('/exchange', exchangetoken);
 app.use ("/changeNumOfRel", changeNumOfRel);
 app.use ("/changeDefaultNum", changeDefNum)

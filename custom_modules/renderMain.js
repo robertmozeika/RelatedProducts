@@ -1,7 +1,7 @@
 var getNumOfRel = require('./getNumOfRel.js');
 var getShop = require('./getShopifyData.js');
 var addProducts2DB = require('./addsProducts2DB.js');
-var getDefaultNum = require('./getDefaultNum.js')
+var getDefaultNum = require('./getDefaultNum.js');
 
 function renderPromises(res){
 
@@ -18,10 +18,11 @@ function renderPromises(res){
 
   }).then(function(values){
     // values[0][0].locals.inspect = inspect;
-    
+
 
       values[0][0].render('layout', {
               title: 'Related Products',
+              shop: values[0][3],
               numOfRelPass: values[0][1],
               defaultNum: values[1],
               relatedProducts: values[0][2]

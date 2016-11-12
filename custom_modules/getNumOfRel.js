@@ -76,7 +76,7 @@ function getNumOfRel(res){
       }else if (result !== undefined){
         console.log("connection successful at getNumOfRel")
         getRelatedProducts(result).then(function(inp){
-          var passPromise = [res, result, inp]
+          var passPromise = [res, result, inp, index.shop_id]
 
           resolve(passPromise)
         })

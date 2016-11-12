@@ -55,6 +55,10 @@ a {
   border-style: solid;
   border-color: black;
   border-width: 1px;
+  .row{
+    position: relative;
+    top: 50px;
+  }
 }
 
 .close-rpWindow {
@@ -63,4 +67,5 @@ a {
   top: 10px;
   color: white;
   cursor: pointer;
+  z-index: 10;
 }

@@ -41,12 +41,16 @@ a {
   border-style: solid;
   border-color: black;
   border-width: 1px; }
+  #rpWindow .row {
+    position: relative;
+    top: 50px; }
 
 .close-rpWindow {
   position: absolute;
   right: 10px;
   top: 10px;
   color: white;
-  cursor: pointer; }
+  cursor: pointer;
+  z-index: 10; }
 
 /*# sourceMappingURL=style.css.map */

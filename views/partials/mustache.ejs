@@ -1,0 +1,20 @@
+<script type="text/template" id="rpWinMain">
+  {{#title}}
+  <li>
+
+    {{title}} <a href='#' productid="{{productID}}" forproduct="{{forProduct}}" class="changeProductLink" store="{{forStore}}"> change</a>
+
+  </li>
+  {{/title}}
+</script>
+
+
+<script type="text/template" id="rpListAll">
+  {{#products}}
+  <li>
+
+    <a forproduct="{{forproduct}}" productid="{{productID}}" store="{{store}}" title="{{productName}}" oldproduct="{{oldproduct}}" class="listAllLink">{{productName}}</a>
+
+  </li>
+  {{/products}}
+</script>
