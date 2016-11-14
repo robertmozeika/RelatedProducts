@@ -51,8 +51,8 @@ function getArrayIndexes(){
               collection.update({"productID" : element, "store":index.shop_id}, {$set:{"numOfRel" : Number(prodValues[ind])}}, function(result, err){
                 if (err){
                   console.log("error at update replaceNum" )
-                  // console.log(err)
-                  reject("err")
+                  console.log(err)
+                  reject(err)
                 }
                 else {
                   console.log('successful update')

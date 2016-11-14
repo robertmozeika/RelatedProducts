@@ -29,7 +29,7 @@ return new Promise(function(resolve, reject){
     if (products2Add.length > 0){
         var insert2RP =[];
         products2Add.forEach((element)=>{
-          for (var i = 1; i <= values[2]; i++){
+          for (var i = 1; i <= 6; i++){
             var insObj = {
               forStore: index.shop_id,
               forProduct: element.id.toString(),

@@ -31,65 +31,7 @@ router.get('/', function(req, res, next) {
 
             if (changeAll){
 
-            var removeNum = [];
-            if (oldNum > defNum) {
-              for (var i = oldNum; i > defNum; i--){
-                removeNum.push(i)
-              }
-              console.log('numhere', removeNum)
-
-              rpCollection.remove({"forStore":index.shop_id, "order": {$in:removeNum}},function(err, result){
-                if (err){
-                  console.log(err)
-                } else{
-                  console.log("removed order+ successfully")
-                }
-
-              })
-            } else if (oldNum < defNum){
-
-
-
-              var pCollection = db.collection("StoreProducts");
-              pCollection.find({"store":index.shop_id}, {"productID":1, "numOfRel":1}).toArray(function(err, result){
-                if (err){
-                  console.log('error at get collection of all products in changedef' + err);
-                } else if (result.length > 0) {
-                  console.log("changeall found products")
-                  var insert2RP = [];
-                  result.forEach((element) =>{
-                    var numArr = [];
-                    for (var i = element.numOfRel; i <= defNum; i++){
-                      numArr.push(i)
-                    }
-                    numArr.forEach((rNum) =>{
-
-                      if (element.numOfRel < rNum){
-                        var insObj = {
-                          forStore: index.shop_id,
-                          forProduct: element.productID,
-                          productID: "blank",
-                          title: "blank",
-                          order: rNum,
-                        };
-                        insert2RP.push(insObj)
-                      }
-                    })
-
-                  })
-                  console.log(insert2RP)
-                  insertBlanks(insert2RP)
-
-                } else {
-                  console.log("returned result of all products but no result at changedef get all products")
-                }
-
-              })
-
-
-
-
-            }
+          
 
           }
             var collection = db.collection('shops');
