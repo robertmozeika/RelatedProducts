@@ -30,8 +30,7 @@ function getRelatedProducts(inp){
           }
 
         })
-        console.log('rpPas')
-        console.log(rpPass);
+
         resolve(rpPass);
 
 
@@ -67,9 +66,9 @@ function getNumOfRel(res){
      console.log('Connection between Database Success');
 
      var collectStr = index.shop_id + "StoreProducts"
-     var collection = db.collection(index.colName);
+     var collection = db.collection("StoreProducts");
 
-     collection.find({}).toArray(function(err, result){
+     collection.find({"store":index.shop_id}).toArray(function(err, result){
        if(err) {
 
         console.log(err)

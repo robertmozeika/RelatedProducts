@@ -2,7 +2,7 @@
   {{#title}}
   <li>
 
-    {{title}} <a href='#' productid="{{productID}}" forproduct="{{forProduct}}" class="changeProductLink" store="{{forStore}}"> change</a>
+    {{title}} <a href='#' order="{{order}}" productid="{{productID}}" forproduct="{{forProduct}}" class="changeProductLink" store="{{forStore}}"> change</a>
 
   </li>
   {{/title}}
@@ -13,7 +13,7 @@
   {{#products}}
   <li>
 
-    <a forproduct="{{forproduct}}" productid="{{productID}}" store="{{store}}" title="{{productName}}" oldproduct="{{oldproduct}}" class="listAllLink">{{productName}}</a>
+    <a order="{{order}}" forproduct="{{forproduct}}" productid="{{productID}}" store="{{store}}" title="{{productName}}" oldproduct="{{oldproduct}}" class="listAllLink">{{productName}}</a>
 
   </li>
   {{/products}}

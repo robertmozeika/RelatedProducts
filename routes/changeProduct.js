@@ -10,6 +10,7 @@ router.get('/', function(req, res, next) {
   var product = req.query.product;
   var oldproduct = req.query.oldproduct;
   var title = req.query.title;
+  var order = Number(req.query.order);
 
 
   // shop_id = shop_id.replace(/-/g,"_");
@@ -24,11 +25,11 @@ router.get('/', function(req, res, next) {
 
 
       var collection = db.collection('RelatedProducts');
-      collection.update({"forStore": shop_id, "forProduct": forproduct, "productID" : oldproduct},{$set:{"productID": product, "title": title}}, function(err, result){
+      collection.update({"forStore": shop_id, "forProduct": forproduct, "productID" : oldproduct, "order": order},{$set:{"productID": product, "title": title}}, function(err, result){
         if (err){
           res.send('failed to change')
         }
-          res.send('OK')      
+          res.send('OK')
         });
     }
   })

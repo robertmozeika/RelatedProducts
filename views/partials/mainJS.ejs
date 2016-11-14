@@ -39,7 +39,7 @@
       console.log(inp.attr('forproduct'))
       $.ajax({
         type: "GET",
-        url: "http://localhost:3000/changeProduct?forproduct=" + inp.attr('forproduct') + "&product=" + inp.attr('productid') + "&shop=" + inp.attr('store') + "&oldproduct=" + inp.attr('oldproduct') + '&title=' + inp.attr('title'),
+        url: "http://localhost:3000/changeProduct?forproduct=" + inp.attr('forproduct') + "&product=" + inp.attr('productid') + "&shop=" + inp.attr('store') + "&oldproduct=" + inp.attr('oldproduct') + '&title=' + inp.attr('title') + "&order=" + inp.attr('order'),
         contentType: "application/json; charset=utf-8",
         async: true,
         dataType: "json",
@@ -64,7 +64,8 @@
               products: data,
               forproduct: inp.attr("forproduct"),
               store: inp.attr("store"),
-              oldproduct: inp.attr("productid")
+              oldproduct: inp.attr("productid"),
+              order: inp.attr('order')
             }
             $('#rpProductList').html(Mustache.render(template, mObj));
             $('.listAllLink').on('click', function(){
@@ -88,9 +89,10 @@
             var template = $("#rpWinMain").html();
             var mObj = {title: []};
             data.forEach(function(element){
-              mObj.title.push(element)
+              mObj.title.push(element);
             });
-
+            console.log(data);
+            console.log(mObj)
             $('#rpOL').html(Mustache.render(template, mObj));
             $('.changeProductLink').on('click', function(){
               getAll($(this));
@@ -109,11 +111,12 @@
 
     $('.open-rp').on('click',function(event){
       showRPWindow($(this).attr('forproduct'));
-      event.preventDefault()
+      event.preventDefault();
+      $('#rpProductList').html("");
+
     })
     $('.close-rpWindow').on('click',function(){
       closeRPWindow();
-      $('#rpProductList').html("");
     })
 
 

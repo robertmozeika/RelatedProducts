@@ -24,8 +24,24 @@ return new Promise(function(resolve, reject){
       });
 
     }
+    var insert2RP =[];
 
+    if (products2Add.length > 0){
+        var insert2RP =[];
+        products2Add.forEach((element)=>{
+          for (var i = 1; i <= values[2]; i++){
+            var insObj = {
+              forStore: index.shop_id,
+              forProduct: element.id.toString(),
+              productID: "blank",
+              title: "blank",
+              order: i,
+            };
+            insert2RP.push(insObj)
+          }
 
+        })
+    }
     if (products2Add.length > 0){
       console.log('Adding new products to DB');
       var numOfArr = [];
@@ -38,12 +54,21 @@ return new Promise(function(resolve, reject){
          } else {
            console.log('Connection between Database Success at addProducts2Database');
 
-           var collectStr = index.shop_id + "StoreProducts"
-           var collection = db.collection(index.colName);
+           var collection2 = db.collection('RelatedProducts');
+
+           collection2.insert(insert2RP, function(err, result){
+             if (err){
+               console.log(err)
+             } else {
+               console.log('rps were added ')
+             }
+           });
+
+           var collection = db.collection("StoreProducts");
 
            var errors = [];
            products2Add.forEach((element) => {
-             collection.insert({"productID" : element.id.toString(), "productName": element.title, "numOfRel": values[2]},  function(err, result){
+             collection.insert({"productID" : element.id.toString(), "productName": element.title, "numOfRel": values[2], "store":index.shop_id},  function(err, result){
                if (err) {
                 errors.push(err);
                  console.log(" we got an error at addProducts2DB ");
@@ -60,7 +85,13 @@ return new Promise(function(resolve, reject){
                }
 
            });
+
+
+
          })
+
+
+
 
          db.close();
 

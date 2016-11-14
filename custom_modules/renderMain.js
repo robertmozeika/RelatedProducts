@@ -17,7 +17,7 @@ function renderPromises(res){
 
 
   }).then(function(values){
-    // values[0][0].locals.inspect = inspect;
+    
 
 
       values[0][0].render('layout', {
