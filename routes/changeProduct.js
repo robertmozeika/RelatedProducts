@@ -6,15 +6,6 @@ var mongodb = require('mongodb');
 /* GET users listing. */
 router.post('/', function(req, res, next) {
   console.log(req.body)
-  // var shop_id = req.query.shop;
-  // var forproduct = req.query.forproduct;
-  // var product = req.query.product;
-  // var oldproduct = req.query.oldproduct;
-  // var title = req.query.title;
-  // var order = Number(req.query.order);
-  //
-  //
-  // // shop_id = shop_id.replace(/-/g,"_");
 
   var shop_id = req.body.store;
   var forproduct = req.body.forProduct;

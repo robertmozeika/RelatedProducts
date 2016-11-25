@@ -28,4 +28,26 @@ router.get('/thelist', function(req, rest){
   })
 })
 
+router.get('/test', function(req, res, next){
+  req.session.lastNight = 'session test';
+  router.test = 'variable test';
+  res.send('test')
+})
+
+router.get('/rest', function(req, res, next){
+  req.session.lastNight = '/rest';
+  res.send('rest')
+
+})
+
+router.get('/pest', function(req, res, next){
+  console.log(req.session)
+  res.send(req.session.lastNight)
+})
+
+router.get('/lest', function(req, res, next){
+  console.log(req.session)
+  res.send(router.test)
+})
+
 module.exports = router;

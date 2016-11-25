@@ -39,4 +39,9 @@ ShopifyObj.Shopify.post('/admin/products.json', post_data, function(err, data, h
 
 });
 
+
+router.get('/test', function(req, res, next){
+  res.send(req.session.lastNight)
+})
+
 module.exports = router;

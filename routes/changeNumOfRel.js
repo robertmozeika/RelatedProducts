@@ -1,10 +1,10 @@
 var express = require('express');
 var router = express.Router();
 var mongodb = require('mongodb');
-var index = require('./index.js')
 
 /* GET home page. */
 router.post('/', function(req, res, next) {
+  var shop_session = req.session.shop;
   var propNames = Object.getOwnPropertyNames(req.body);
   var productIDs = [];
   propNames.forEach((element) => {
@@ -46,9 +46,8 @@ function getArrayIndexes(){
             console.log('Connection between Database Success');
             var collection = db.collection("StoreProducts");
             productIDs.forEach((element, ind)=>{
-              console.log("$$");
-              console.log(element, index.colName)
-              collection.update({"productID" : element, "store":index.shop_id}, {$set:{"numOfRel" : Number(prodValues[ind])}}, function(result, err){
+
+              collection.update({"productID" : element, "store":shop_session}, {$set:{"numOfRel" : Number(prodValues[ind])}}, function(result, err){
                 if (err){
                   console.log("error at update replaceNum" )
                   console.log(err)
@@ -79,7 +78,7 @@ function getArrayIndexes(){
     console.log("here is inp")
     return replaceNum(inp)
   }).then(()=>{
-    res.redirect('/finish_auth?shop=' + index.shop_id)
+    res.redirect('/finish_auth?shop=' + shop_session)
   }).catch((err) =>{
     console.log("error at changenum promises")
     console.log(err)

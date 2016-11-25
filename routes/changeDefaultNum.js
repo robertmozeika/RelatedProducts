@@ -1,12 +1,11 @@
 var express = require('express');
 var router = express.Router();
 var mongodb = require('mongodb');
-var index = require('./index.js')
-
 
 
 
 router.get('/', function(req, res, next) {
+  var shop_session = req.session.shop;
   console.log(req.query)
   var defNum = Number(req.query.defNum);
   var changeAll = req.query.changeAll;
@@ -35,7 +34,7 @@ router.get('/', function(req, res, next) {
 
           }
             var collection = db.collection('shops');
-            collection.update({"name" : index.shop_id}, {$set:{"defaultNumOfRelated": defNum}}, function(err, result){
+            collection.update({"name" : shop_session}, {$set:{"defaultNumOfRelated": defNum}}, function(err, result){
               if (err){
                 console.log("Error getting productsID " + err);
                 reject(err)
@@ -102,7 +101,7 @@ router.get('/', function(req, res, next) {
 
               var collection = db.collection("StoreProducts");
 
-                collection.update({"productID" : {$exists: true}, "store":index.shop_id}, {$set:{"numOfRel" : defNum}}, {multi: true}, function(err, result){
+                collection.update({"productID" : {$exists: true}, "store":shop_session}, {$set:{"numOfRel" : defNum}}, {multi: true}, function(err, result){
                   console.log("update function ran $$")
                   if (err){
                     console.log("got error updating defnum")
@@ -133,7 +132,7 @@ router.get('/', function(req, res, next) {
     promise.then(()=>{
       return setDefault4All();
     }).then(function(){
-      res.redirect('/finish_auth?shop=' + index.shop_id);
+      res.redirect('/finish_auth?shop=' + shop_session);
     }).catch((err) =>{
       console.log("error at changeDefNum")
       console.log(err)
