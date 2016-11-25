@@ -31,7 +31,7 @@ router.get('/', function(req, res, next) {
 
             if (changeAll){
 
-          
+
 
           }
             var collection = db.collection('shops');
@@ -133,7 +133,7 @@ router.get('/', function(req, res, next) {
     promise.then(()=>{
       return setDefault4All();
     }).then(function(){
-      res.redirect('/finish_auth');
+      res.redirect('/finish_auth?shop=' + index.shop_id);
     }).catch((err) =>{
       console.log("error at changeDefNum")
       console.log(err)

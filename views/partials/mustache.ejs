@@ -1,4 +1,4 @@
-<script type="text/template" id="rpWinMain">
+<!-- <script type="text/template" id="rpWinMain">
   {{#title}}
   <li>
 
@@ -6,15 +6,60 @@
 
   </li>
   {{/title}}
-</script>
+</script> -->
 
 
-<script type="text/template" id="rpListAll">
+<!-- <script type="text/template" id="rpListAll">
   {{#products}}
   <li>
 
     <a order="{{order}}" forproduct="{{forproduct}}" productid="{{productID}}" store="{{store}}" title="{{productName}}" oldproduct="{{oldproduct}}" class="listAllLink">{{productName}}</a>
 
   </li>
+  {{/products}}
+</script> -->
+
+
+<script type="text/template" id="rpWinMain">
+
+<div class="chosen-container" single style="width:300px">
+	<form method="post" action="/changeProduct">
+{{#title}}
+		<select name="{{order}}{{productID}}" class="my_select_box" data-placeholder="{{title}}">
+			<option value=""></option>
+		    <option value="Internet Explorer">IE</option>
+		    <option value="Firefox">Firefox</option>
+		    <option value="Chrome">Chrome</option>
+		    <option value="Opera">Opera</option>
+		    <option value="Safari">Safari</option>
+		</select>
+
+{{/title}}
+
+
+<input  class="hidden" name="store" value="{{cStore}}" />
+<input  class="hidden" name="forProduct" value="{{forproduct}}" />
+
+
+
+<br />
+<br />
+
+<button class="btn btn-success" type="submit">Submit</button>
+</form>
+</div>
+
+</script>
+
+
+
+<script type="text/template" id="rpListAll">
+  <option value=""></option>
+  {{#products}}
+
+
+    <option value="{{productID}}{{productName}}">{{productName}}</option>
+
+
   {{/products}}
 </script>

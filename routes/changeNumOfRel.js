@@ -79,7 +79,7 @@ function getArrayIndexes(){
     console.log("here is inp")
     return replaceNum(inp)
   }).then(()=>{
-    res.redirect('/finish_auth')
+    res.redirect('/finish_auth?shop=' + index.shop_id)
   }).catch((err) =>{
     console.log("error at changenum promises")
     console.log(err)

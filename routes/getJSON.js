@@ -7,9 +7,10 @@ var myjson = {
   book: [{title: "to kill a mockingbird"}, {title: "great gatsby"}]
 }
 /* GET users listing. */
-router.get('/', function(req, res, next) {
-
-  res.json(myjson)
+router.post('/', function(req, res, next) {
+  var query = req.body;
+  console.log(query)
+  res.send(query)
 });
 
 router.get('/thelist', function(req, rest){
