@@ -52,7 +52,7 @@ var dbObj = {
         collection.find({}).toArray(function(err, result){
           if(err) {
             res.send(err)
-          }else if (result.length){
+          }else{
             console.log("success getting result Length at database.js connectDB")
             var nametest = {name: shopname};
             var foundmatch = false;
@@ -73,7 +73,7 @@ var dbObj = {
               res.redirect(auth_url);
             }
           }
-        else {res.send("no dobs found")}
+        // else {res.send("no dobs found")}
 
         db.close();
 
@@ -98,7 +98,7 @@ var dbObj = {
         collection.find({}).toArray(function(err, result){
           if(err) {
             res.send(err)
-          }else if (result.length){
+          }else {
             var shopname = shopArg;
             var nametest = {name: shopname};
             var foundmatch = false;
@@ -116,7 +116,7 @@ var dbObj = {
 
             }
           }
-        else {res.send("no dobs found")}
+        // else {res.send("no dobs found")}
 
         db.close();
 

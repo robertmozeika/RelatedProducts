@@ -1,10 +1,8 @@
 var mongodb = require('mongodb');
-var index = require('../routes/index.js')
 var getNumOfRel = require('./getNumOfRel.js');
 
-function prodFromShopify(values){
+function prodFromShopify(values, shop){
 return new Promise(function(resolve, reject){
-
     var products2Add = []
     if (values[0][1] !== undefined){
 
@@ -31,7 +29,7 @@ return new Promise(function(resolve, reject){
         products2Add.forEach((element)=>{
           for (var i = 1; i <= 6; i++){
             var insObj = {
-              forStore: index.shop_id,
+              forStore: shop,
               forProduct: element.id.toString(),
               productID: "blank",
               title: "blank",
@@ -68,7 +66,7 @@ return new Promise(function(resolve, reject){
 
            var errors = [];
            products2Add.forEach((element) => {
-             collection.insert({"productID" : element.id.toString(), "productName": element.title, "numOfRel": values[2], "store":index.shop_id},  function(err, result){
+             collection.insert({"productID" : element.id.toString(), "productName": element.title, "numOfRel": values[2], "store":shop},  function(err, result){
                if (err) {
                 errors.push(err);
                  console.log(" we got an error at addProducts2DB ");

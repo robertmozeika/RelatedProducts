@@ -1,7 +1,6 @@
 var mongodb = require('mongodb');
-var index = require('../routes/index.js');
 
-function getDefault(){
+function getDefault(shop){
   return new Promise(function(resolve, reject){
   var numOfArr = [];
  var MongoClient = mongodb.MongoClient;
@@ -15,7 +14,7 @@ function getDefault(){
 
      var collection = db.collection('shops');
 
-     collection.find({"name": index.shop_id}).toArray(function(err, result){
+     collection.find({"name": shop}).toArray(function(err, result){
        if(err) {
 
         console.log(err)

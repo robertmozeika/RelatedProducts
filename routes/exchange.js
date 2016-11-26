@@ -3,14 +3,13 @@ var router = express.Router();
 var app = require('../app.js')
 var ShopifyObj = require('../custom_modules/shopify.js');
 var database = require('../custom_modules/database.js');
-var index = require('./index');
 
 
 // Again assuming you are using the express framework
 /* GET users listing. */
 
 router.get('/', function(req, res){
-
+    var shop_session = req.session.shop;
     query_params = req.query;
     if (ShopifyObj.tempNeeded == true){
       console.log("temp is true")
@@ -20,7 +19,7 @@ router.get('/', function(req, res){
     // The module will automatically update your config with the new access token
     // It is also available here as data['access_token']
       // console.log("error here ", err, "data here ", data)
-      database.saveAccessToken(index.shop_id, data['access_token'], res)
+      database.saveAccessToken(shop_session, data['access_token'], res)
   });
 }
 

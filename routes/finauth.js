@@ -8,8 +8,8 @@ var renderMain = require('../custom_modules/renderMain.js')
 
 router.get('/', function(req, res){
 
-
-renderMain(res)
+  var shop = req.session.shop;
+  renderMain(res, shop)
 
 
 
