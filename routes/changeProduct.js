@@ -32,13 +32,25 @@ router.post('/', function(req, res, next) {
 
 
     }
+    
+    var indexNum = prodValues[i].indexOf("https");
+    if (indexNum > -1){
+      image = prodValues[i].slice(indexNum)
+    } else {
+      image = "none";
+      indexNum = prodValues[i].indexOf("none");
+    }
 
     var dRP ={
+
       $set:{
         "productID": prodValues[i].slice(0,10),
-        "title": prodValues[i].slice(10)
+        "title": prodValues[i].slice(10, indexNum),
+        "image": image
       }
     }
+    console.log("$$");
+    console.log(dRP)
 
 
     updatedRP.push(dRP)

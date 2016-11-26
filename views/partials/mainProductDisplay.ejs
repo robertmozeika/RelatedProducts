@@ -1,4 +1,14 @@
 <div id="insert-products">
+    <form id="live-search" action="" class="styled" method="post">
+      <fieldset>
+        <p>
+          Product Search:
+        </p>
+        <input type="text" class="text-input" id="filter" value="" />
+        <span id="filter-count"></span>
+      </fieldset>
+    </form>
+    <br />
     <form id="nrForm" class="numRelForm" action="/changeNumOfRel" method="post">
         <% numOfRelPass.forEach(function(element){ %>
             <div class="well">

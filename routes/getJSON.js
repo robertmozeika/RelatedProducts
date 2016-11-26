@@ -133,6 +133,42 @@ router.get('/image', function(req, res, next){
 
 })
 
+router.get('/getOrders', function(req, res, next){
+    ShopifyObj.Shopify.get('/admin/orders.json', function(err, data, headers){
+      console.log(err, data)
+      //array of all emails who people who bought the item at hand
+      var peopleWhoBought = [];
+      data.orders.forEach((element)=>{
+        element.line_items.forEach((line)=>{
+          if (line.product_id == 6560603013){
+            peopleWhoBought.push(element.email);
+          }
+        })
+      })
+      let seen = new Set();
+
+      function testPB(value){
+        return (peopleWhoBought.indexOf(value.email) > -1)
+      }
+
+      //filters all data to people who bought the product at hand
+      var peopleWhoBoughtOrders = data.orders.filter(testPB);
+
+      // var hasDuplicates = [];
+      // peopleWhoBought.forEach(function(currentObject) {
+      //
+      //   if (seen.email === seen.add(currentObject).email){
+      //     hasDuplicates.push(currentObject)
+      //   }
+      //
+      // });
+
+      // console.log(hasDuplicates)
+      res.send(peopleWhoBoughtOrders)
+    });
+
+})
+
 
 
 module.exports = router;

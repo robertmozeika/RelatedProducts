@@ -37,6 +37,7 @@ return new Promise(function(resolve, reject){
               productID: "blank",
               title: "blank",
               order: i,
+              image: "none"
             };
             insert2RP.push(insObj)
           }
@@ -44,17 +45,7 @@ return new Promise(function(resolve, reject){
         })
     }
 
-    // var promise = getImages(products2Add);
-    //
-    // promise.then((result)=>{
-    //   addDBOrResolve(result)
-    // })
 
-
-    console.log('$$')
-    console.log(products2Add)
-
-  // function addDBOrResolve(){
     if (products2Add.length > 0){
       console.log('Adding new products to DB');
       var numOfArr = [];
@@ -83,7 +74,17 @@ return new Promise(function(resolve, reject){
            products2Add.forEach((element) => {
              var image;
              if (element.image){
-               image = element.image.src}
+
+               image = element.image.src
+               var num = image.indexOf(".jpg");
+               if (num == -1){
+                 num = image.indexOf(".png")
+               }
+               if (num > -1){
+                 image = [image.slice(0,num), "_medium", image.slice(num)].join('');
+               }
+
+             }
              else{
                image = "none"
              }

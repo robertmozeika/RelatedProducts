@@ -18,7 +18,7 @@ var ShopifyObj = {
       shopify_api_key: '55512454cd904b56d38a12c8573aa27a', // Your API key
       shopify_shared_secret: '6815b758b2996ee3ef116c112432a085', // Your Shared Secret
       access_token: accessToken,
-      shopify_scope: 'read_products,write_script_tags,read_script_tags',
+      shopify_scope: 'read_products,write_script_tags,read_script_tags,read_orders',
       redirect_uri: 'http://localhost:3000/finish_auth',
       // nonce: '1312312414afdafdasds2242323' // you must provide a randomly selected value unique for each authorization request
     });
@@ -33,7 +33,7 @@ var ShopifyObj = {
       shop: shopname, // MYSHOP.myshopify.com
       shopify_api_key: '55512454cd904b56d38a12c8573aa27a', // Your API key
       shopify_shared_secret: '6815b758b2996ee3ef116c112432a085', // Your Shared Secret
-      shopify_scope: 'read_products,write_script_tags,read_script_tags',
+      shopify_scope: 'read_products,write_script_tags,read_script_tags,read_orders',
       redirect_uri: 'http://localhost:3000/exchange',
       nonce: '1312312414afdafdasds2242323' // you must provide a randomly selected value unique for each authorization request
     });
