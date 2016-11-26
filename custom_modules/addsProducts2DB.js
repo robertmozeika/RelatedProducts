@@ -1,5 +1,6 @@
 var mongodb = require('mongodb');
 var getNumOfRel = require('./getNumOfRel.js');
+var getImages = require('./getImages.js')
 
 function prodFromShopify(values, shop){
 return new Promise(function(resolve, reject){
@@ -17,6 +18,7 @@ return new Promise(function(resolve, reject){
             }
           })
           if (need2add == true){
+
             products2Add.push(shopProd)
           }
       });
@@ -27,6 +29,7 @@ return new Promise(function(resolve, reject){
     if (products2Add.length > 0){
         var insert2RP =[];
         products2Add.forEach((element)=>{
+
           for (var i = 1; i <= 6; i++){
             var insObj = {
               forStore: shop,
@@ -40,6 +43,18 @@ return new Promise(function(resolve, reject){
 
         })
     }
+
+    // var promise = getImages(products2Add);
+    //
+    // promise.then((result)=>{
+    //   addDBOrResolve(result)
+    // })
+
+
+    console.log('$$')
+    console.log(products2Add)
+
+  // function addDBOrResolve(){
     if (products2Add.length > 0){
       console.log('Adding new products to DB');
       var numOfArr = [];
@@ -66,7 +81,13 @@ return new Promise(function(resolve, reject){
 
            var errors = [];
            products2Add.forEach((element) => {
-             collection.insert({"productID" : element.id.toString(), "productName": element.title, "numOfRel": values[2], "store":shop},  function(err, result){
+             var image;
+             if (element.image){
+               image = element.image.src}
+             else{
+               image = "none"
+             }
+             collection.insert({"productID" : element.id.toString(), "productName": element.title, "numOfRel": values[2], "store":shop, "image": image},  function(err, result){
                if (err) {
                 errors.push(err);
                  console.log(" we got an error at addProducts2DB ");
@@ -94,11 +115,16 @@ return new Promise(function(resolve, reject){
          db.close();
 
          }
-       })
-   }
-   else {
-     resolve([values[0],values[2]])
-   }
+        })
+       }
+
+       else {
+         resolve([values[0],values[2]])
+       }
+    // }
+
+
+
 
 
  });

@@ -25,8 +25,6 @@ router.get('/', function(req, res, next) {
   })
 });
 
-router.get('/thelist', function(req, rest){
 
-})
 
 module.exports = router;

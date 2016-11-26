@@ -5,6 +5,7 @@ var database = require('../custom_modules/database.js');
 /* GET home page. */
 router.get('/', function(req, res, next) {
   var toRouter = req.query.shop.replace('.myshopify.com', "");
+  toRouter = toRouter.replace('.com', "")
   // router.shop_id = toRouter;
   req.session.shop = toRouter;
 
