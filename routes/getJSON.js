@@ -135,12 +135,13 @@ router.get('/image', function(req, res, next){
 
 router.get('/getOrders', function(req, res, next){
     ShopifyObj.Shopify.get('/admin/orders.json', function(err, data, headers){
+      var productAtHand = 6560603013;
       console.log(err, data)
       //array of all emails who people who bought the item at hand
       var peopleWhoBought = [];
       data.orders.forEach((element)=>{
         element.line_items.forEach((line)=>{
-          if (line.product_id == 6560603013){
+          if (line.product_id == productAtHand){
             peopleWhoBought.push(element.email);
           }
         })
@@ -151,20 +152,49 @@ router.get('/getOrders', function(req, res, next){
         return (peopleWhoBought.indexOf(value.email) > -1)
       }
 
-      //filters all data to people who bought the product at hand
       var peopleWhoBoughtOrders = data.orders.filter(testPB);
 
-      // var hasDuplicates = [];
-      // peopleWhoBought.forEach(function(currentObject) {
-      //
-      //   if (seen.email === seen.add(currentObject).email){
-      //     hasDuplicates.push(currentObject)
-      //   }
-      //
-      // });
+      var productsAlsoBought = [];
+      peopleWhoBoughtOrders.forEach((element)=>{
+        element.line_items.forEach((item)=>{
+          if (item.product_id !== productAtHand){
+            productsAlsoBought.push(item)
+          }
+        })
+      })
 
-      // console.log(hasDuplicates)
-      res.send(peopleWhoBoughtOrders)
+      var alsoBoughtInsert = [];
+      productsAlsoBought.forEach((element)=>{
+            var seen = false;
+            var atIndex = -1;
+            for(var j = 0; j != alsoBoughtInsert.length; ++j) {
+                if(alsoBoughtInsert[j].productID == element.product_id){
+                 seen = true;
+                 atIndex = j;
+                 console.log(alsoBoughtInsert)
+                 console.log(j)
+               }
+            }
+            if (seen){
+              alsoBoughtInsert[atIndex].howMany = alsoBoughtInsert[atIndex].howMany + 1
+            } else {
+              var store = element.vendor.replace(/ /g, "-");
+              store = store.toLowerCase();
+              console.log(store)
+              var abObj = {
+                forStore: store,
+                forProduct: productAtHand.toString(),
+                productID: element.product_id.toString(),
+                title: element.title,
+                howMany:1,
+              }
+              alsoBoughtInsert.push(abObj)
+            }
+
+      })
+
+
+      res.send(alsoBoughtInsert)
     });
 
 })

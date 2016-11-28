@@ -16,11 +16,46 @@ router.get('/', function(req, res, next) {
     } else {
       console.log('Connection between Database Success');
 
+      function searchRP(){
+        return new Promise(function(resolve, reject){
+          var collection = db.collection('RelatedProducts');
+          collection.find({"forStore":shop_id, "forProduct":product_id}).toArray(function(err, result){
+            if (err){
+              reject(err)
+            } else {
+            resolve(result);
+            }
+          });
+        })
+      }
 
-      var collection = db.collection('RelatedProducts');
-      collection.find({"forStore":shop_id, "forProduct":product_id}).toArray(function(err, result){
-        res.json(result);
-      });
+      function searchBP(){
+        return new Promise(function(resolve, reject){
+          var collection = db.collection('alsoBoughtProducts');
+          collection.find({"forStore":shop_id, "forProduct":product_id}).toArray(function(err, result){
+            resolve(result);
+          });
+        })
+      }
+
+      Promise.all([
+        searchRP(),
+        searchBP(),
+
+
+
+      ]).then(function(values){
+        var sendObj = {
+          products: values[0],
+          alsoBought: values[1]
+        }
+        
+        res.send(sendObj)
+
+      }).catch(reason => {
+        console.log(reason)});
+
+
     }
   })
 });

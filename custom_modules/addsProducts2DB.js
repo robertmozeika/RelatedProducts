@@ -1,13 +1,14 @@
 var mongodb = require('mongodb');
 var getNumOfRel = require('./getNumOfRel.js');
-var getImages = require('./getImages.js')
+var addAlsoBought = require('./addAlsoBought');
 
 function prodFromShopify(values, shop){
 return new Promise(function(resolve, reject){
-    var products2Add = []
+    var products2Add = [];
+    //gets put into add alsobought function
+    var ids2Add = [];
     if (values[0][1] !== undefined){
-
-
+    
       JSON.parse(values[1]).forEach((shopProd) => {
           var need2add = true;
           values[0][1].forEach((currentDb) => {
@@ -19,14 +20,36 @@ return new Promise(function(resolve, reject){
           })
           if (need2add == true){
 
-            products2Add.push(shopProd)
+            products2Add.push(shopProd);
+
+            var image;
+            if (shopProd.image){
+
+              image = shopProd.image.src
+              var num = image.indexOf(".jpg");
+              if (num == -1){
+                num = image.indexOf(".png")
+              }
+              if (num > -1){
+                image = [image.slice(0,num), "_medium", image.slice(num)].join('');
+              }
+
+            }
+            else{
+              image = "none"
+            }
+
+            ids2Add.push({id: shopProd.id, image: image})
           }
       });
 
     }
+
     var insert2RP =[];
 
     if (products2Add.length > 0){
+        addAlsoBought(ids2Add)
+
         var insert2RP =[];
         products2Add.forEach((element)=>{
 

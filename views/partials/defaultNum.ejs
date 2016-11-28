@@ -1,6 +1,7 @@
 <div id="defaultNum" class="well">
-    <span>Default Number of Related:</span>
+
     <form id="defNumForm" action="/changeDefaultNum" method="get" onsubmit=" if (document.getElementById('changeAllCheck').checked) {return confirm('Do you really want to all your products number of related items? All your previous changes will not be saved.');}">
+      <span>Default Number of Related:</span>
         <select class="form-control" id="defNumSelect" name="defNum">
           <option value="1" >
             1
@@ -23,6 +24,17 @@
         </select>
         <input class="hidden" name="old" value="<%=defaultNum%>"></input>
         <input id="changeAllCheck" type="checkbox" name="changeAll"> Change all products to default?
+
+        <br /><br />
+
+          <% for (var i = 0; i < defaultNum; i++) {%>
+            Change all place <%=i+1%> to most also bought? <input type="checkbox" name="toMostBought<%=i+1%>" /><br />
+          <% } %>
+        <br />
         <button id="submitNumOfRel" class="btn btn-primary" type="submit">Submit</button>
+
+
+
     </form>
+
 </div>

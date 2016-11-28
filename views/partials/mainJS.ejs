@@ -114,7 +114,7 @@
         })
     }
 
-    function getAll(inp){
+    function getAll(inp, alsoBought){
       $.ajax({
         type: "GET",
         // url: "http://localhost:3000/getAllProducts?shop=" + inp.attr("store"),
@@ -128,6 +128,7 @@
             var template = $("#rpListAll").html();
             var mObj = {
               products: data,
+              alsoBought: alsoBought
 
               // forproduct: inp.attr("forproduct"),
               // store: inp.attr("store"),
@@ -159,13 +160,15 @@
         async: true,
         dataType: "json",
         success: function (data, textStatus, jqXHR) {
+
+           console.log(data)
             var template = $("#rpWinMain").html();
             var mObj = {title: [],
             cStore: shopValue,
           forproduct: inp.attr('forproduct')};
 
             var p = 1;
-            data.every(function(element){
+            data.products.every(function(element){
               p += 1;
               mObj.title.push(element);
               return !(p > inp.attr('NOR'))
@@ -177,9 +180,16 @@
               getAll($(this));
             })
 
+            var template2 = $("#bpListAll").html();
+            $('#bpProductList').html(Mustache.render(template2, data));
 
 
-            getAll("test-store-1994-1994");
+
+
+
+
+
+            getAll("test-store-1994-1994", data.alsoBought);
 
 
 
@@ -193,7 +203,7 @@
     }
 
     $('.open-rp').on('click',function(event){
-      $('#rpProductList').html("");
+      $('#bpProductList').html("");
 
       showRPWindow($(this));
       event.preventDefault();
