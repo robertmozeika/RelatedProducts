@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var app = require('../app.js')
 var ShopifyObj = require('../custom_modules/shopify.js');
+var shopModel = require('../models/shops.js')
 
 // Again assuming you are using the express framework
 /* GET users listing. */
@@ -41,7 +42,15 @@ ShopifyObj.Shopify.post('/admin/products.json', post_data, function(err, data, h
 
 
 router.get('/test', function(req, res, next){
-  res.send(req.session.lastNight)
+  // res.send(req.session.lastNight)
+  console.log(req.session)
+  shopModel.find()
+    .then(function(doc){
+      res.send(doc)
+    })
 })
+
+
+
 
 module.exports = router;

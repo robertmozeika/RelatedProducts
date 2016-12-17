@@ -1,9 +1,11 @@
-var ShopifyObj = require('./shopify.js')
- function prodFromShopify(){
+var ShopifyObj = require('./shopify.js');
+var shopifyAPI = require('shopify-node-api');
+
+ function prodFromShopify(shopifyconfig){
 return new Promise(function(resolve, reject){
   if (resolve) {
-
-    ShopifyObj.Shopify.get('/admin/products.json',  function(err, data, headers){
+    var shopify = new shopifyAPI(shopifyconfig)
+    shopify.get('/admin/products.json',  function(err, data, headers){
             var stringdata = JSON.stringify(data.products);
                   resolve(stringdata)
 

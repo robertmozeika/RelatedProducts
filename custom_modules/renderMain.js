@@ -3,12 +3,12 @@ var getShop = require('./getShopifyData.js');
 var addProducts2DB = require('./addsProducts2DB.js');
 var getDefaultNum = require('./getDefaultNum.js');
 
-function renderPromises(res,shop){
+function renderPromises(res,shop,shopify){
 
 
   Promise.all([
     getNumOfRel(res, shop),
-    getShop(),
+    getShop(shopify),
     getDefaultNum(shop)
 
 

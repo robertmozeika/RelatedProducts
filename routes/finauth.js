@@ -9,7 +9,9 @@ var renderMain = require('../custom_modules/renderMain.js')
 router.get('/', function(req, res){
 
   var shop = req.session.shop;
-  renderMain(res, shop)
+  var shopify = req.session.shopifyconfig;
+  // res.send(shopify)
+  renderMain(res, shop, shopify)
 
 
 
