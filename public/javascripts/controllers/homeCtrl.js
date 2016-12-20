@@ -24,10 +24,11 @@ angular
     }
 
     $scope.rpWindowProduct = false;
-    $scope.showRPWindow = function(product){
+    $scope.showRPWindow = function(product,index){
       $scope.rpWindowProduct = product;
+      $scope.rpWindowProduct.index = index
     }
 
-    
+
 
   }])

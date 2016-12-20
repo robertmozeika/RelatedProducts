@@ -11,8 +11,9 @@ angular
 
       link: function(scope,element,attrs){
         scope.$watch('rpWindowProduct', function(){
-          console.log(scope.rpWindowProduct)
-          if (scope.rpWindowProduct){
+
+          if (scope.rpWindowProduct && !scope.noNewModal){
+
             ChangeRP.getBP(scope.rpWindowProduct.productID).then(function(data){
               scope.alsoBought = data;
               console.log(scope.alsoBought)
@@ -20,6 +21,8 @@ angular
             // console.log(scope.alsoBought)
             scope.modal();
           }
+          scope.noNewModal = false;
+
 
         }, true);
 
@@ -45,8 +48,15 @@ angular
 
             scope.theModal.result.catch(function(){
                 //Do stuff with respect to dismissal
-                console.log('dismissed')
+                console.log('dismissed');
+                scope.showProductSelection = false;
+                scope.order = -1;
                 scope.rpWindowProduct = false;
+
+
+
+
+
             });
 
         };
@@ -61,11 +71,13 @@ angular
         scope.selectedProductToChange = null;
 
         scope.changeRPSelect = function(product){
-          console.log(scope.rpWindowProduct)
-          console.log(scope.order);
-          console.log(product)
+          scope.noNewModal = true;
           ChangeRP.changeRP(scope.order,scope.rpWindowProduct.productID,product);
-          // scope.products = null;
+          var index = scope.rpWindowProduct.index;
+          scope.products[index].relatedProducts[scope.order - 1] = product.productName;
+
+
+
         }
 
 
