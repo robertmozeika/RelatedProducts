@@ -8,8 +8,15 @@ angular
           productID: productID,
           newProduct: newProduct,
         }
+        console.log(postData)
         return $http.post('/changeRP', postData)
       };
+
+      this.getBP = function(product){
+        return $http.get('/changeRP?productID=' + product).then(function(response){
+          return response.data;
+        })
+      }
 
 
 

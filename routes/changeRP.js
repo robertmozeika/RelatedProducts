@@ -1,15 +1,14 @@
 var express = require('express');
 var router = express.Router();
 var rpModel = require('../models/relatedProducts.js');
-// var shopModel = require('../models/shops.js');
+var bpModel = require('../models/alsoBoughtProducts.js');
 
 
 /* GET users listing. */
 router.post('/', function(req, res, next) {
   var postData = req.body;
-  console.log(postData)
-  postData.forStore = req.session.shop;
 
+  postData.forStore = req.session.shop;
   var query = {
     forProduct:postData.productID,
     order: postData.order,
@@ -17,11 +16,10 @@ router.post('/', function(req, res, next) {
   };
   var newData = {
     'productID': postData.newProduct.productID,
-    'title': postData.newProduct.productName,
+    'title': postData.newProduct.productName || postData.newProduct.title,
     'image': postData.newProduct.image,
   }
-  console.log(query)
-  console.log(newData)
+
   rpModel.findOneAndUpdate(query, newData, {upsert:false}, function(err, doc){
       if (err) return res.send(500, { error: err });
       return res.send("succesfully saved");
@@ -29,6 +27,26 @@ router.post('/', function(req, res, next) {
 
 
 });
+
+router.get('/', function(req,res,next){
+
+
+  var query = {
+    forStore: req.session.shop,
+    forProduct: req.query.productID,
+  }
+
+  console.log(query)
+
+  bpModel.find(query)
+    .then(function(doc){
+      console.log('returned successful');
+      console.log(doc)
+      res.send(doc)
+    })
+
+
+})
 
 
 module.exports = router;

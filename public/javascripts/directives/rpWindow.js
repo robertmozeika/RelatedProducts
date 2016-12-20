@@ -13,11 +13,21 @@ angular
         scope.$watch('rpWindowProduct', function(){
           console.log(scope.rpWindowProduct)
           if (scope.rpWindowProduct){
-            scope.modal()
+            ChangeRP.getBP(scope.rpWindowProduct.productID).then(function(data){
+              scope.alsoBought = data;
+              console.log(scope.alsoBought)
+            });
+            // console.log(scope.alsoBought)
+            scope.modal();
           }
 
         }, true);
 
+        scope.getAlsoBought = function(){
+          if (scope.alsoBought){
+            return scope.alsoBought
+          }
+        }
         scope.modal = function(){
             scope.theModal = $uibModal.open({
               animation: true,
@@ -54,7 +64,8 @@ angular
           console.log(scope.rpWindowProduct)
           console.log(scope.order);
           console.log(product)
-          ChangeRP.changeRP(scope.order,scope.rpWindowProduct.productID,product)
+          ChangeRP.changeRP(scope.order,scope.rpWindowProduct.productID,product);
+          // scope.products = null;
         }
 
 

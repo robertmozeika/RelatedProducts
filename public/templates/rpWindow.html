@@ -11,13 +11,20 @@
         </li>
       </ul>
     </div>
-    <div class="col-md-6">
-      <ul class="list-group" ng-class="{hidden: !showProductSelection}">
+    <div class="col-md-6" ng-class="{hidden: !showProductSelection}">
+      <h6>Also Bought Products</h6>
+      <ul class="list-group">
+        <li class="list-group-item" ng-repeat="bp in getAlsoBought() | orderBy: '-howMany' ">
+          <a href="#" ng-click="changeRPSelect(bp)">{{bp.title}}</a> <span class="badge">{{bp.howMany}}</span>
+        </li>
+      </ul>
+      <h6>All Products</h6>
+      <ul class="list-group" >
         <li class="list-group-item" ng-repeat="product in products">
           <a href="#" ng-click="changeRPSelect(product)">{{product.productName}}</a>
-           <!-- <a href='#' ng-click="testFunc()">Change</a> -->
         </li>
       </ul>
     </div>
+
   </div>
 </div>
