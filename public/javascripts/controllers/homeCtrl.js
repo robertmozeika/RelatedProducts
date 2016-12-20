@@ -23,8 +23,11 @@ angular
       }
     }
 
+    $scope.rpWindowProduct = false;
+    $scope.showRPWindow = function(product){
+      $scope.rpWindowProduct = product;
+    }
 
-
-
+    
 
   }])

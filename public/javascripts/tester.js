@@ -3,6 +3,8 @@
 // require('angular');
 import 'angular';
 import 'angular-ui-router';
+import 'angular-ui-bootstrap';
+
 
 // var arr = [1,2,3];
 //
@@ -13,6 +15,8 @@ import 'angular-ui-router';
 angular
   .module('app', [
     'ui.router',
+    'ui.bootstrap',
+    'app.directives.rpWindow',
   ])
 
   .config(['$urlRouterProvider','$stateProvider',function($urlRouterProvider, $stateProvider) {

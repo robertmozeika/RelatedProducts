@@ -30,7 +30,7 @@
     <tr ng-repeat="product in products | filter: filterString">
       <td>
         {{product.productName}}<br />
-        <a href="#">Set Related Products</a>
+        <a href="#" ng-click="showRPWindow(product)">Set Related Products</a>
       </td>
       <td>
         <select ng-model="product.numOfRel" ng-options="n for n in numbers" ng-change="changeNR(product)">
@@ -45,4 +45,4 @@
 </table>
 
 <!-- <show-Details detail-contact="detailContact"></show-Details> -->
-<!-- <rpWindow></rpWindow> -->
+<rp-window rp-window-product="rpWindowProduct" products="products"></rp-window>

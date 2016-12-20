@@ -1,0 +1,23 @@
+<div class="modal-header">
+  {{rpWindowProduct.productName}}
+</div>
+
+<div class="modal-body">
+  <div class="row">
+    <div class="col-md-6">
+      <ul class="list-group">
+        <li class="list-group-item" ng-repeat="rp in rpWindowProduct.relatedProducts | limitTo: rpWindowProduct.numOfRel track by $index">
+          {{rp}} <a href='#' ng-click="changeRP($index)">Change</a>
+        </li>
+      </ul>
+    </div>
+    <div class="col-md-6">
+      <ul class="list-group" ng-class="{hidden: !showProductSelection}">
+        <li class="list-group-item" ng-repeat="product in products">
+          <a href="#" ng-click="changeRPSelect(product)">{{product.productName}}</a>
+           <!-- <a href='#' ng-click="testFunc()">Change</a> -->
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
