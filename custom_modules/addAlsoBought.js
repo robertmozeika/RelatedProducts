@@ -1,11 +1,13 @@
-var ShopifyObj = require('./shopify.js')
+var shopifyAPI = require('shopify-node-api');
 var mongodb = require('mongodb');
 
 
-function addAlsoBought(array){
+function addAlsoBought(array, shopifyconfig){
   var alsoBoughtInsert = [];
 
-  ShopifyObj.Shopify.get('/admin/orders.json', function(err, data, headers){
+  var shopify = new shopifyAPI(shopifyconfig)
+
+  shopify.get('/admin/orders.json', function(err, data, headers){
     array.forEach((productAtHand)=>{
         //array of all emails who people who bought the item at hand
         var peopleWhoBought = [];

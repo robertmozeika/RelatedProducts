@@ -2,13 +2,13 @@ var mongodb = require('mongodb');
 var getNumOfRel = require('./getNumOfRel.js');
 var addAlsoBought = require('./addAlsoBought');
 
-function prodFromShopify(values, shop){
+function prodFromShopify(values, shop, shopify){
 return new Promise(function(resolve, reject){
     var products2Add = [];
     //gets put into add alsobought function
     var ids2Add = [];
     if (values[0][1] !== undefined){
-    
+
       JSON.parse(values[1]).forEach((shopProd) => {
           var need2add = true;
           values[0][1].forEach((currentDb) => {
@@ -48,7 +48,7 @@ return new Promise(function(resolve, reject){
     var insert2RP =[];
 
     if (products2Add.length > 0){
-        addAlsoBought(ids2Add)
+        addAlsoBought(ids2Add, shopify)
 
         var insert2RP =[];
         products2Add.forEach((element)=>{

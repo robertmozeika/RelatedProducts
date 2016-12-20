@@ -30,13 +30,17 @@ function getRelatedProducts(inp, shop){
 
         })
 
+        inp.forEach((ele)=>{
+          ele.relatedProducts = rpPass[ele.productID];
+        })
         resolve(rpPass);
 
 
 
        }
      else {
-       console.log('passing nothing at getRel')
+       console.log('passing nothing at getRel');
+
        var passPromise = [res, []]
 
        resolve(passPromise)

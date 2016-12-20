@@ -1,4 +1,3 @@
-var ShopifyObj = require('./shopify.js');
 var shopifyAPI = require('shopify-node-api');
 
  function prodFromShopify(shopifyconfig){

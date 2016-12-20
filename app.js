@@ -15,7 +15,7 @@ app.use(session({
   secret: '123qwe',
   expires: new Date(Date.now() + (30 * 86400 * 1000)),
   resave: false,
-  saveUninitialized: false 
+  saveUninitialized: false
 
 }))
 
@@ -31,6 +31,8 @@ var changeProduct = require('./routes/changeProduct.js')
 var exchangetoken = require('./routes/exchange.js');
 var changeNumOfRel = require('./routes/changeNumOfRel.js');
 var changeDefNum = require('./routes/changeDefaultNum.js');
+var changeNR = require('./routes/changeNR.js');
+
 
 
 
@@ -76,7 +78,9 @@ app.use('/getAllProducts', getAllProducts);
 app.use('/changeProduct', changeProduct);
 app.use('/exchange', exchangetoken);
 app.use ("/changeNumOfRel", changeNumOfRel);
-app.use ("/changeDefaultNum", changeDefNum)
+app.use ("/changeDefaultNum", changeDefNum);
+app.use ("/changeNR", changeNR);
+
 
 
 

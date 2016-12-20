@@ -13,7 +13,7 @@ function renderPromises(res,shop,shopify){
 
 
   ]).then(function(values){
-    return addProducts2DB(values, shop)
+    return addProducts2DB(values, shop, shopify)
 
 
   }).then(function(values){
@@ -25,7 +25,8 @@ function renderPromises(res,shop,shopify){
               shop: values[0][3],
               numOfRelPass: values[0][1],
               defaultNum: values[1],
-              relatedProducts: values[0][2]
+              relatedProducts: values[0][2],
+              // products: values[0][4],
 
     });
 

@@ -1,0 +1,48 @@
+<h3>Products</h3>
+
+
+<div class="form-group">
+  <label >Search Products: </label>
+  <input type="text" ng-model="filterString.productName" class="form-control" />
+</div>
+<form class="form-inline">
+  <div class="form-group">
+    <label >Default Number of Related Items: </label>
+    <select type="text" ng-model="defaultNR" class="form-control" ng-options="n for n in numbers"/>
+
+    <span>Change all products to new default?</span>
+    <input type="checkbox" ng-model="checkedDNR" />
+    &nbsp;
+    <button class="btn btn-primary"type="submit" ng-click="changeDefaultNR(defaultNR, checkedDNR)">Submit Changes</button>
+  </div>
+</form>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Product Name</th>
+      <th>Number of Related</th>
+      <th>Related Products</th>
+
+    </tr>
+  </thead>
+  <tbody>
+    <tr ng-repeat="product in products | filter: filterString">
+      <td>
+        {{product.productName}}<br />
+        <a href="#">Set Related Products</a>
+      </td>
+      <td>
+        <select ng-model="product.numOfRel" ng-options="n for n in numbers" ng-change="changeNR(product)">
+        </select>
+
+      </td>
+      <td>
+        <ul><li ng-repeat="product in product.relatedProducts | limitTo: product.numOfRel track by $index">{{product}}</li></ul>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- <show-Details detail-contact="detailContact"></show-Details> -->
+<!-- <rpWindow></rpWindow> -->

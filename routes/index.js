@@ -1,6 +1,5 @@
 var express = require('express');
 var router = express.Router();
-var database = require('../custom_modules/database.js');
 var authorize = require('../custom_modules/authorize.js')
 
 /* GET home page. */
