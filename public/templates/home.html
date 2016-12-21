@@ -13,7 +13,7 @@
     <span>Change all products to new default?</span>
     <input type="checkbox" ng-model="checkedDNR" />
     &nbsp;
-    <button class="btn btn-primary"type="submit" ng-click="changeDefaultNR(defaultNR, checkedDNR)">Submit Changes</button>
+    <button class="btn btn-primary"type="submit" ng-click="changeDefaultNR(defaultNR, checkedDNR)">Set</button>
   </div>
 </form>
 <form class="form-inline">
@@ -24,7 +24,7 @@
       <input type="checkbox"  ng-model="setAllChecked[$index]" ng-change="setAlltoMostBought()"/>
       &nbsp;
     </div>
-    <button class="btn btn-primary" ng-click="setAllMostBought(setAllChecked)" type="submit">Submit Changes</button>
+    <button class="btn btn-primary" ng-click="setAllMostBought(setAllChecked)" type="submit">Set</button>
 
 
   </div>

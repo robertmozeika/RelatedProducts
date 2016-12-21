@@ -5,17 +5,22 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var mongo = require('mongodb');
-var session = require('express-session');
 var mongoose = require('mongoose');
+var session = require('express-session');
+var MongoStore = require('connect-mongo')(session);
 
 
 var app = express();
+
+mongoose.connect('mongodb://localhost:27017/shopify')
+mongoose.Promise = global.Promise;
 
 app.use(session({
   secret: '123qwe',
   expires: new Date(Date.now() + (30 * 86400 * 1000)),
   resave: false,
-  saveUninitialized: false
+  saveUninitialized: false,
+  store: new MongoStore({mongooseConnection:mongoose.connection}),
 
 }))
 
@@ -117,8 +122,6 @@ if (app.get('env') === 'development') {
 }
 
 
-mongoose.connect('mongodb://localhost:27017/shopify')
-mongoose.Promise = global.Promise;
 
 
 // production error handler
