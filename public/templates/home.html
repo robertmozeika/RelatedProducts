@@ -16,6 +16,19 @@
     <button class="btn btn-primary"type="submit" ng-click="changeDefaultNR(defaultNR, checkedDNR)">Submit Changes</button>
   </div>
 </form>
+<form class="form-inline">
+  <div class="form-group">
+    Set to Most Bought:
+    <div style="display:inline" ng-repeat="n in numbers">
+      <label>{{n}}</label>
+      <input type="checkbox"  ng-model="setAllChecked[$index]" ng-change="setAlltoMostBought()"/>
+      &nbsp;
+    </div>
+    <button class="btn btn-primary" ng-click="setAllMostBought(setAllChecked)" type="submit">Submit Changes</button>
+
+
+  </div>
+</form>
 
 <table class="table">
   <thead>
@@ -30,7 +43,7 @@
     <tr ng-repeat="product in products | filter: filterString">
       <td>
         {{product.productName}}<br />
-        <a href="#" ng-click="showRPWindow(product, $index)">Set Related Products</a>
+        <a href="#" ng-click="showRPWindow(product)">Set Related Products</a>
       </td>
       <td>
         <select ng-model="product.numOfRel" ng-options="n for n in numbers" ng-change="changeNR(product)">

@@ -24,10 +24,18 @@ angular
     }
 
     $scope.rpWindowProduct = false;
-    $scope.showRPWindow = function(product,index){
+    $scope.showRPWindow = function(product){
       $scope.rpWindowProduct = product;
-      $scope.rpWindowProduct.index = index
     }
+
+    $scope.setAllChecked = [];
+    $scope.setAlltoMostBought = function(){
+      console.log($scope.setAllChecked)
+    }
+
+    $scope.setAllMostBought = ChangeNR.setAllMostBought;
+
+
 
 
 

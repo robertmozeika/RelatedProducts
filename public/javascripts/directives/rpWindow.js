@@ -73,8 +73,8 @@ angular
         scope.changeRPSelect = function(product){
           scope.noNewModal = true;
           ChangeRP.changeRP(scope.order,scope.rpWindowProduct.productID,product);
-          var index = scope.rpWindowProduct.index;
-          scope.products[index].relatedProducts[scope.order - 1] = product.productName;
+          var index = scope.products.indexOf(scope.rpWindowProduct);
+          scope.products[index].relatedProducts[scope.order - 1] = product.productName || product.title;
 
 
 

@@ -15,6 +15,13 @@ angular
         return $http.get('/changeNR?num=' + input + '&checked=' + checked)
       }
 
+      this.setAllMostBought = function(checked){
+        var postData = {
+          checked: checked,
+        }
+        return $http.post('/setAllMostBought', postData)
+      }
+
 
 
   }])
