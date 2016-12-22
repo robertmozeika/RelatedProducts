@@ -3,7 +3,7 @@
 
 <div class="form-group">
   <label >Search Products: </label>
-  <input type="text" ng-model="filterString.productName" class="form-control" />
+  <input type="text" ng-model="filterString.title" class="form-control" />
 </div>
 <form class="form-inline">
   <div class="form-group">
@@ -42,7 +42,7 @@
   <tbody>
     <tr ng-repeat="product in products | filter: filterString">
       <td>
-        {{product.productName}}<br />
+        {{product.title}}<br />
         <a href="#" ng-click="showRPWindow(product)">Set Related Products</a>
       </td>
       <td>

@@ -16,7 +16,7 @@ router.post('/', function(req, res, next) {
   };
   var newData = {
     'productID': postData.newProduct.productID,
-    'title': postData.newProduct.productName || postData.newProduct.title,
+    'title': postData.newProduct.title,
     'image': postData.newProduct.image,
   }
 

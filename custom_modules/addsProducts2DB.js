@@ -111,7 +111,7 @@ return new Promise(function(resolve, reject){
              else{
                image = "none"
              }
-             collection.insert({"productID" : element.id.toString(), "productName": element.title, "numOfRel": values[2], "store":shop, "image": image},  function(err, result){
+             collection.insert({"productID" : element.id.toString(), "title": element.title, "numOfRel": values[2], "store":shop, "image": image},  function(err, result){
                if (err) {
                 errors.push(err);
                  console.log(" we got an error at addProducts2DB ");

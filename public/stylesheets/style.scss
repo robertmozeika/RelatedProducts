@@ -8,66 +8,7 @@ a {
 }
 
 
-.numRelForm select{
-  width: 35px;
-  display: inline-block;
-}
-
-#defNumSelect {
-  width: 35px;
-  display: inline-block;
-
-}
-
-#defNumForm {
-  display: inline-block;
-}
-
-#defNumForm button {
-  display: inline-block;
-}
-
-#defaultNum span{
-  font-size: 15px;
-}
-
-#insert-products {
-  ol {
-    display: inline-block;
-    position: relative;
-  }
-  .main-well-info {
-    display: inline-block;
-  }
-}
-
-
-#rpWindow{
-  width: 600px;
-  position: fixed;
-  background-color: #2e6da4;
-  top: 25%;
-  left: -50%;
-  // margin-top: -200px;
-  margin-left: -300px;
-  border-radius: 10px;
-  border-style: solid;
-  border-color: black;
-  border-width: 1px;
-  padding-top: 50px;
-  padding-bottom: 50px;
-
-  .row{
-    // position: relative;
-    // top: 50px;
-  }
-}
-
-.close-rpWindow {
-  position: absolute;
-  right: 10px;
-  top: 10px;
-  color: white;
-  cursor: pointer;
-  z-index: 10;
+.rpSearch {
+  display: inline;
+  width: 75%; 
 }

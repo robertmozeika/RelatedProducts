@@ -4,7 +4,6 @@ angular
 
     //global variable from before scripts.min.js
     $scope.products = products;
-    console.log(products)
     $scope.numbers = [1,2,3,4,5,6];
 
     //global variable from before scripts.min.js

@@ -2,7 +2,7 @@ var mongoose = require('mongoose');
 
 var spSchema = mongoose.Schema({
   productID: String,
-  productName: String,
+  title: String,
   numOfRel: Number,
   store: String,
   image: String,

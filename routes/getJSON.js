@@ -108,7 +108,7 @@ router.get('/client', function(req, res, next){
         });
       }
 
-      firstcollection.find({"productName": prodReg, "store":shop}).toArray(function(err, result){
+      firstcollection.find({"title": prodReg, "store":shop}).toArray(function(err, result){
         if (err){
           console.log(err)
         }
