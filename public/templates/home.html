@@ -21,7 +21,7 @@
     Set to Most Bought:
     <div style="display:inline" ng-repeat="n in numbers">
       <label>{{n}}</label>
-      <input type="checkbox"  ng-model="setAllChecked[$index]" ng-change="setAlltoMostBought()"/>
+      <input type="checkbox"  ng-model="setAllChecked[$index]"/>
       &nbsp;
     </div>
     <button class="btn btn-primary" ng-click="setAllMostBought(setAllChecked)" type="submit">Set</button>

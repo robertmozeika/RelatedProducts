@@ -7,7 +7,8 @@
 <% var stringPass =  JSON.stringify(numOfRelPass);
 var parsedPass = JSON.parse(stringPass); %>
 var products = <%-stringPass%>;
-var defaultNum = <%-defaultNum%>
+<% var stringDef = JSON.stringify(defaultNum)%>
+var defaultNum = <%-stringDef%>
 
 </script>
 <script src="/javascripts/scripts.min.js"></script>

@@ -20,9 +20,13 @@ function getDefault(shop){
         console.log(err)
       }else if (result !== undefined){
          var defaultNum = result[0].defaultNumOfRelated;
-         console.log("defaultnum")
-         console.log(defaultNum)
-         resolve(defaultNum)
+         var allMostBought = result[0].allMostBought;
+         var defNumPass = {
+           defaultNum: defaultNum,
+           allMostBought: allMostBought,
+         }
+
+         resolve(defNumPass)
 
        }
      else {

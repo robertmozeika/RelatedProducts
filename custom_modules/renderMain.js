@@ -26,7 +26,6 @@ function renderPromises(res,shop,shopify){
               numOfRelPass: values[0][1],
               defaultNum: values[1],
               relatedProducts: values[0][2],
-              // products: values[0][4],
 
     });
 

@@ -19,7 +19,10 @@ angular
         var postData = {
           checked: checked,
         }
-        return $http.post('/setAllMostBought', postData)
+        return $http.post('/setAllMostBought', postData).then(function(response){
+          // console.log(response.data)
+          return response.data
+        })
       }
 
 
