@@ -111,7 +111,20 @@ return new Promise(function(resolve, reject){
              else{
                image = "none"
              }
-             collection.insert({"productID" : element.id.toString(), "title": element.title, "numOfRel": values[2], "store":shop, "image": image},  function(err, result){
+
+             var inserter = {
+               "productID" : element.id.toString(),
+               "title": element.title,
+               "numOfRel": values[2].defaultNum,
+               "store":shop,
+               "image": image
+             }
+             console.log('$$')
+             console.log(values[2]);
+             console.log(values[0])
+
+             values[0][1].push(inserter)
+             collection.insert({"productID" : element.id.toString(), "title": element.title, "numOfRel": values[2].defaultNum, "store":shop, "image": image},  function(err, result){
                if (err) {
                 errors.push(err);
                  console.log(" we got an error at addProducts2DB ");
@@ -119,10 +132,9 @@ return new Promise(function(resolve, reject){
                }
                else {
                  console.log("inserted into document");
-                 getNumOfRel(values[0][0]).then(function(inp){
-
-                   resolve([inp,values[2]])
-                 })
+                //  getNumOfRel(values[0][0]).then(function(inp){
+                //    resolve([inp,values[2]])
+                //  })
 
 
                }
@@ -137,6 +149,8 @@ return new Promise(function(resolve, reject){
 
 
          db.close();
+
+         resolve([values[0],values[2]])
 
          }
         })

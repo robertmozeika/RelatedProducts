@@ -82,21 +82,26 @@ function addAlsoBought(array, shopifyconfig){
       if(err){
         console.log('Unable to connect' + err)
       } else {
+        console.log(alsoBoughtInsert)
         console.log('Connection between Database Success at alsobought');
 
         var collection = db.collection('alsoBoughtProducts');
 
-        collection.insert(alsoBoughtInsert,function(err, result){
-          if(err) {
+        if (alsoBoughtInsert.length){
+            collection.insert(alsoBoughtInsert,function(err, result){
+              if(err) {
 
-           console.log(err)
-         }else {
-          console.log('no error at alsobought')
+               console.log(err)
+             }else {
+              console.log('no error at alsobought')
+            }
+
+            db.close();
+
+          });
+        } else {
+          db.close();
         }
-
-        db.close();
-
-      });
 
       }
     })

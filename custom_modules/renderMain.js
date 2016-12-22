@@ -17,8 +17,7 @@ function renderPromises(res,shop,shopify){
 
 
   }).then(function(values){
-
-
+    // console.log(values)
 
       values[0][0].render('layout', {
               title: 'Related Products',
