@@ -18,15 +18,18 @@ function renderPromises(res,shop,shopify){
 
   }).then(function(values){
     // console.log(values)
+      
+        console.log('rendering')
+          values[0][0].render('layout', {
+                  title: 'Related Products',
+                  shop: values[0][3],
+                  numOfRelPass: values[0][1],
+                  defaultNum: values[1],
+                  relatedProducts: values[0][2],
 
-      values[0][0].render('layout', {
-              title: 'Related Products',
-              shop: values[0][3],
-              numOfRelPass: values[0][1],
-              defaultNum: values[1],
-              relatedProducts: values[0][2],
 
-    });
+        });
+      }
 
   } ).catch(reason => {
     console.log(reason)});

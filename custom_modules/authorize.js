@@ -16,6 +16,7 @@ var authorize = {
             access_token: doc[0].access_token,
             shopify_scope: 'read_products,write_script_tags,read_script_tags,read_orders',
             redirect_uri: 'http://localhost:3000/finish_auth',
+            verbose: false,
           }
 
           var shopify = new shopifyAPI(req.session.shopifyconfig)
@@ -29,7 +30,6 @@ var authorize = {
 
 
         else {
-          console.log('else ran')
           req.session.shopifyconfig = {
             shop: shop, // MYSHOP.myshopify.com
             shopify_api_key: '55512454cd904b56d38a12c8573aa27a', // Your API key

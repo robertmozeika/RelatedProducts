@@ -1,6 +1,7 @@
 var mongodb = require('mongodb');
 var getNumOfRel = require('./getNumOfRel.js');
 var addAlsoBought = require('./addAlsoBought');
+var assignNewAB = require('./assignNewProductAlsoBought')
 
 function prodFromShopify(values, shop, shopify){
 return new Promise(function(resolve, reject){
@@ -119,10 +120,9 @@ return new Promise(function(resolve, reject){
                "store":shop,
                "image": image
              }
-             console.log('$$')
-             console.log(values[2]);
-             console.log(values[0])
 
+             completeInsert = [];
+             completeInsert.push(inserter)
              values[0][1].push(inserter)
              collection.insert({"productID" : element.id.toString(), "title": element.title, "numOfRel": values[2].defaultNum, "store":shop, "image": image},  function(err, result){
                if (err) {
@@ -132,10 +132,6 @@ return new Promise(function(resolve, reject){
                }
                else {
                  console.log("inserted into document");
-                //  getNumOfRel(values[0][0]).then(function(inp){
-                //    resolve([inp,values[2]])
-                //  })
-
 
                }
 
@@ -145,12 +141,17 @@ return new Promise(function(resolve, reject){
 
          })
 
-
-
+         console.log('$$')
+         console.log(completeInsert)
+         console.log(values[2])
+         //adds also bought from the defaultNum how many are set to also bought all and also adds a temporary property for related products as a property of the product object
 
          db.close();
-
-         resolve([values[0],values[2]])
+         assignNewAB(completeInsert, values[2].allMostBought, shop).then(function(data){
+           //add complete insert retuned to values[0][1] down here instead
+           console.log(data)
+           resolve([values[0],values[2]]);
+         })
 
          }
         })

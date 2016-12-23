@@ -15,7 +15,7 @@ function setAlsoBought(whichMostBought,shop_session){
       var newData = {
         allMostBought: whichMostBought,
       }
-
+      //changes the shops collection to the proper array of what was chosen from check boxes
       shopModel.findOneAndUpdate(query, newData, {upsert:false}, function(err, doc){
           if (err) {console.log(err);}
           else {console.log("succesfully updated most bought in shops collection")}
@@ -109,7 +109,26 @@ function setAlsoBought(whichMostBought,shop_session){
 
 
 
-
+                /*which most ordered is a array of objects looking like:  ('1' is the first most ordered for each product that has also boughts)
+                { '1':
+                 { '6560603013':
+                    { _id: 585beda36abc0d037d74ad0b,
+                      forStore: 'test-store-1994-1994',
+                      forProduct: '6560603013',
+                      productID: '6744174917',
+                      title: 'Fig Newton',
+                      image: 'none',
+                      howMany: 3 },
+                   '6744174917':
+                    { _id: 585beda36abc0d037d74ad0e,
+                      forStore: 'test-store-1994-1994',
+                      forProduct: '6744174917',
+                      productID: '6560603013',
+                      title: 'Dog',
+                      image: 'https://cdn.shopify.com/s/files/1/1569/4167/products/imagejpeg_0_5_medium.jpg?v=1477581093',
+                      howMany: 3 }, */
+                console.log('$$')
+                console.log(mostBoughtOrdered)
                 var propertyNumber = 0;
                 for (var i = 0; i < Object.keys(mostBoughtOrdered).length; i++){
                   if (whichMostBought[i]){
