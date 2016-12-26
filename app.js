@@ -39,6 +39,8 @@ var changeDefNum = require('./routes/changeDefaultNum.js');
 var changeNR = require('./routes/changeNR.js');
 var changeRP = require('./routes/changeRP.js');
 var setAllMostBought = require('./routes/setAllMostBought.js');
+var refreshAlsoBought = require('./routes/refreshAlsoBought.js');
+
 
 
 
@@ -91,6 +93,7 @@ app.use ("/changeDefaultNum", changeDefNum);
 app.use ("/changeNR", changeNR);
 app.use ("/changeRP", changeRP);
 app.use ("/setAllMostBought", setAllMostBought);
+app.use ("/refreshAlsoBought", refreshAlsoBought);
 
 
 

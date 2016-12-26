@@ -2,7 +2,7 @@ var mongodb = require('mongodb');
 var shopModel = require('../models/shops.js')
 
 
-function setAlsoBought(whichMostBought,shop_session){
+function setAlsoBought(whichMostBought,shop_session,abProds){
 
   return new Promise((resolve, reject)=> {
 
@@ -37,7 +37,6 @@ function setAlsoBought(whichMostBought,shop_session){
           function findRP(){
             return new Promise((resolve, reject)=>{
               var collection = db.collection("RelatedProducts");
-                console.log(whichMostBought)
                 collection.find({"order":{$in:whichMostBought} , "forStore":shop_session}).toArray(function(err, result){
                   if (err){
                     console.log(err);
@@ -51,16 +50,24 @@ function setAlsoBought(whichMostBought,shop_session){
 
           function findBP(){
             return new Promise((resolve, reject)=>{
-              var collection = db.collection("alsoBoughtProducts");
+              if (abProds){
+                resolve(abProds)
+              } else {
+                var collection = db.collection("alsoBoughtProducts");
 
-                collection.find({"forStore":shop_session}).toArray(function(err, result){
-                  if (err){
-                    console.log(err);
-                    reject(err);
-                  } else {
-                    resolve(result);
-                  }
-              })
+                  collection.find({"forStore":shop_session}).toArray(function(err, result){
+                    if (err){
+                      console.log("hereerrow")
+                      console.log(err);
+                      reject(err);
+                    } else {
+                      console.log('heregood')
+                      resolve(result);
+                    }
+                })
+              }
+
+
             })
           }
 
@@ -72,9 +79,9 @@ function setAlsoBought(whichMostBought,shop_session){
                 for (var i = 0; i < whichMostBought.length; i++){
                   mostBoughtOrdered[i+1] = {};
 
-                    console.log("leftovers")
-                    console.log(leftovers)
-                    console.log("leftovers over")
+                    // console.log("leftovers")
+                    // console.log(leftovers)
+                    // console.log("leftovers over")
 
                   leftovers.forEach((element)=>{
                     if(mostBoughtOrdered[i+1][element.forProduct]){
@@ -96,7 +103,7 @@ function setAlsoBought(whichMostBought,shop_session){
 
                 }
 
-                console.log(mostBoughtOrdered)
+                // console.log(mostBoughtOrdered)
 
 
 
@@ -127,14 +134,14 @@ function setAlsoBought(whichMostBought,shop_session){
                       title: 'Dog',
                       image: 'https://cdn.shopify.com/s/files/1/1569/4167/products/imagejpeg_0_5_medium.jpg?v=1477581093',
                       howMany: 3 }, */
-                console.log('$$')
-                console.log(mostBoughtOrdered)
+                // console.log('$$')
+                // console.log(mostBoughtOrdered)
                 var propertyNumber = 0;
                 for (var i = 0; i < Object.keys(mostBoughtOrdered).length; i++){
                   if (whichMostBought[i]){
                     propertyNumber++;
-                    console.log('prop num');
-                    console.log(propertyNumber)
+                    // console.log('prop num');
+                    // console.log(propertyNumber)
                     for (var propertyName in mostBoughtOrdered[i+1]){
 
                       finder.push({

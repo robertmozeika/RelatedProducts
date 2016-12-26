@@ -1,7 +1,8 @@
 var express = require('express');
 var router = express.Router();
 var mongodb = require('mongodb');
-var ShopifyObj = require('../custom_modules/shopify.js')
+var shopifyAPI = require('shopify-node-api');
+
 
 
 var myjson = {
@@ -14,6 +15,11 @@ router.post('/', function(req, res, next) {
   console.log(query)
   res.send(query)
 });
+
+router.get('/food', function(req,res,next){
+  console.log('hello');
+  res.send('worked')
+})
 
 router.get('/thelist', function(req, rest){
   var MongoClient = mongodb.MongoClient;
@@ -52,6 +58,55 @@ router.get('/test', function(req, res, next){
 
 })
 
+router.get('/trest', function(req, res, next){
+  var ShopifyObj = new shopifyAPI(req.session.shopifyconfig)
+
+   function prodFromShopify(){
+     var post_data = {
+       "script_tag": {
+       "event": "onload",
+       "src": "https:\/\/dl.dropboxusercontent.com\/s\/goyefog63vzbdje\/test.txt"
+     }
+
+     }
+
+     ShopifyObj.post('/admin/script_tags.json', post_data, function(err, data, headers){
+       console.log(err, data)
+       res.send(data)
+     });
+  }
+
+  prodFromShopify();
+
+
+
+})
+
+router.get('/trest', function(req, res, next){
+  var ShopifyObj = new shopifyAPI(req.session.shopifyconfig)
+
+   function prodFromShopify(){
+     var post_data = {
+       "script_tag": {
+       "event": "onload",
+       "src": "https:\/\/dl.dropboxusercontent.com\/s\/8ftx370vb3mcx2d\/other.html"
+     }
+
+     }
+
+     ShopifyObj.post('/admin/script_tags.json', post_data, function(err, data, headers){
+       console.log(err, data)
+       res.send(data)
+     });
+  }
+
+  prodFromShopify();
+
+
+
+})
+
+
 router.get('/rest', function(req, res, next){
   function prodFromShopify(){
 
@@ -68,9 +123,16 @@ router.get('/rest', function(req, res, next){
 })
 
 router.get('/pest', function(req, res, next){
-  ShopifyObj.Shopify.get('/admin/script_tags.json',  function(err, data, headers){
+  console.log(req.session.shopifyconfig)
+  var ShopifyObj = new shopifyAPI(req.session.shopifyconfig)
+
+  ShopifyObj.get('/admin/script_tags.json',  function(err, data, headers){
+    if (err){
+      console.log(err)
+    } else {
     console.log(data)
         res.send(data)
+    }
     });
 })
 
