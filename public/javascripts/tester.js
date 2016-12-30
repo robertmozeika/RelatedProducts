@@ -28,4 +28,5 @@ angular
         controller: 'homeCtrl',
 
       })
+    
   }])

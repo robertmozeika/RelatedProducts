@@ -16,7 +16,7 @@ var authorize = {
             access_token: doc[0].access_token,
             shopify_scope: 'read_products,write_script_tags,read_script_tags,read_orders',
             redirect_uri: 'http://localhost:3000/finish_auth',
-            verbose: true,
+            verbose: false,
           }
 
           var shopify = new shopifyAPI(req.session.shopifyconfig)

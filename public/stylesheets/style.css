@@ -9,4 +9,18 @@ a {
   display: inline;
   width: 75%; }
 
+.settings {
+  border-style: solid;
+  position: relative; }
+  .settings .close-btn {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    height: 25px;
+    width: 25px; }
+    .settings .close-btn span {
+      position: absolute;
+      left: 5px;
+      top: 5px; }
+
 /*# sourceMappingURL=style.css.map */

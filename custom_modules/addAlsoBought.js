@@ -79,7 +79,6 @@ function addAlsoBought(array, shopifyconfig){
 
 
         });
-        console.log('$$$,',alsoBoughtInsert)
         resolve(alsoBoughtInsert);
 
 console.log("this works")

@@ -24,7 +24,7 @@ router.get('/', function(req, res, next) {
       }).then(function(doc){
         // console.log('abprods')
         // console.log(abProds)
-        setAllMostBought(doc[0].allMostBought,req.session.shop,abProds)
+        assignNewProductAlsoBought(doc[0].allMostBought,req.session.shop,abProds)
       }).then(function(){
         res.send('respond with a resource');
 

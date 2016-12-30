@@ -1,5 +1,6 @@
 var mongodb = require('mongodb');
-var shopModel = require('../models/shops.js')
+var shopModel = require('../models/shops.js');
+var abModel = require('../models/alsoBoughtProducts.js')
 
 
 function setAlsoBought(whichMostBought,shop_session,abProds){
@@ -7,7 +8,7 @@ function setAlsoBought(whichMostBought,shop_session,abProds){
   return new Promise((resolve, reject)=> {
 
 
-
+      console.log('$$ this ran')
 
       var query = {
         name: shop_session,
@@ -52,20 +53,13 @@ function setAlsoBought(whichMostBought,shop_session,abProds){
             return new Promise((resolve, reject)=>{
               if (abProds){
                 resolve(abProds)
-              } else {
-                var collection = db.collection("alsoBoughtProducts");
+              } else
 
-                  collection.find({"forStore":shop_session}).toArray(function(err, result){
-                    if (err){
-                      console.log("hereerrow")
-                      console.log(err);
-                      reject(err);
-                    } else {
-                      console.log('heregood')
-                      resolve(result);
-                    }
-                })
-              }
+                abModel.find({"forStore":shop_session})
+                  .then(function(doc){
+
+                    resolve(doc)
+                  })
 
 
             })
@@ -147,7 +141,7 @@ function setAlsoBought(whichMostBought,shop_session,abProds){
                       finder.push({
                         forStore: shop_session,
                         forProduct: propertyName,
-                        order: i+1,
+                        order: i,
                       });
                       setter.push({
                         productID: mostBoughtOrdered[propertyNumber][propertyName].productID,

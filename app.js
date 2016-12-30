@@ -40,6 +40,8 @@ var changeNR = require('./routes/changeNR.js');
 var changeRP = require('./routes/changeRP.js');
 var setAllMostBought = require('./routes/setAllMostBought.js');
 var refreshAlsoBought = require('./routes/refreshAlsoBought.js');
+var setHeader = require('./routes/setHeader.js');
+
 
 
 
@@ -94,6 +96,8 @@ app.use ("/changeNR", changeNR);
 app.use ("/changeRP", changeRP);
 app.use ("/setAllMostBought", setAllMostBought);
 app.use ("/refreshAlsoBought", refreshAlsoBought);
+app.use ("/setHeader", setHeader);
+
 
 
 

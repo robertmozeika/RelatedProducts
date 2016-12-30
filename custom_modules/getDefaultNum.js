@@ -21,9 +21,11 @@ function getDefault(shop){
       }else if (result !== undefined){
          var defaultNum = result[0].defaultNumOfRelated;
          var allMostBought = result[0].allMostBought;
+         var header = result[0].header;
          var defNumPass = {
            defaultNum: defaultNum,
            allMostBought: allMostBought,
+           header: header,
          }
 
          resolve(defNumPass)

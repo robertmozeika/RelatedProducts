@@ -13,7 +13,6 @@ router.get('/', function(req, res, next) {
   console.log(req.session.shop)
   authorize.connectShop(req.session.shop, req, res)
 
-  // database.connectDB(toRouter, res);
 });
 
 module.exports = router;

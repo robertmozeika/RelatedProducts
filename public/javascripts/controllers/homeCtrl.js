@@ -1,11 +1,12 @@
 angular
   .module('app')
-  .controller('homeCtrl',['$scope', 'ChangeNR', function($scope, ChangeNR){
+  .controller('homeCtrl',['$scope', 'ChangeNR', 'HeaderService', function($scope, ChangeNR, HeaderService){
 
     //global variable from before scripts.min.js
     $scope.products = products;
     console.log(products)
     $scope.numbers = [1,2,3,4,5,6];
+
 
     //global variable from before scripts.min.js
     $scope.defaultNR = defaultNum.defaultNum;
@@ -37,12 +38,21 @@ angular
         console.log(data)
         data.finder.forEach((element,index)=>{
           var productIndex = products.findIndex(x => x.productID==element.forProduct);
-          products[productIndex].relatedProducts[element.order - 1] = data.setter[index].title;
+          products[productIndex].relatedProducts[element.order] = data.setter[index].title;
         })
 
 
       })
     };
+
+    $scope.settings = {show: false };
+
+    $scope.openSettings = function(){
+      $scope.settings.show = !$scope.settings.show;
+      console.log($scope.settings.show)
+    }
+
+    $scope.headerValues = HeaderService.getValues();
 
 
 

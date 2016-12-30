@@ -5,6 +5,7 @@ var shopSchema = mongoose.Schema({
   access_token: String,
   defaultNumOfRelated: Number,
   allMostBought: [Boolean],
+  header: String,
 
 })
 
