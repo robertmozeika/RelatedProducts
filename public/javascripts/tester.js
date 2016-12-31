@@ -17,9 +17,14 @@ angular
     'ui.router',
     'ui.bootstrap',
     'app.directives.rpWindow',
+    'app.directives.popdelay',
   ])
 
-  .config(['$urlRouterProvider','$stateProvider',function($urlRouterProvider, $stateProvider) {
+  .config(['$urlRouterProvider','$stateProvider','$uibTooltipProvider',function($urlRouterProvider, $stateProvider,$uibTooltipProvider) {
+
+    $uibTooltipProvider.setTriggers({'openTrigger': 'closeTrigger'}) ;
+
+
     $urlRouterProvider.otherwise('/');
     $stateProvider
       .state('home', {
@@ -28,5 +33,5 @@ angular
         controller: 'homeCtrl',
 
       })
-    
+
   }])

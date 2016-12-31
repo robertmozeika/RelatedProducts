@@ -8,4 +8,5 @@ require('./javascripts/services/ChangeRP.js')
 require('./javascripts/services/HeaderService.js')
 
 
-require('./javascripts/directives/rpWindow.js')
+require('./javascripts/directives/rpWindow.js');
+require('./javascripts/directives/popover.js')

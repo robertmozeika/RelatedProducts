@@ -12,6 +12,14 @@ angular
       link: function(scope,element,attrs){
         scope.$watch('rpWindowProduct', function(){
 
+          scope.abTitle = function(){
+            if (!scope.showProductSelection){
+              return "No product selected!";
+            } else {
+              return "Changed Related Product"
+            }
+          };
+
           if (scope.rpWindowProduct && !scope.noNewModal){
 
             ChangeRP.getBP(scope.rpWindowProduct.productID).then(function(data){
@@ -65,7 +73,7 @@ angular
         scope.changeRP = function(index){
           console.log(scope.products);
           scope.showProductSelection = true;
-          scope.order = index + 1;
+          scope.order = index;
         }
 
         scope.selectedProductToChange = null;
@@ -74,7 +82,7 @@ angular
           scope.noNewModal = true;
           ChangeRP.changeRP(scope.order,scope.rpWindowProduct.productID,product);
           var index = scope.products.indexOf(scope.rpWindowProduct);
-          scope.products[index].relatedProducts[scope.order - 1] = product.title;
+          scope.products[index].relatedProducts[scope.order] = product.title;
 
 
 

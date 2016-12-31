@@ -8,7 +8,6 @@ function setAlsoBought(whichMostBought,shop_session,abProds){
   return new Promise((resolve, reject)=> {
 
 
-      console.log('$$ this ran')
 
       var query = {
         name: shop_session,
@@ -106,7 +105,6 @@ function setAlsoBought(whichMostBought,shop_session,abProds){
 
                 var finder = [];
                 var setter = [];
-                console.log("%%");
 
 
 

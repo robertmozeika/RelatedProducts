@@ -40,13 +40,14 @@ function addAlsoBought(array, shopifyconfig){
             })
 
             productsAlsoBought.forEach((element)=>{
+
                   var seen = false;
                   var atIndex = -1;
                   for(var j = 0; j != alsoBoughtInsert.length; ++j) {
                       if(alsoBoughtInsert[j].productID == element.product_id && alsoBoughtInsert[j].forProduct == productAtHand.productID){
                        seen = true;
                        atIndex = j;
-                     }
+                      }
                   }
                   if (seen){
                     alsoBoughtInsert[atIndex].howMany = alsoBoughtInsert[atIndex].howMany + 1;
@@ -71,7 +72,9 @@ function addAlsoBought(array, shopifyconfig){
                       image: image,
                       howMany:1,
                     }
-                    alsoBoughtInsert.push(abObj)
+                    if (abObj.forProduct !== abObj.productID){
+                      alsoBoughtInsert.push(abObj)
+                    }
                   }
 
 
@@ -81,7 +84,6 @@ function addAlsoBought(array, shopifyconfig){
         });
         resolve(alsoBoughtInsert);
 
-console.log("this works")
 
 
 

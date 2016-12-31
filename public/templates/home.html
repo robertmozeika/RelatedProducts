@@ -1,6 +1,7 @@
 
-  <a class="btn btn-primary pull-right" ng-hide="settings.show" ng-click="openSettings()" >Settings</a>
 
+  <a class="btn btn-primary pull-right" ng-hide="settings.show" ng-click="openSettings()" >Settings</a>
+<div my-directive="some string" another-param="another string"></div>
 
 <div class="well settings" ng-hide="!settings.show">
 
@@ -17,7 +18,7 @@
         <span>Change all products to new default?</span>
         <input type="checkbox" ng-model="checkedDNR" />
         &nbsp;
-        <button class="btn btn-primary"type="submit" ng-click="changeDefaultNR(defaultNR, checkedDNR)">Set</button>
+        <button class="btn btn-primary"type="submit" ng-click="changeDefaultNR(defaultNR, checkedDNR)" uib-popover="Set!" popover-is-open="changeDefNumPop"  popdelay>Set</button>
       </div>
     </form>
     <form class="form-inline">
@@ -28,7 +29,7 @@
           <input type="checkbox"  ng-model="setAllChecked[$index]"/>
           &nbsp;
         </div>
-        <button class="btn btn-primary" ng-click="setAllMostBought(setAllChecked)" type="submit">Set</button>
+        <button class="btn btn-primary" ng-click="setAllMostBought(setAllChecked)" type="submit" uib-popover="Set!" popover-is-open="setMostBoughtPop"  popdelay>Set</button>
 
 
       </div>
@@ -39,7 +40,7 @@
         <label>Display Header:</label>
         <input ng-model="headerValues.header"/>
 
-        <button class="btn btn-primary" ng-click="headerValues.setHeader(headerValues.header)" type="submit">Set</button>
+        <button class="btn btn-primary" ng-click="headerValues.setHeader(headerValues.header)" type="submit" uib-popover="Set!" popover-is-open="displayPop"  popdelay>Set</button>
 
 
       </div>

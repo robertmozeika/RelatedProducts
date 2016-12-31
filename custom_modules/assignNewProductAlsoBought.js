@@ -16,7 +16,6 @@ function assignNewAB(products, allMostBought, shop,ab2Add){
             var leftOversToReplace = [];
             var mostBoughtOrdered = {};
             for (var i = 0; i < allMostBought.length; i++){
-              console.log('for going ifrst')
               mostBoughtOrdered[i+1] = {};
 
                 // console.log("leftovers")
@@ -51,7 +50,6 @@ function assignNewAB(products, allMostBought, shop,ab2Add){
           var trackMostBought = 0;
           var insert2RP = [];
           allMostBought.forEach((mb,index)=>{
-            console.log('did this')
             if (mb){
               trackMostBought++;
               products.forEach((product)=>{

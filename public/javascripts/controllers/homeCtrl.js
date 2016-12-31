@@ -1,8 +1,10 @@
 angular
   .module('app')
-  .controller('homeCtrl',['$scope', 'ChangeNR', 'HeaderService', function($scope, ChangeNR, HeaderService){
-
+  .controller('homeCtrl',['$scope', 'ChangeNR', 'HeaderService','$timeout',function($scope, ChangeNR, HeaderService,$timeout){
     //global variable from before scripts.min.js
+
+  
+
     $scope.products = products;
     console.log(products)
     $scope.numbers = [1,2,3,4,5,6];
@@ -61,4 +63,24 @@ angular
   }])
 
 
+
+
 // db.shops.update({"name":"test-store-1994-1994"},{$set:{"allMostBought":[true,false,true,false,true,false]}})
+.directive('popoverAutoclose', function ($timeout) {
+  return {
+    restrict: 'A',
+    link: function (scope, element, attrs) {
+      var timeoutHandle;
+
+      scope.$watch('tt_isOpen', function (isOpen) {
+        $timeout.cancel(timeoutHandle);
+
+        if (isOpen) {
+          timeoutHandle = $timeout(function () {
+            scope.tt_isOpen = false;
+          }, +attrs.popoverAutoclose || 2000);
+        }
+      });
+    }
+  }
+});
