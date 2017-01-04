@@ -41,6 +41,8 @@ var changeRP = require('./routes/changeRP.js');
 var setAllMostBought = require('./routes/setAllMostBought.js');
 var refreshAlsoBought = require('./routes/refreshAlsoBought.js');
 var setHeader = require('./routes/setHeader.js');
+var changeLock = require('./routes/changeLock.js');
+
 
 
 
@@ -97,6 +99,8 @@ app.use ("/changeRP", changeRP);
 app.use ("/setAllMostBought", setAllMostBought);
 app.use ("/refreshAlsoBought", refreshAlsoBought);
 app.use ("/setHeader", setHeader);
+app.use ("/changeLock", changeLock);
+
 
 
 

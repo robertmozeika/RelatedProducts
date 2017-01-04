@@ -3,7 +3,7 @@ angular
   .controller('homeCtrl',['$scope', 'ChangeNR', 'HeaderService','$timeout',function($scope, ChangeNR, HeaderService,$timeout){
     //global variable from before scripts.min.js
 
-  
+
 
     $scope.products = products;
     console.log(products)

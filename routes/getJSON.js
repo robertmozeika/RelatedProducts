@@ -5,6 +5,8 @@ var shopifyAPI = require('shopify-node-api');
 var shopModel = require('../models/shops.js');
 var spModel = require('../models/storeProducts.js');
 var rpModel = require('../models/relatedProducts.js');
+var abModel = require('../models/alsoBoughtProducts.js');
+
 
 
 
@@ -298,6 +300,17 @@ router.get('/delete', function(req,res,next){
 
 
 
+})
+
+router.get('/removeProducts', function(req,res,next){
+  Promise.all([
+    abModel.find({}).remove(),
+    rpModel.find({}).remove(),
+    spModel.find({}).remove(),
+
+  ]).then(function(){
+    res.send('removed products')
+  })
 })
 
 

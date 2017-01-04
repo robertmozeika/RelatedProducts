@@ -131,6 +131,7 @@ return new Promise(function(resolve, reject){
                      "store":shop,
                      "image": image,
                      "handle": element.title.replace(/ /g,'-').toLowerCase(),
+                     "locks": [false,false,false,false,false,false],
                    }
 
                    completeInsert.push(inserter)

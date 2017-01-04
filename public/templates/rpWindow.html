@@ -8,7 +8,8 @@
       <h5>Chosen Related Products</h5>
       <ul class="list-group">
         <li class="list-group-item" ng-class="{active: (order) == $index}" ng-repeat="rp in rpWindowProduct.relatedProducts | limitTo: rpWindowProduct.numOfRel track by $index">
-          {{rp}} <a href='#' ng-click="changeRP($index)">Change</a>
+          {{rp}} <a href='#' ng-click="changeRP($index)">Change</a><a href="#" ng-click="changeLock($index)"><i class="fa pull-right" ng-class="!rpWindowProduct.locks[$index] ? 'fa-unlock' : 'fa-lock'" aria-hidden="true"></i></a>
+
         </li>
       </ul>
     </div>

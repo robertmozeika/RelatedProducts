@@ -64,6 +64,7 @@ function assignNewAB(products, allMostBought, shop,ab2Add){
                     title: currentEntry.title,
                     order: index,
                     image: currentEntry.image,
+                    locked: false,
                   };
                   insert2RP.push(insObj)
                 } else {
@@ -75,6 +76,7 @@ function assignNewAB(products, allMostBought, shop,ab2Add){
                     title: "blank",
                     order: index,
                     image: null,
+                    locked: false,
                   };
                   insert2RP.push(insObj)
                 }
@@ -93,6 +95,7 @@ function assignNewAB(products, allMostBought, shop,ab2Add){
                     title: "blank",
                     order: index,
                     image: null,
+                    locked: false,
                   };
                   insert2RP.push(insObj)
 
@@ -113,6 +116,7 @@ function assignNewAB(products, allMostBought, shop,ab2Add){
                 title: "blank",
                 order: i,
                 image: null,
+                locked: false,
               };
               insert2RP.push(insObj)
 
@@ -122,7 +126,6 @@ function assignNewAB(products, allMostBought, shop,ab2Add){
 
 
 
-          console.log('**',products);
           rpModel.insertMany(insert2RP)
             .catch(function(err){
               console.log('Error at assignNewProducts: Inserting related products: ', err)

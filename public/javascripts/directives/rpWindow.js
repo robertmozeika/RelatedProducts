@@ -1,6 +1,6 @@
 angular
   .module('app.directives.rpWindow',[])
-  .directive('rpWindow', ['$uibModal', 'ChangeRP', function($uibModal, ChangeRP){
+  .directive('rpWindow', ['$uibModal', 'ChangeRP', 'ChangeLock', function($uibModal, ChangeRP, ChangeLock){
     return {
       restrict: 'E',
       scope: {
@@ -87,6 +87,8 @@ angular
 
 
         }
+
+        scope.changeLock = ChangeLock.changeLock.bind(scope);
 
 
 
