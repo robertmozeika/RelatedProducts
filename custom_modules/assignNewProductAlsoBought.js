@@ -4,23 +4,23 @@ var rpModel = require('../models/relatedProducts');
 
 function assignNewAB(products, allMostBought, shop,ab2Add){
   return new Promise ((resolve,reject)=>{
+    console.log('made ie hte')
+    if(ab2Add.length){
+      abModel.insertMany(ab2Add)
+        .catch(function(err){
+          console.log('Error: assignNewProducts inserting also boughts: ',err)
+        });
+    }
 
-    abModel.insertMany(ab2Add);
+    var insert2RP = [];
+
     if (allMostBought.indexOf(true) > -1 && ab2Add){
-      // console.log('products',products);
-      // console.log('ab2Add',ab2Add)
-      // products.forEach((ele)=>{
-
-
             var leftovers = ab2Add;
             var leftOversToReplace = [];
             var mostBoughtOrdered = {};
             for (var i = 0; i < allMostBought.length; i++){
               mostBoughtOrdered[i+1] = {};
 
-                // console.log("leftovers")
-                // console.log(leftovers)
-                // console.log("leftovers over")
 
               leftovers.forEach((element)=>{
                 if(mostBoughtOrdered[i+1][element.forProduct]){
@@ -42,13 +42,9 @@ function assignNewAB(products, allMostBought, shop,ab2Add){
 
             }
 
-          // })
-          // console.log('$$')
-          // console.log(mostBoughtOrdered)
-          // resolve(mostBoughtOrdered)
+
 
           var trackMostBought = 0;
-          var insert2RP = [];
           allMostBought.forEach((mb,index)=>{
             if (mb){
               trackMostBought++;
@@ -78,7 +74,7 @@ function assignNewAB(products, allMostBought, shop,ab2Add){
                     productID: "blank",
                     title: "blank",
                     order: index,
-                    image: "none",
+                    image: null,
                   };
                   insert2RP.push(insObj)
                 }
@@ -96,20 +92,43 @@ function assignNewAB(products, allMostBought, shop,ab2Add){
                     productID: "blank",
                     title: "blank",
                     order: index,
-                    image: "none",
+                    image: null,
                   };
                   insert2RP.push(insObj)
 
                 })
             }
           })
-          rpModel.insertMany(insert2RP);
-          resolve(products)
-      }
+        } else {
+          for (var i = 0; i < 6; i++){
+            products.forEach((product)=>{
+              if (!product.relatedProducts){
+                product.relatedProducts = [];
+              }
+              product.relatedProducts[i] = "blank";
+              var insObj = {
+                forStore: shop,
+                forProduct: product.productID,
+                productID: "blank",
+                title: "blank",
+                order: i,
+                image: null,
+              };
+              insert2RP.push(insObj)
 
-      else {
-        resolve('nothing')
-      }
+            })
+          }
+        }
+
+
+
+          console.log('**',products);
+          rpModel.insertMany(insert2RP)
+            .catch(function(err){
+              console.log('Error at assignNewProducts: Inserting related products: ', err)
+            })
+          resolve(products)
+
 
   })
 }

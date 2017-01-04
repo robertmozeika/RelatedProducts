@@ -36,9 +36,10 @@ router.get('/client', function(req, res, next){
       })
 
     }
+    console.log(req.query.handle)
     function findProduct(){
         return new Promise((resolve,reject)=>{
-          spModel.find({"title": prodReg, "store":shop})
+          spModel.find({"handle": req.query.handle, "store":shop})
             .then(function(doc){
               if (doc){
                 resolve([doc[0].productID, doc[0].numOfRel])
@@ -55,7 +56,7 @@ router.get('/client', function(req, res, next){
         .then(function(doc){
           sendResult = [];
           for (var i = 0; i < values[1][1]; i++){
-            sendResult.push(doc[i+1])
+            sendResult.push(doc[i])
           }
           console.log(sendResult);
           var obj = {
@@ -183,6 +184,7 @@ router.get('/thelist', function(req, rest){
 })
 
 router.get('/test', function(req, res, next){
+  var ShopifyObj = new shopifyAPI(req.session.shopifyconfig)
 
    function prodFromShopify(){
      var post_data = {
@@ -193,7 +195,7 @@ router.get('/test', function(req, res, next){
 
      }
 
-     ShopifyObj.Shopify.post('/admin/script_tags.json', post_data, function(err, data, headers){
+     ShopifyObj.post('/admin/script_tags.json', post_data, function(err, data, headers){
        console.log(err, data)
      });
   }
@@ -280,6 +282,22 @@ router.get('/pest', function(req, res, next){
         res.send(data)
     }
     });
+})
+
+router.get('/delete', function(req,res,next){
+  var deleteID = req.query.id;
+  console.log(deleteID)
+  var ShopifyObj = new shopifyAPI(req.session.shopifyconfig)
+
+  ShopifyObj.delete('/admin/script_tags/' + deleteID + '.json', function(err, data, headers){
+    console.log(err, data)
+    res.send(data)
+  });
+
+
+
+
+
 })
 
 

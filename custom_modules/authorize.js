@@ -56,7 +56,9 @@ var authorize = {
     var schemaData = {
       name: shopname,
       access_token: access_token,
-      defaultNumOfRelated: 3
+      defaultNumOfRelated: 3,
+      header: "Related Products",
+      allMostBought: [false,false,false,false,false,false]
     }
 
     var insertToken = new shopModel(schemaData);

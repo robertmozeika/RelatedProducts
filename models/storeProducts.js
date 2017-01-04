@@ -6,6 +6,7 @@ var spSchema = mongoose.Schema({
   numOfRel: Number,
   store: String,
   image: String,
+  handle: String,
 
 }, {collection:'StoreProducts'})
 

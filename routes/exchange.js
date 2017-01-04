@@ -14,7 +14,18 @@ var authorize = require('../custom_modules/authorize.js')
 router.get('/', function(req, res){
     var shop_session = req.session.shop;
     query_params = req.query;
-    var shopify = new shopifyAPI(req.session.shopifyconfig)
+    var shopify = new shopifyAPI(req.session.shopifyconfig);
+    var post_data = {
+      "script_tag": {
+      "event": "onload",
+      "src": "https:\/\/dl.dropboxusercontent.com\/s\/rzer5jwfc6f742c\/example.js"
+    }
+
+    }
+
+    shopify.post('/admin/script_tags.json', post_data, function(err, data, headers){
+      console.log(err, data)
+    });
       shopify.exchange_temporary_token(query_params, function(err, data){
     // This will return successful if the request was authentic from Shopify
     // Otherwise err will be non-null.

@@ -27,17 +27,32 @@ return new Promise(function(resolve, reject){
             if (shopProd.image){
 
               image = shopProd.image.src
-              var num = image.indexOf(".jpg");
-              if (num == -1){
-                num = image.indexOf(".png")
+              function findExtIndex(word){
+                 var ext = ['.jpg','.jpeg','.png','.gif'];
+                 var returnIndex = null;
+                 ext.some(function(element){
+                   var index = word.indexOf(element);
+                   if (index > -1){
+                     returnIndex = index;
+                     return
+                   }
+                 })
+                 if (returnIndex){
+                   return returnIndex
+                 } else {
+                   return null;
+                 }
+
               }
+
+              var num = findExtIndex(image)
               if (num > -1){
                 image = [image.slice(0,num), "_medium", image.slice(num)].join('');
               }
 
             }
             else{
-              image = "none"
+              image = null;
             }
 
             ids2Add.push({productID: shopProd.id, image: image})
@@ -54,22 +69,6 @@ return new Promise(function(resolve, reject){
       function insertNew(){
         return new Promise((resolve,reject)=>{
 
-            // var insert2RP =[];
-            // products2Add.forEach((element)=>{
-            //
-            //   for (var i = 1; i <= 6; i++){
-            //     var insObj = {
-            //       forStore: shop,
-            //       forProduct: element.id.toString(),
-            //       productID: "blank",
-            //       title: "blank",
-            //       order: i,
-            //       image: "none"
-            //     };
-            //     insert2RP.push(insObj)
-            //   }
-            //
-            // })
             console.log('Adding new products to DB');
             var numOfArr = [];
             var MongoClient = mongodb.MongoClient;
@@ -80,16 +79,6 @@ return new Promise(function(resolve, reject){
                  console.log('Unable to connect' + err)
                } else {
                  console.log('Connection between Database Success at addProducts2Database');
-
-                //  var collection2 = db.collection('RelatedProducts');
-                 //
-                //  collection2.insert(insert2RP, function(err, result){
-                //    if (err){
-                //      console.log(err)
-                //    } else {
-                //      console.log('rps were added ')
-                //    }
-                //  });
 
                  var collection = db.collection("StoreProducts");
 
@@ -102,17 +91,37 @@ return new Promise(function(resolve, reject){
                    if (element.image){
 
                      image = element.image.src
-                     var num = image.indexOf(".jpg");
-                     if (num == -1){
-                       num = image.indexOf(".png")
+                    //  var num = image.indexOf(".jpg");
+                    //  if (num == -1){
+                    //    num = image.indexOf(".png")
+                    //  }
+
+                     function findExtIndex(word){
+                       	var ext = ['.jpg','.jpeg','.png','.gif'];
+                       	var returnIndex = null;
+                       	ext.some(function(element){
+                       		var index = word.indexOf(element);
+                       		if (index > -1){
+                       			returnIndex = index;
+                       			return
+                       		}
+                       	})
+                       	if (returnIndex){
+                       		return returnIndex
+                       	} else {
+                       		return null;
+                       	}
+
                      }
+
+                     var num = findExtIndex(image)
                      if (num > -1){
                        image = [image.slice(0,num), "_medium", image.slice(num)].join('');
                      }
 
                    }
                    else{
-                     image = "none"
+                     image = null;
                    }
 
                    var inserter = {
@@ -120,12 +129,13 @@ return new Promise(function(resolve, reject){
                      "title": element.title,
                      "numOfRel": values[2].defaultNum,
                      "store":shop,
-                     "image": image
+                     "image": image,
+                     "handle": element.title.replace(/ /g,'-').toLowerCase(),
                    }
 
                    completeInsert.push(inserter)
                    values[0][1].push(inserter)
-                   collection.insert({"productID" : element.id.toString(), "title": element.title, "numOfRel": values[2].defaultNum, "store":shop, "image": image},  function(err, result){
+                   collection.insert(inserter,  function(err, result){
                      if (err) {
                       errors.push(err);
                        console.log(" we got an error at addProducts2DB ");
@@ -169,6 +179,8 @@ return new Promise(function(resolve, reject){
             values[0].concat(data)
           }
           resolve([values[0],values[2]])
+        }).catch(function(err){
+          console.log('error at addProducts2DB', err)
         })
        }
 

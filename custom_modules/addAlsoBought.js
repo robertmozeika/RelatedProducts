@@ -4,7 +4,6 @@ var mongodb = require('mongodb');
 
 function addAlsoBought(array, shopifyconfig){
   return new Promise((resolve,reject)=>{
-    // console.log("$$$",array)
       var alsoBoughtInsert = [];
 
       var shopify = new shopifyAPI(shopifyconfig)
@@ -58,12 +57,11 @@ function addAlsoBought(array, shopifyconfig){
                     var image;
                     array.some((imageSearch)=>{
 
-                      if (imageSearch.id == element.product_id){
+                      if (imageSearch.productID == element.product_id){
                         image = imageSearch.image;
                         return
                       }
                     })
-
                     var abObj = {
                       forStore: store,
                       forProduct: productAtHand.productID.toString(),
@@ -87,36 +85,7 @@ function addAlsoBought(array, shopifyconfig){
 
 
 
-        // var MongoClient = mongodb.MongoClient;
-        //
-        // var url = "mongodb://localhost:27017/shopify"
-        // MongoClient.connect(url, function(err, db){
-        //   if(err){
-        //     console.log('Unable to connect' + err)
-        //   } else {
-        //     console.log(alsoBoughtInsert)
-        //     console.log('Connection between Database Success at alsobought');
-        //
-        //     var collection = db.collection('alsoBoughtProducts');
-        //
-        //     if (alsoBoughtInsert.length){
-        //         collection.insert(alsoBoughtInsert,function(err, result){
-        //           if(err) {
-        //
-        //            console.log(err)
-        //          }else {
-        //           console.log('no error at alsobought')
-        //         }
-        //
-        //         db.close();
-        //
-        //       });
-        //     } else {
-        //       db.close();
-        //     }
-        //
-        //   }
-        // })
+
 
 
       })
