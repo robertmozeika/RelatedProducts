@@ -4,6 +4,7 @@
 import 'angular';
 import 'angular-ui-router';
 import 'angular-ui-bootstrap';
+import Tester from './services/Tester.js'
 
 
 // var arr = [1,2,3];
@@ -20,6 +21,7 @@ angular
     'app.directives.popdelay',
   ])
 
+  .service('Tester', Tester)
   .config(['$urlRouterProvider','$stateProvider','$uibTooltipProvider',function($urlRouterProvider, $stateProvider,$uibTooltipProvider) {
 
     $uibTooltipProvider.setTriggers({'openTrigger': 'closeTrigger'}) ;

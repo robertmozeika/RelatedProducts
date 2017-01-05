@@ -18,7 +18,7 @@ router.get('/client', function(req, res, next){
   var product = req.query.handle.replace(/-/g, " ");
   var prodReg = new RegExp(product, "gi");
 
-  console.log(prodReg)
+  // console.log(prodReg)
   var shop = req.query.shop;
   var testobj = {prod: product};
 
@@ -54,9 +54,12 @@ router.get('/client', function(req, res, next){
 
 
     function nextSearch(values) {
-      rpModel.find({"forStore":shop, "forProduct":values[1][0]})
+      rpModel.find({"forStore":shop, "forProduct":values[1][0]}).sort('order')
         .then(function(doc){
           sendResult = [];
+          console.log("doc,",doc);
+          console.log(values[1][1])
+
           for (var i = 0; i < values[1][1]; i++){
             sendResult.push(doc[i])
           }

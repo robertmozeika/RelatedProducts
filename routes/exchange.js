@@ -23,10 +23,11 @@ router.get('/', function(req, res){
 
     }
 
-    shopify.post('/admin/script_tags.json', post_data, function(err, data, headers){
-      console.log(err, data)
-    });
+
       shopify.exchange_temporary_token(query_params, function(err, data){
+        shopify.post('/admin/script_tags.json', post_data, function(err, data, headers){
+          console.log(err, data)
+        });
     // This will return successful if the request was authentic from Shopify
     // Otherwise err will be non-null.
     // The module will automatically update your config with the new access token

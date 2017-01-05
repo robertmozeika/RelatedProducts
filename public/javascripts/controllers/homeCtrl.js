@@ -1,9 +1,9 @@
 angular
   .module('app')
-  .controller('homeCtrl',['$scope', 'ChangeNR', 'HeaderService','$timeout',function($scope, ChangeNR, HeaderService,$timeout){
+  .controller('homeCtrl',['$scope', 'ChangeNR', 'HeaderService','$timeout', 'Tester', function($scope, ChangeNR, HeaderService,$timeout,Tester){
     //global variable from before scripts.min.js
 
-
+    Tester.callMom();
 
     $scope.products = products;
     console.log(products)
