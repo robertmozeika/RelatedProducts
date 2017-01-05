@@ -55,6 +55,21 @@ angular
 
     $scope.headerValues = HeaderService.getValues();
 
+    $scope.checkModel = [];
+
+    $scope.checkedProducts = [];
+
+    $scope.checkProduct = function(id,idx){
+      if($scope.checkModel[idx]){
+        $scope.checkedProducts.push(id);
+      } else {
+        let index = $scope.checkedProducts.indexOf(id);
+        $scope.checkedProducts.splice(index,1)
+      }
+      console.log($scope.checkedProducts)
+    }
+
+
 
 
 

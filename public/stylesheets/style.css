@@ -23,4 +23,13 @@ a {
       left: 5px;
       top: 5px; }
 
+.checkHeading {
+  width: 100px; }
+
+.checkTable {
+  display: block;
+  margin-right: auto !important;
+  margin-left: auto !important;
+  width: 30px; }
+
 /*# sourceMappingURL=style.css.map */

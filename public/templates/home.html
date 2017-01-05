@@ -84,6 +84,7 @@
 <table class="table">
   <thead>
     <tr>
+      <th class="checkHeading">Check All</th>
       <th>Product Name</th>
       <th>Number of Related</th>
       <th>Related Products</th>
@@ -92,6 +93,9 @@
   </thead>
   <tbody>
     <tr ng-repeat="product in products | filter: filterString">
+      <td>
+        <input  ng-click="checkProduct(product.productID, $index)" ng-model="checkModel[$index]" class="checkTable" type="checkbox" value="on">
+      </td>
       <td>
         {{product.title}}<br />
         <a href="#" ng-click="showRPWindow(product)">Set Related Products</a>
