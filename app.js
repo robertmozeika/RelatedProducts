@@ -12,7 +12,7 @@ var MongoStore = require('connect-mongo')(session);
 
 var app = express();
 
-mongoose.connect('mongodb://localhost:27017/shopify')
+mongoose.connect('mongodb://robertmozeika:testpass>@ds155418.mlab.com:55418/relatedproducts')
 mongoose.Promise = global.Promise;
 
 app.use(session({

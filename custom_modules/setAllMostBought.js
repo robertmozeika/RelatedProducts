@@ -24,7 +24,7 @@ function setAlsoBought(whichMostBought,shop_session,abProds){
 
       var MongoClient = mongodb.MongoClient;
 
-      var url = "mongodb://localhost:27017/shopify"
+      var url = "mongodb://robertmozeika:testpass>@ds155418.mlab.com:55418/relatedproducts"
       MongoClient.connect(url, function(err, db){
         var indexEval = []
         if(err){
@@ -159,7 +159,7 @@ function setAlsoBought(whichMostBought,shop_session,abProds){
 
                 var MongoClient = mongodb.MongoClient;
 
-                var url = "mongodb://localhost:27017/shopify"
+                var url = "mongodb://robertmozeika:testpass>@ds155418.mlab.com:55418/relatedproducts"
                 MongoClient.connect(url, function(err, db){
                   var indexEval = []
                   if(err){
