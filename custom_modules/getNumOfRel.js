@@ -12,7 +12,7 @@ function getRelatedProducts(inp, shop){
      console.log('Connection between Database Success');
 
      var collection = db.collection('RelatedProducts');
-     collection.find({"forStore":shop}).toArray(function(err, result){
+     collection.find({"forStore":shop},{"sort": "order"}).toArray(function(err, result){
        var rpPass = {};
        if(err) {
 

@@ -6,13 +6,11 @@ angular
     Tester.callMom();
 
     $scope.products = products;
-    console.log(products)
     $scope.numbers = [1,2,3,4,5,6];
 
 
     //global variable from before scripts.min.js
     $scope.defaultNR = defaultNum.defaultNum;
-    console.log(defaultNum)
 
 
 
@@ -37,10 +35,11 @@ angular
 
     $scope.setAllMostBought = function(checked){
       ChangeNR.setAllMostBought(checked).then(function(data){
-        console.log(data)
         data.finder.forEach((element,index)=>{
           var productIndex = products.findIndex(x => x.productID==element.forProduct);
-          products[productIndex].relatedProducts[element.order] = data.setter[index].title;
+          if (products[productIndex].locks[element.order] == false){
+            products[productIndex].relatedProducts[element.order] = data.setter[index].title;
+          }
         })
 
 

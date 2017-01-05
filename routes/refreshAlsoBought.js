@@ -17,7 +17,7 @@ router.get('/', function(req, res, next) {
   var allProducts = [];
 
   Promise.all([
-    rpModel.find({}).remove(),
+    rpModel.find({locked:false}).remove(),
     abModel.find({}).remove()
   ]).then(function(){
     spModel.find({store: req.session.shop})

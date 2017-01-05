@@ -140,6 +140,7 @@ function setAlsoBought(whichMostBought,shop_session,abProds){
                         forStore: shop_session,
                         forProduct: propertyName,
                         order: i,
+                        locked: false,
                       });
                       setter.push({
                         productID: mostBoughtOrdered[propertyNumber][propertyName].productID,

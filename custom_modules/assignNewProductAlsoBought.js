@@ -49,79 +49,87 @@ function assignNewAB(products, allMostBought, shop,ab2Add){
             if (mb){
               trackMostBought++;
               products.forEach((product)=>{
-                if (!product.relatedProducts){
-                  product.relatedProducts = [];
+                if (!product.locks[index]){
+                    if (!product.relatedProducts){
+                      product.relatedProducts = [];
 
 
-                }
-                if (mostBoughtOrdered[trackMostBought][product.productID]){
-                  var currentEntry = mostBoughtOrdered[trackMostBought][product.productID]
-                  product.relatedProducts[index] = currentEntry.title;
-                  var insObj = {
-                    forStore: shop,
-                    forProduct: product.productID,
-                    productID: currentEntry.productID,
-                    title: currentEntry.title,
-                    order: index,
-                    image: currentEntry.image,
-                    locked: false,
-                  };
-                  insert2RP.push(insObj)
-                } else {
-                  product.relatedProducts[index] = "blank";
-                  var insObj = {
-                    forStore: shop,
-                    forProduct: product.productID,
-                    productID: "blank",
-                    title: "blank",
-                    order: index,
-                    image: null,
-                    locked: false,
-                  };
-                  insert2RP.push(insObj)
+                    }
+                    if (mostBoughtOrdered[trackMostBought][product.productID]){
+                      var currentEntry = mostBoughtOrdered[trackMostBought][product.productID]
+                      product.relatedProducts[index] = currentEntry.title;
+                      var insObj = {
+                        forStore: shop,
+                        forProduct: product.productID,
+                        productID: currentEntry.productID,
+                        title: currentEntry.title,
+                        order: index,
+                        image: currentEntry.image,
+                        locked: false,
+                      };
+                      insert2RP.push(insObj)
+                    } else {
+                      product.relatedProducts[index] = "blank";
+                      var insObj = {
+                        forStore: shop,
+                        forProduct: product.productID,
+                        productID: "blank",
+                        title: "blank",
+                        order: index,
+                        image: null,
+                        locked: false,
+                      };
+                      insert2RP.push(insObj)
+                    }
                 }
               })
             } else {
 
                 products.forEach((product)=>{
-                  if (!product.relatedProducts){
-                    product.relatedProducts = [];
-                  }
-                  product.relatedProducts[index] = "blank";
-                  var insObj = {
-                    forStore: shop,
-                    forProduct: product.productID,
-                    productID: "blank",
-                    title: "blank",
-                    order: index,
-                    image: null,
-                    locked: false,
-                  };
-                  insert2RP.push(insObj)
-
+                    if (!product.locks[index]){
+                        if (!product.relatedProducts){
+                          product.relatedProducts = [];
+                        }
+                        product.relatedProducts[index] = "blank";
+                        var insObj = {
+                          forStore: shop,
+                          forProduct: product.productID,
+                          productID: "blank",
+                          title: "blank",
+                          order: index,
+                          image: null,
+                          locked: false,
+                        };
+                        insert2RP.push(insObj)
+                    }
                 })
             }
           })
         } else {
-          for (var i = 0; i < 6; i++){
-            products.forEach((product)=>{
-              if (!product.relatedProducts){
-                product.relatedProducts = [];
-              }
-              product.relatedProducts[i] = "blank";
-              var insObj = {
-                forStore: shop,
-                forProduct: product.productID,
-                productID: "blank",
-                title: "blank",
-                order: i,
-                image: null,
-                locked: false,
-              };
-              insert2RP.push(insObj)
+          products.forEach((product)=>{
+            for (var i = 0; i < 6; i++){
 
-            })
-          }
+              console.log(i)
+              if (!product.locks[i]){
+                console.log('did it')
+                if (!product.relatedProducts){
+                  product.relatedProducts = [];
+                }
+                product.relatedProducts[i] = "blank";
+                var insObj = {
+                  forStore: shop,
+                  forProduct: product.productID,
+                  productID: "blank",
+                  title: "blank",
+                  order: i,
+                  image: null,
+                  locked: false,
+                };
+                insert2RP.push(insObj)
+
+              }
+            }
+          })
         }
 
 
