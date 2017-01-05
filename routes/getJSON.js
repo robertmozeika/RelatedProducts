@@ -173,7 +173,7 @@ router.get('/food', function(req,res,next){
 router.get('/thelist', function(req, rest){
   var MongoClient = mongodb.MongoClient;
 
-  var url = "mongodb://robertm:testpass>@ds155418.mlab.com:55418/relatedproducts"
+  var url = "mongodb://robertm:testpass@ds155418.mlab.com:55418/relatedproducts"
   MongoClient.connect(url, function(err, db){
     if(err){
       console.log('Unable to connect' + err)

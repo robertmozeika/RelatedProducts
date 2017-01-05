@@ -8,7 +8,7 @@ router.get('/', function(req, res, next) {
   var shop_id = req.query.shop;
   var MongoClient = mongodb.MongoClient;
 
-  var url = "mongodb://robertm:testpass>@ds155418.mlab.com:55418/relatedproducts"
+  var url = "mongodb://robertm:testpass@ds155418.mlab.com:55418/relatedproducts"
   MongoClient.connect(url, function(err, db){
     if(err){
       console.log('Unable to connect' + err)

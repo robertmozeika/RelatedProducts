@@ -15,7 +15,7 @@ var authorize = {
             shopify_shared_secret: '6815b758b2996ee3ef116c112432a085', // Your Shared Secret
             access_token: doc[0].access_token,
             shopify_scope: 'read_products,write_script_tags,read_script_tags,read_orders',
-            redirect_uri: 'http://localhost:3000/finish_auth',
+            redirect_uri: 'https://simple-related-products.herokuapp.com/finish_auth',
             verbose: false,
           }
 
@@ -35,7 +35,7 @@ var authorize = {
             shopify_api_key: '55512454cd904b56d38a12c8573aa27a', // Your API key
             shopify_shared_secret: '6815b758b2996ee3ef116c112432a085', // Your Shared Secret
             shopify_scope: 'read_products,write_script_tags,read_script_tags,read_orders',
-            redirect_uri: 'http://localhost:3000/exchange',
+            redirect_uri: 'https://simple-related-products.herokuapp.com/exchange',
             nonce: '1312312414afdafdasds2242323' // you must provide a randomly selected value unique for each authorization request
           };
 

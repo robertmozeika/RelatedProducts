@@ -30,7 +30,7 @@ router.get('/', function(req, res, next) {
     return new Promise((resolve, reject)=> {
         var MongoClient = mongodb.MongoClient;
 
-        var url = "mongodb://robertm:testpass>@ds155418.mlab.com:55418/relatedproducts"
+        var url = "mongodb://robertm:testpass@ds155418.mlab.com:55418/relatedproducts"
         MongoClient.connect(url, function(err, db){
           var indexEval = []
           if(err){
@@ -71,7 +71,7 @@ router.get('/', function(req, res, next) {
     function insertBlanks(ins){
       var MongoClient = mongodb.MongoClient;
 
-      var url = "mongodb://robertm:testpass>@ds155418.mlab.com:55418/relatedproducts"
+      var url = "mongodb://robertm:testpass@ds155418.mlab.com:55418/relatedproducts"
       MongoClient.connect(url, function(err, db){
         if(err){
           console.log('Unable to connect' + err)
@@ -102,7 +102,7 @@ router.get('/', function(req, res, next) {
         if (changeAll){
           var MongoClient = mongodb.MongoClient;
 
-          var url = "mongodb://robertm:testpass>@ds155418.mlab.com:55418/relatedproducts"
+          var url = "mongodb://robertm:testpass@ds155418.mlab.com:55418/relatedproducts"
           MongoClient.connect(url, function(err, db){
             var indexEval = []
             if(err){
@@ -145,7 +145,7 @@ router.get('/', function(req, res, next) {
           if (whichMostBought.length > 0){
             var MongoClient = mongodb.MongoClient;
 
-            var url = "mongodb://robertm:testpass>@ds155418.mlab.com:55418/relatedproducts"
+            var url = "mongodb://robertm:testpass@ds155418.mlab.com:55418/relatedproducts"
             MongoClient.connect(url, function(err, db){
               var indexEval = []
               if(err){
@@ -252,7 +252,7 @@ router.get('/', function(req, res, next) {
                   console.log(setter)
                   var MongoClient = mongodb.MongoClient;
 
-                  var url = "mongodb://robertm:testpass>@ds155418.mlab.com:55418/relatedproducts"
+                  var url = "mongodb://robertm:testpass@ds155418.mlab.com:55418/relatedproducts"
                   MongoClient.connect(url, function(err, db){
                     var indexEval = []
                     if(err){
