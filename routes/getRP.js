@@ -9,7 +9,7 @@ router.get('/', function(req, res, next) {
   var product_id = req.query.product;
   var MongoClient = mongodb.MongoClient;
 
-  var url = "mongodb://localhost:27017/shopify"
+  var url = "mongodb://robertm:testpass>@ds155418.mlab.com:55418/relatedproducts"
   MongoClient.connect(url, function(err, db){
     if(err){
       console.log('Unable to connect' + err)
@@ -49,7 +49,7 @@ router.get('/', function(req, res, next) {
           products: values[0],
           alsoBought: values[1]
         }
-        
+
         res.send(sendObj)
 
       }).catch(reason => {
