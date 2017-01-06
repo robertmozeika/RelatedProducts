@@ -18,6 +18,22 @@ angular
         })
       }
 
+      this.changeMultipleRP = function(products,order,product){
+        console.log(products,order, product);
+        const { productID, image, title } = product;
+        console.log(productID,image)
+        const postData = {
+          products,
+          order,
+          productID,
+          image,
+          title,
+          // productID,
+        }
+        return $http.post('/changeRP/multiple', postData)
+
+      }
+
 
 
 

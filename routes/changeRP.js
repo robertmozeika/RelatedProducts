@@ -48,5 +48,28 @@ router.get('/', function(req,res,next){
 
 })
 
+router.post('/multiple',function(req,res,next){
+  const { products, order,productID,title,image } = req.body;
+  console.log(req.body)
+  const queryData = {
+    forStore: req.session.shop,
+    order,
+    forProduct: {$in: products},
+  }
+  const updateData = {
+    productID,
+    title,
+    image,
+  }
+  rpModel.find(queryData)
+    .then((doc)=>{
+      console.log(doc)
+    })
+
+  rpModel.update(queryData,updateData,{multi:true},function(err,doc){
+    console.log(err,doc)
+  })
+})
+
 
 module.exports = router;

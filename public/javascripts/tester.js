@@ -5,6 +5,7 @@ import 'angular';
 import 'angular-ui-router';
 import 'angular-ui-bootstrap';
 import Tester from './services/Tester.js'
+// import multipleWindow from './directives/multipleWindow.js'
 
 
 // var arr = [1,2,3];
@@ -14,11 +15,15 @@ import Tester from './services/Tester.js'
 // })
 
 angular
+// .directive(multipleWindow)
+// .directive('multipleWindow', () => new multipleWindow())
+
   .module('app', [
     'ui.router',
     'ui.bootstrap',
     'app.directives.rpWindow',
     'app.directives.popdelay',
+    'app.directives.multipleWindow',
   ])
 
   .service('Tester', Tester)

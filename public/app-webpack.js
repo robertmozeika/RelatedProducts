@@ -11,6 +11,8 @@ require('./javascripts/services/HeaderService.js');
 // require('./javascripts/services/Tester.js')
 
 
+require('./javascripts/directives/testfile.js');
 
 require('./javascripts/directives/rpWindow.js');
-require('./javascripts/directives/popover.js')
+require('./javascripts/directives/popover.js');
+require('./javascripts/directives/multipleWindow.js')

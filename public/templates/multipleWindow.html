@@ -1,0 +1,15 @@
+<div class="modal-header">
+  Change Related Products for Checked Products
+</div>
+<div class="modal-body">
+  <ul class="list-group">
+    <li ng-class="{active: (selectedWPOrder) == $index}" class="list-group-item" ng-repeat="i in getNumber(number) track by $index">
+      <a href="#" ng-click="setWPOrder($index)">Change Product in Slot {{$index + 1}}</a>
+    </li>
+  </ul>
+  <!-- <ul  ng-class="{hidden: !showProductSelection}" class="list-group" > -->
+    <li class="list-group-item" ng-repeat="product in products">
+      <a href="#" ng-click="changeMultipleRP(checkedProducts, selectedWPOrder, product)" uib-popover="Changed Related Product!" popover-is-open="wpPop"  popdelay>{{product.title}}</a>
+    </li>
+  </ul>
+</div>
