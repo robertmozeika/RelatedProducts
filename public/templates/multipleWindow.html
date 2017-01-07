@@ -7,6 +7,9 @@
       <a href="#" ng-click="setWPOrder($index)">Change Product in Slot {{$index + 1}}</a>
     </li>
   </ul>
+  Overwrite Locks? <input type='checkbox' ng-model='owLocks.checked' value="on"/>
+  <h4>All Products:</h4>
+  <ul class="list-group">
   <!-- <ul  ng-class="{hidden: !showProductSelection}" class="list-group" > -->
     <li class="list-group-item" ng-repeat="product in products">
       <a href="#" ng-click="changeMultipleRP(checkedProducts, selectedWPOrder, product)" uib-popover="Changed Related Product!" popover-is-open="wpPop"  popdelay>{{product.title}}</a>

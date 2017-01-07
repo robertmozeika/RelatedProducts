@@ -7,6 +7,7 @@ var bpSchema = mongoose.Schema({
   howMany: Number,
   forStore: String,
   image: String,
+  price: String,
 
 }, {collection:'alsoBoughtProducts'})
 

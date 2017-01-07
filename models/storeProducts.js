@@ -8,6 +8,7 @@ var spSchema = mongoose.Schema({
   image: String,
   handle: String,
   locks: [Boolean],
+  price: String,
 
 }, {collection:'StoreProducts'})
 

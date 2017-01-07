@@ -94,7 +94,7 @@
   <tbody>
     <tr ng-repeat="product in products | filter: filterString">
       <td>
-        <input  ng-click="checkProduct(product.productID, $index)" ng-model="checkModel[$index]" class="checkTable" type="checkbox" value="on">
+        <input  ng-click="checkProduct(product, $index)" ng-model="checkModel[$index]" class="checkTable" type="checkbox" value="on">
       </td>
       <td>
         {{product.title}}<br />

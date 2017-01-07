@@ -8,6 +8,7 @@ var rpSchema = mongoose.Schema({
   forStore: String,
   image: String,
   locked: Boolean,
+  price: String,
 
 }, {collection:'RelatedProducts'})
 

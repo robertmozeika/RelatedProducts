@@ -18,9 +18,9 @@ angular
         })
       }
 
-      this.changeMultipleRP = function(products,order,product){
+      this.changeMultipleRP = function(products,order,product,ow){
         console.log(products,order, product);
-        const { productID, image, title } = product;
+        const { productID, image, title, price } = product;
         console.log(productID,image)
         const postData = {
           products,
@@ -28,7 +28,8 @@ angular
           productID,
           image,
           title,
-          // productID,
+          ow,
+          price,
         }
         return $http.post('/changeRP/multiple', postData)
 

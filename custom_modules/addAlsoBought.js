@@ -62,11 +62,13 @@ function addAlsoBought(array, shopifyconfig){
                         return
                       }
                     })
+                    console.log('element',element)
                     var abObj = {
                       forStore: store,
                       forProduct: productAtHand.productID.toString(),
                       productID: element.product_id.toString(),
                       title: element.title,
+                      price:element.price,
                       image: image,
                       howMany:1,
                     }

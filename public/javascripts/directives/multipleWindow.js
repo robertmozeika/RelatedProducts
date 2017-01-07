@@ -15,9 +15,10 @@ class multipleWindow {
   }
 
   link(scope){
-    TIMEOUT.get(multipleWindow.instance)(()=>{
-      console.log('working please')
-    },2000)
+    scope.owLocks = {checked: false,};
+    scope.showOW = function(){
+      console.log(scope.owLocks)
+    }
     // $timeout(function(){console.log('im happy')},2000)
     scope.openModal = function(){
       scope.modal();
@@ -27,7 +28,25 @@ class multipleWindow {
     //   scope.modal();
     // }, true)
     scope.changeMultipleRP = function(products,order,product){
-      CHANGERP.get(multipleWindow.instance).changeMultipleRP(products,order,product);
+      console.log('ow',scope.owLocks)
+      CHANGERP.get(multipleWindow.instance).changeMultipleRP(products,order,product,scope.owLocks.checked).then((data)=>{
+        if (scope.owLocks.checked){
+          console.log('doing this')
+          scope.checkedProducts.forEach((element)=>{
+            console.log('changed')
+            element.relatedProducts[order] = product.title;
+          })
+        } else {
+          scope.checkedProducts.forEach((element)=>{
+            if (!element.locks[order]){
+              element.relatedProducts[order] = product.title;
+            }
+          })
+        }
+
+      }).catch((error)=>{
+        console.log(error)
+      });
     }
     scope.number = 6;
     scope.getNumber = function(num) {

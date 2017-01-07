@@ -18,6 +18,7 @@ router.post('/', function(req, res, next) {
     'productID': postData.newProduct.productID,
     'title': postData.newProduct.title,
     'image': postData.newProduct.image,
+    'price': postData.newProduct.price,
   }
 
   rpModel.findOneAndUpdate(query, newData, {upsert:false}, function(err, doc){
@@ -49,25 +50,32 @@ router.get('/', function(req,res,next){
 })
 
 router.post('/multiple',function(req,res,next){
-  const { products, order,productID,title,image } = req.body;
-  console.log(req.body)
+  const { products, order,productID,title,image,ow,price } = req.body;
+  const allIDs =[];
+  products.forEach((element)=>{
+    if(ow){
+      allIDs.push(element.productID)
+    } else {
+      if (!element.locks[order]){
+        allIDs.push(element.productID)
+      }
+    }
+  })
   const queryData = {
     forStore: req.session.shop,
     order,
-    forProduct: {$in: products},
+    forProduct: {$in: allIDs},
   }
   const updateData = {
     productID,
     title,
     image,
+    price,
   }
-  rpModel.find(queryData)
-    .then((doc)=>{
-      console.log(doc)
-    })
 
   rpModel.update(queryData,updateData,{multi:true},function(err,doc){
     console.log(err,doc)
+    res.send('worked')
   })
 })
 

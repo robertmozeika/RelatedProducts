@@ -146,6 +146,7 @@ function setAlsoBought(whichMostBought,shop_session,abProds){
                         productID: mostBoughtOrdered[propertyNumber][propertyName].productID,
                         title: mostBoughtOrdered[propertyNumber][propertyName].title,
                         image: mostBoughtOrdered[propertyNumber][propertyName].image,
+                        price: mostBoughtOrdered[propertyNumber][propertyName].price,
                       })
                     }
                   }

@@ -11,6 +11,7 @@ return new Promise(function(resolve, reject){
     if (values[0][1] !== undefined){
 
       JSON.parse(values[1]).forEach((shopProd) => {
+        // console.log('**',shopProd)
           var need2add = true;
           values[0][1].forEach((currentDb) => {
             // var cDB = currentDb.substring(0, currentDb.length - 1);
@@ -55,7 +56,7 @@ return new Promise(function(resolve, reject){
               image = null;
             }
 
-            ids2Add.push({productID: shopProd.id, image: image})
+            ids2Add.push({productID: shopProd.id, image: image,price:shopProd.variants[0].price})
           }
       });
 
@@ -130,6 +131,7 @@ return new Promise(function(resolve, reject){
                      "numOfRel": values[2].defaultNum,
                      "store":shop,
                      "image": image,
+                     "price": element.variants[0].price,
                      "handle": element.title.replace(/ /g,'-').toLowerCase(),
                      "locks": [false,false,false,false,false,false],
                    }

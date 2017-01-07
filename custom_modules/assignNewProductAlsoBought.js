@@ -66,6 +66,7 @@ function assignNewAB(products, allMostBought, shop,ab2Add){
                         order: index,
                         image: currentEntry.image,
                         locked: false,
+                        price: currentEntry.price,
                       };
                       insert2RP.push(insObj)
                     } else {

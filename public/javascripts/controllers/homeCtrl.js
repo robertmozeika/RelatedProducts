@@ -59,11 +59,11 @@ angular
 
     $scope.checkedProducts = [];
 
-    $scope.checkProduct = function(id,idx){
+    $scope.checkProduct = function(product,idx){
       if($scope.checkModel[idx]){
-        $scope.checkedProducts.push(id);
+        $scope.checkedProducts.push(product);
       } else {
-        let index = $scope.checkedProducts.indexOf(id);
+        let index = $scope.checkedProducts.indexOf(product);
         $scope.checkedProducts.splice(index,1)
       }
       console.log($scope.checkedProducts)
