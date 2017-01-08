@@ -50,36 +50,13 @@
 <div ui-view=""></div>
 
 <h3>Products</h3>
-<a href="/refreshAlsoBought">Refresh also bought data</a>
+<a class="btn btn-primary" href="/refreshAlsoBought">Refresh also bought data</a>&nbsp;<a class="btn btn-primary" href="/refreshProductInfo">Refresh Product Information</a>
+
 
 <div class="form-group">
   <label >Search Products: </label>
   <input type="text" ng-model="filterString.title" class="form-control" />
 </div>
-<!-- <form class="form-inline">
-  <div class="form-group">
-    <label >Default Number of Related Items: </label>
-    <select type="text" ng-model="defaultNR" class="form-control" ng-options="n for n in numbers"/>
-
-    <span>Change all products to new default?</span>
-    <input type="checkbox" ng-model="checkedDNR" />
-    &nbsp;
-    <button class="btn btn-primary"type="submit" ng-click="changeDefaultNR(defaultNR, checkedDNR)">Set</button>
-  </div>
-</form>
-<form class="form-inline">
-  <div class="form-group">
-    Set to Most Bought:
-    <div style="display:inline" ng-repeat="n in numbers">
-      <label>{{n}}</label>
-      <input type="checkbox"  ng-model="setAllChecked[$index]"/>
-      &nbsp;
-    </div>
-    <button class="btn btn-primary" ng-click="setAllMostBought(setAllChecked)" type="submit">Set</button>
-
-
-  </div>
-</form> -->
 
 <table class="table">
   <thead>
