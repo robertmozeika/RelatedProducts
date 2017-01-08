@@ -37,7 +37,7 @@ function setAlsoBought(whichMostBought,shop_session,abProds){
           function findRP(){
             return new Promise((resolve, reject)=>{
               var collection = db.collection("RelatedProducts");
-                collection.find({"order":{$in:whichMostBought} , "forStore":shop_session}).toArray(function(err, result){
+                collection.find({"order":{$in:whichMostBought} , "store":shop_session}).toArray(function(err, result){
                   if (err){
                     console.log(err);
                     reject(err);
@@ -54,7 +54,7 @@ function setAlsoBought(whichMostBought,shop_session,abProds){
                 resolve(abProds)
               } else
 
-                abModel.find({"forStore":shop_session})
+                abModel.find({"store":shop_session})
                   .then(function(doc){
 
                     resolve(doc)
@@ -112,7 +112,7 @@ function setAlsoBought(whichMostBought,shop_session,abProds){
                 { '1':
                  { '6560603013':
                     { _id: 585beda36abc0d037d74ad0b,
-                      forStore: 'test-store-1994-1994',
+                      store: 'test-store-1994-1994',
                       forProduct: '6560603013',
                       productID: '6744174917',
                       title: 'Fig Newton',
@@ -120,7 +120,7 @@ function setAlsoBought(whichMostBought,shop_session,abProds){
                       howMany: 3 },
                    '6744174917':
                     { _id: 585beda36abc0d037d74ad0e,
-                      forStore: 'test-store-1994-1994',
+                      store: 'test-store-1994-1994',
                       forProduct: '6744174917',
                       productID: '6560603013',
                       title: 'Dog',
@@ -137,7 +137,7 @@ function setAlsoBought(whichMostBought,shop_session,abProds){
                     for (var propertyName in mostBoughtOrdered[i+1]){
 
                       finder.push({
-                        forStore: shop_session,
+                        store: shop_session,
                         forProduct: propertyName,
                         order: i,
                         locked: false,

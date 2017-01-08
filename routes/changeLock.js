@@ -37,7 +37,7 @@ router.post('/', function(req, res, next) {
 
   var { bool } = req.body;
   const rpSchema = {
-    forStore: req.session.shop,
+    store: req.session.shop,
     forProduct: req.body.productID,
     order: req.body.index,
   }

@@ -19,7 +19,7 @@ router.get('/', function(req, res, next) {
       function searchRP(){
         return new Promise(function(resolve, reject){
           var collection = db.collection('RelatedProducts');
-          collection.find({"forStore":shop_id, "forProduct":product_id}).toArray(function(err, result){
+          collection.find({"store":shop_id, "forProduct":product_id}).toArray(function(err, result){
             if (err){
               reject(err)
             } else {
@@ -32,7 +32,7 @@ router.get('/', function(req, res, next) {
       function searchBP(){
         return new Promise(function(resolve, reject){
           var collection = db.collection('alsoBoughtProducts');
-          collection.find({"forStore":shop_id, "forProduct":product_id}).toArray(function(err, result){
+          collection.find({"store":shop_id, "forProduct":product_id}).toArray(function(err, result){
             resolve(result);
           });
         })

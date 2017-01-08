@@ -59,7 +59,7 @@ function assignNewAB(products, allMostBought, shop,ab2Add){
                       var currentEntry = mostBoughtOrdered[trackMostBought][product.productID]
                       product.relatedProducts[index] = currentEntry.title;
                       var insObj = {
-                        forStore: shop,
+                        store: shop,
                         forProduct: product.productID,
                         productID: currentEntry.productID,
                         title: currentEntry.title,
@@ -72,7 +72,7 @@ function assignNewAB(products, allMostBought, shop,ab2Add){
                     } else {
                       product.relatedProducts[index] = "blank";
                       var insObj = {
-                        forStore: shop,
+                        store: shop,
                         forProduct: product.productID,
                         productID: "blank",
                         title: "blank",
@@ -93,7 +93,7 @@ function assignNewAB(products, allMostBought, shop,ab2Add){
                         }
                         product.relatedProducts[index] = "blank";
                         var insObj = {
-                          forStore: shop,
+                          store: shop,
                           forProduct: product.productID,
                           productID: "blank",
                           title: "blank",
@@ -118,7 +118,7 @@ function assignNewAB(products, allMostBought, shop,ab2Add){
                 }
                 product.relatedProducts[i] = "blank";
                 var insObj = {
-                  forStore: shop,
+                  store: shop,
                   forProduct: product.productID,
                   productID: "blank",
                   title: "blank",

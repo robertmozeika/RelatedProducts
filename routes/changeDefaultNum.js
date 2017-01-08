@@ -159,7 +159,7 @@ router.get('/', function(req, res, next) {
                   return new Promise((resolve, reject)=>{
                     var collection = db.collection("RelatedProducts");
 
-                      collection.find({"order":{$in:whichMostBought} , "forStore":shop_session}).toArray(function(err, result){
+                      collection.find({"order":{$in:whichMostBought} , "store":shop_session}).toArray(function(err, result){
                         if (err){
                           console.log(err);
                           reject(err);
@@ -174,7 +174,7 @@ router.get('/', function(req, res, next) {
                   return new Promise((resolve, reject)=>{
                     var collection = db.collection("alsoBoughtProducts");
 
-                      collection.find({"forStore":shop_session}).toArray(function(err, result){
+                      collection.find({"store":shop_session}).toArray(function(err, result){
                         if (err){
                           console.log(err);
                           reject(err);
@@ -236,7 +236,7 @@ router.get('/', function(req, res, next) {
                     for (var propertyName in mostBoughtOrdered[i+1]){
 
                       finder.push({
-                        forStore: shop_session,
+                        store: shop_session,
                         forProduct: propertyName,
                         order: i+1,
                       });

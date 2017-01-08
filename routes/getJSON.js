@@ -44,6 +44,7 @@ router.get('/client', function(req, res, next){
           spModel.find({"handle": req.query.handle, "store":shop})
             .then(function(doc){
               if (doc){
+                console.log(doc,req.query.handle,shop)
                 resolve([doc[0].productID, doc[0].numOfRel])
               } else {
                 reject('none found at findProduct')
@@ -54,7 +55,7 @@ router.get('/client', function(req, res, next){
 
 
     function nextSearch(values) {
-      rpModel.find({"forStore":shop, "forProduct":values[1][0]}).sort('order')
+      rpModel.find({"store":shop, "forProduct":values[1][0]}).sort('order')
         .then(function(doc){
           sendResult = [];
           console.log("doc,",doc);
@@ -139,7 +140,7 @@ router.get('/getOrders', function(req, res, next){
               store = store.toLowerCase();
               console.log(store)
               var abObj = {
-                forStore: store,
+                store: store,
                 forProduct: productAtHand.toString(),
                 productID: element.product_id.toString(),
                 title: element.title,

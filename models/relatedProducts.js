@@ -5,7 +5,7 @@ var rpSchema = mongoose.Schema({
   forProduct: String,
   title: String,
   order: Number,
-  forStore: String,
+  store: String,
   image: String,
   locked: Boolean,
   price: String,

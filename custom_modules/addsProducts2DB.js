@@ -132,7 +132,7 @@ return new Promise(function(resolve, reject){
                      "store":shop,
                      "image": image,
                      "price": element.variants[0].price,
-                     "handle": element.title.replace(/ /g,'-').toLowerCase(),
+                     "handle": element.handle,
                      "locks": [false,false,false,false,false,false],
                    }
 

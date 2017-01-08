@@ -23,9 +23,9 @@ router.post('/', function(req, res, next) {
   var updateRP = [];
   var updatedRP = [];
   for (var i = 0; i < (propNames.length - 2); i++){
-// {"forStore": shop_id, "forProduct": forproduct, "productID" : oldproduct, "order": order},{$set:{"productID": product, "title": title}}
+// {"store": shop_id, "forProduct": forproduct, "productID" : oldproduct, "order": order},{$set:{"productID": product, "title": title}}
     var uRP = {
-      "forStore": shop_id,
+      "store": shop_id,
       "order": Number(propNames[i].slice(0,1)),
       "forProduct": forproduct,
       "productID": propNames[i].slice(1)

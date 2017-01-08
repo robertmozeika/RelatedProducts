@@ -26,6 +26,7 @@ router.get('/', function(req, res, next) {
 
 
       const shopProducts = JSON.parse(shopString)
+      console.log(shopProducts)
       shopProducts.forEach((product)=>{
         if (product.image){
           shopMap.set(product.id.toString(),{title: product.title, image: fixImage(product.image.src),price: product.variants[0].price})
@@ -81,48 +82,36 @@ router.get('/', function(req, res, next) {
         }
 
     })
-    console.log(finder,setter)
-    res.send([finder,setter])
+
+    console.log(finder,setter);
+    const promiseArr = [];
+    finder.forEach((element,index)=>{
+      promiseArr.push(spModel.findOneAndUpdate(element,setter[index],{upsert:false},function(err,suc){
+        console.log(err,suc)
+      }))
+      promiseArr.push(rpModel.update(element,setter[index],{multi:true},function(err,suc){
+        console.log(err,suc)
+      }))
+      promiseArr.push(abModel.update(element,setter[index],{multi:true},function(err,suc){
+        console.log(err,suc)
+      }))
+
+    })
+
+
+    Promise.all(promiseArr).then((data)=>{
+      console.log(data);
+      console.log(promiseArr);
+      res.send([finder,setter])
+    })
+
+
+
+
   })
 
 
-
-
-
-
-
-
-
-
-
-    // res.send('worked')
   })
-  // getShopData(shopifyconfig)
-  //   .then((data)=>{
-  //     console.log(typeof data)
-  //     const dataobject = JSON.parse(data)
-  //     dataobject.forEach((product)=>{
-  //       if (product.image){
-  //         shopMap.set(product.id,{title: product.title, image: product.image.src,price: product.variants[0].price})
-  //       } else {
-  //         shopMap.set(product.id,{title: product.title, image: null,price: product.variants[0].price})
-  //       }
-  //     })
-  //     console.log(dataobject);
-  //     console.log(shopMap);
-  //
-  //     shopMap.forEach((value,key)=>{
-  //       console.log('key',key);
-  //       console.log('value',value.title)
-  //     })
-  //
-  //
-  //
-  //     res.send(shopMap)
-  //   });
 
-
-//
-// });
 
 module.exports = router;

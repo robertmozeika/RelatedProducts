@@ -8,11 +8,11 @@ var bpModel = require('../models/alsoBoughtProducts.js');
 router.post('/', function(req, res, next) {
   var postData = req.body;
 
-  postData.forStore = req.session.shop;
+  postData.store = req.session.shop;
   var query = {
     forProduct:postData.productID,
     order: postData.order,
-    forStore:postData.forStore
+    store:postData.store
   };
   var newData = {
     'productID': postData.newProduct.productID,
@@ -33,7 +33,7 @@ router.get('/', function(req,res,next){
 
 
   var query = {
-    forStore: req.session.shop,
+    store: req.session.shop,
     forProduct: req.query.productID,
   }
 
@@ -62,7 +62,7 @@ router.post('/multiple',function(req,res,next){
     }
   })
   const queryData = {
-    forStore: req.session.shop,
+    store: req.session.shop,
     order,
     forProduct: {$in: allIDs},
   }
