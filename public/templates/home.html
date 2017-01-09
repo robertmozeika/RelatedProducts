@@ -50,7 +50,6 @@
 <div ui-view=""></div>
 
 <h3>Products</h3>
-<a class="btn btn-primary" href="/refreshAlsoBought">Refresh also bought data</a>&nbsp;<a class="btn btn-primary" href="/refreshProductInfo">Refresh Product Information</a>
 
 
 <div class="form-group">
@@ -58,10 +57,14 @@
   <input type="text" ng-model="filterString.title" class="form-control" />
 </div>
 
+<button id="changeChecked" class="btn btn-primary" ng-click="openModal()" popover-enable="{{wpPopEnable()}}" uib-popover="No products selected" popover-is-open="changeMultiplePop"  popdelay>Change Checked Related Products</button>
+&nbsp;<a class="btn btn-primary" href="/refreshAlsoBought">Refresh also bought data</a>
+&nbsp;<a class="btn btn-primary" href="/refreshProductInfo">Refresh Product Information</a>
+
 <table class="table">
   <thead>
     <tr>
-      <th class="checkHeading">Check All</th>
+      <th class="checkHeading"><input id="checkAll" class="checkTable" ng-model="checkAllModel" type="checkbox" ng-click="checkAll()"/></th>
       <th>Product Name</th>
       <th>Number of Related</th>
       <th>Related Products</th>
@@ -71,7 +74,7 @@
   <tbody>
     <tr ng-repeat="product in products | filter: filterString">
       <td>
-        <input  ng-click="checkProduct(product, $index)" ng-model="checkModel[$index]" class="checkTable" type="checkbox" value="on">
+        <input  ng-click="changeCheck(product, $index)" ng-checked="returnCheck(product.productID)" ng-model="checkMap[product.productID]" class="checkTable" type="checkbox" value="on">
       </td>
       <td>
         {{product.title}}<br />

@@ -55,11 +55,11 @@ angular
 
     $scope.headerValues = HeaderService.getValues();
 
-    $scope.checkModel = [];
 
     $scope.checkedProducts = [];
 
     $scope.checkProduct = function(product,idx){
+      console.log('ngchange fired')
       if($scope.checkModel[idx]){
         $scope.checkedProducts.push(product);
       } else {
@@ -68,6 +68,61 @@ angular
       }
       console.log($scope.checkedProducts)
     }
+
+    $scope.checkAllModel = false;
+
+    $scope.checkAll = function(){
+      console.log($scope.checkAllModel)
+      if($scope.checkAllModel){
+        products.forEach((element)=>{
+          if($scope.checkMap.get(element.productID)){
+            console.log('already checked')
+          } else {
+            $scope.checkMap.set(element.productID, true);
+            $scope.checkedProducts.push(element)
+          }
+
+        })
+      } else {
+        $scope.checkMap.forEach((value,key,map)=>{
+          $scope.checkMap.set(key, false);
+          $scope.checkedProducts = [];
+        })
+      }
+      console.log($scope.checkMap)
+      console.log($scope.checkedProducts);
+
+    }
+
+    $scope.checkMap = new Map();
+    products.forEach((element)=>{
+      $scope.checkMap.set(element.productID, false)
+    })
+    console.log($scope.checkMap);
+
+    $scope.changeCheck = function(product){
+      $('#checkAll').prop("indeterminate", true);
+
+      $scope.checkMap.set(product.productID, !$scope.checkMap.get(product.productID));
+      console.log($scope.checkMap.get(product.productID));
+
+      if($scope.checkMap.get(product.productID)){
+        $scope.checkedProducts.push(product);
+      } else {
+        let index = $scope.checkedProducts.indexOf(product);
+        $scope.checkedProducts.splice(index,1)
+      }
+      console.log($scope.checkedProducts)
+
+    }
+
+    $scope.returnCheck = function(id){
+      return $scope.checkMap.get(id)
+    }
+
+
+
+    // $scope.$watch('checkModel')
 
 
 

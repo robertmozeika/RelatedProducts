@@ -19,9 +19,22 @@ class multipleWindow {
     scope.showOW = function(){
       console.log(scope.owLocks)
     }
+    scope.wpPopEnable = function(){
+      if (scope.checkedProducts.length){
+        return false;
+      } else {
+        return true;
+      }
+    };
     // $timeout(function(){console.log('im happy')},2000)
     scope.openModal = function(){
-      scope.modal();
+      if (!scope.checkedProducts.length){
+
+      } else {
+        // scope.changeMultiplePop = false;
+        scope.modal();
+
+      }
     }
     // scope.$watch('checkedProducts',function(){
     //   console.log('changed');
