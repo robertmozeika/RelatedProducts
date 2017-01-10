@@ -9,6 +9,7 @@ var spSchema = mongoose.Schema({
   handle: String,
   locks: [Boolean],
   price: String,
+  _collections: [String],
 
 }, {collection:'StoreProducts'})
 

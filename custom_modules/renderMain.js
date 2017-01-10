@@ -18,7 +18,7 @@ function renderPromises(res,shop,shopify){
 
   }).then(function(values){
     // console.log(values)
-
+        console.log(values[2])
         console.log('rendering')
           values[0][0].render('layout', {
                   title: 'Related Products',
@@ -26,10 +26,11 @@ function renderPromises(res,shop,shopify){
                   numOfRelPass: values[0][1],
                   defaultNum: values[1],
                   relatedProducts: values[0][2],
+                  collections: values[2]
 
 
         });
-      
+
 
   } ).catch(reason => {
     console.log(reason)});

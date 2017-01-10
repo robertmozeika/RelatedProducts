@@ -6,7 +6,14 @@ angular
     Tester.callMom();
 
     $scope.products = products;
+    console.log($scope.products)
     $scope.numbers = [1,2,3,4,5,6];
+    $scope.collections = collections;
+    console.log('$',$scope.collections);
+    $scope.defaultCollect = null;
+    $scope.filterString = {};
+    $scope.filterString._collections = $scope.collections[0].value;
+    
 
 
     //global variable from before scripts.min.js
@@ -74,7 +81,7 @@ angular
     $scope.checkAll = function(){
       console.log($scope.checkAllModel)
       if($scope.checkAllModel){
-        products.forEach((element)=>{
+        $scope.filteredProducts.forEach((element)=>{
           if($scope.checkMap.get(element.productID)){
             console.log('already checked')
           } else {

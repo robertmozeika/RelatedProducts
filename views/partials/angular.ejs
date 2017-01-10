@@ -9,6 +9,9 @@ var parsedPass = JSON.parse(stringPass); %>
 var products = <%-stringPass%>;
 <% var stringDef = JSON.stringify(defaultNum)%>
 var defaultNum = <%-stringDef%>
-
+<% var stringCol = JSON.stringify(collections)%>
+var collections = <%-stringCol%>
+collections.unshift({value:null,display:'All'});
+console.log(collections)
 </script>
 <script src="/javascripts/scripts.min.js"></script>

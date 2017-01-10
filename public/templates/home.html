@@ -52,10 +52,20 @@
 <h3>Products</h3>
 
 
-<div class="form-group">
-  <label >Search Products: </label>
-  <input type="text" ng-model="filterString.title" class="form-control" />
-</div>
+<form class="form-inline">
+  <div class="form-group">
+    <label >Search Products: </label>
+    <input type="text" ng-model="filterString.title" class="form-control" />
+    <label >Collection: </label>
+    <!-- <input class="form-control" list="browsers" ng-model="filterString._collections"> -->
+      <select class="form-control" id="browsers" ng-model="filterString._collections">
+        <option  ng-selected="{{defaultCollect == collect.value}}" ng-repeat="collect in collections" value="{{collect.value}}">{{collect.display}}</option>
+      </select>
+  </div>
+</form><br />
+
+
+
 
 <button id="changeChecked" class="btn btn-primary" ng-click="openModal()" popover-enable="{{wpPopEnable()}}" uib-popover="No products selected" popover-is-open="changeMultiplePop"  popdelay>Change Checked Related Products</button>
 &nbsp;<a class="btn btn-primary" href="/refreshAlsoBought">Refresh also bought data</a>
@@ -72,7 +82,7 @@
     </tr>
   </thead>
   <tbody>
-    <tr ng-repeat="product in products | filter: filterString">
+    <tr ng-repeat="product in products | filter: {_collections:filterString._collections||undefined} as filteredProducts">
       <td>
         <input  ng-click="changeCheck(product, $index)" ng-checked="returnCheck(product.productID)" ng-model="checkMap[product.productID]" class="checkTable" type="checkbox" value="on">
       </td>
@@ -95,5 +105,4 @@
 <!-- <show-Details detail-contact="detailContact"></show-Details> -->
 <rp-window rp-window-product="rpWindowProduct" products="products"></rp-window>
 <!-- <multiple-window checked-products="checkedProducts"></multiple-window> -->
-<button ng-click="openModal()">CLick</button>
 <multiple-window checked-products="checkedProducts"> </multiple-window>

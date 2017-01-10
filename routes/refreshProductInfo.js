@@ -8,6 +8,30 @@ const abModel = require('../models/alsoBoughtProducts.js')
 const rpModel = require('../models/relatedProducts.js')
 
 
+Array.prototype.equals = function (array) {
+    // if the other array is a falsy value, return
+    if (!array)
+        return false;
+
+    // compare lengths - can save a lot of time
+    if (this.length != array.length)
+        return false;
+
+    for (var i = 0, l=this.length; i < l; i++) {
+        // Check if we have nested arrays
+        if (this[i] instanceof Array && array[i] instanceof Array) {
+            // recurse into the nested arrays
+            if (!this[i].equals(array[i]))
+                return false;
+        }
+        else if (this[i] != array[i]) {
+            // Warning - two different object instances will never be equal: {x:20} != {x:20}
+            return false;
+        }
+    }
+    return true;
+}
+
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
@@ -20,25 +44,24 @@ router.get('/', function(req, res, next) {
   Promise.all([
     getShopData(shopifyconfig),
     spModel.find({store: shop})
-  ]).then(([ shopString, dbProducts ])=>{
+  ]).then(([ shopProducts, dbProducts ])=>{
       // console.log('sps',shopProducts);
       // console.log('dbs',dbProducts);
 
 
-      const shopProducts = JSON.parse(shopString)
-      console.log(shopProducts)
-      shopProducts.forEach((product)=>{
+      console.log(shopProducts[0])
+      shopProducts[0].forEach((product)=>{
         if (product.image){
-          shopMap.set(product.id.toString(),{title: product.title, image: fixImage(product.image.src),price: product.variants[0].price})
+          shopMap.set(product.id.toString(),{title: product.title, image: fixImage(product.image.src),price: product.variants[0].price,collections: product.collections})
         } else {
-          shopMap.set(product.id.toString(),{title: product.title, image: null,price: product.variants[0].price})
+          shopMap.set(product.id.toString(),{title: product.title, image: null,price: product.variants[0].price,collections: product.collections})
         }
       })
       // console.log(shopMap);
 
 
       dbProducts.forEach((product)=>{
-          dbMap.set(product.productID,{title: product.title, image: product.image,price: product.price})
+          dbMap.set(product.productID,{title: product.title, image: product.image,price: product.price,_collections: product._collections})
       })
 
 
@@ -72,6 +95,15 @@ router.get('/', function(req, res, next) {
           console.log('different title');
           setterPush.title = value.title;
         }
+        console.log('$$',dbMapVal._collections);
+        console.log(value.collections)
+        if (dbMapVal._collections.equals(value.collections)){
+          console.log('same collections')
+        } else {
+          console.log('different collections')
+          setterPush._collections = value.collections
+
+        }
 
         if (Object.keys(setterPush).length){
           finder.push({
@@ -80,6 +112,7 @@ router.get('/', function(req, res, next) {
           })
           setter.push(setterPush)
         }
+
 
     })
 

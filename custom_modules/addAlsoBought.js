@@ -2,8 +2,9 @@ var shopifyAPI = require('shopify-node-api');
 var mongodb = require('mongodb');
 
 
-function addAlsoBought(array, shopifyconfig){
+function addAlsoBought(array, shopifyconfig,map){
   return new Promise((resolve,reject)=>{
+    console.log('array',map)
       var alsoBoughtInsert = [];
 
       var shopify = new shopifyAPI(shopifyconfig)
@@ -32,6 +33,7 @@ function addAlsoBought(array, shopifyconfig){
             var productsAlsoBought = [];
             peopleWhoBoughtOrders.forEach((element)=>{
               element.line_items.forEach((item)=>{
+                console.log('items',item)
                 if (item.product_id !== productAtHand.productID){
                   productsAlsoBought.push(item)
                 }
@@ -67,8 +69,8 @@ function addAlsoBought(array, shopifyconfig){
                       store: store,
                       forProduct: productAtHand.productID.toString(),
                       productID: element.product_id.toString(),
-                      title: element.title,
-                      price:element.price,
+                      title: map.get(element.product_id).title,
+                      price:map.get(element.product_id).price,
                       image: image,
                       howMany:1,
                     }

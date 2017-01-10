@@ -3,14 +3,18 @@ var getNumOfRel = require('./getNumOfRel.js');
 var addAlsoBought = require('./addAlsoBought');
 var assignNewAB = require('./assignNewProductAlsoBought')
 
+const referenceMap = new Map();
+
 function prodFromShopify(values, shop, shopify){
 return new Promise(function(resolve, reject){
+  console.log('#',values[1][1])
+
     var products2Add = [];
     //gets put into add alsobought function
     var ids2Add = [];
     if (values[0][1] !== undefined){
 
-      JSON.parse(values[1]).forEach((shopProd) => {
+      values[1][0].forEach((shopProd) => {
         // console.log('**',shopProd)
           var need2add = true;
           values[0][1].forEach((currentDb) => {
@@ -55,8 +59,8 @@ return new Promise(function(resolve, reject){
             else{
               image = null;
             }
-
-            ids2Add.push({productID: shopProd.id, image: image,price:shopProd.variants[0].price})
+            referenceMap.set(shopProd.id, {price:shopProd.variants[0].price, title:shopProd.title});
+            ids2Add.push({productID: shopProd.id, image: image,price:shopProd.variants[0].price,})
           }
       });
 
@@ -134,6 +138,7 @@ return new Promise(function(resolve, reject){
                      "price": element.variants[0].price,
                      "handle": element.handle,
                      "locks": [false,false,false,false,false,false],
+                     "_collections": element.collections,
                    }
 
                    completeInsert.push(inserter)
@@ -174,14 +179,14 @@ return new Promise(function(resolve, reject){
         // console.log('products2Add',products2Add)
         Promise.all([
           insertNew(),
-          addAlsoBought(ids2Add, shopify)
+          addAlsoBought(ids2Add, shopify,referenceMap)
         ]).then(function(data){
           return assignNewAB(data[0], values[2].allMostBought, shop,data[1])
         }).then(function(data){
           if (data){
             values[0].concat(data)
           }
-          resolve([values[0],values[2]])
+          resolve([values[0],values[2],values[1][1]])
         }).catch(function(err){
           console.log('error at addProducts2DB', err)
         })
@@ -189,7 +194,8 @@ return new Promise(function(resolve, reject){
 
 
        else {
-         resolve([values[0],values[2]])
+         console.log('#',values[1][1])
+         resolve([values[0],values[2],values[1][1]])
        }
     // }
 
