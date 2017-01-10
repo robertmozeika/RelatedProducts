@@ -97,14 +97,15 @@ router.get('/', function(req, res, next) {
         }
         console.log('$$',dbMapVal._collections);
         console.log(value.collections)
-        if (dbMapVal._collections.equals(value.collections)){
-          console.log('same collections')
-        } else {
-          console.log('different collections')
-          setterPush._collections = value.collections
+        if (value.collections){
+          if (dbMapVal._collections.equals(value.collections)){
+            console.log('same collections')
+          } else {
+            console.log('different collections')
+            setterPush._collections = value.collections
 
+          }
         }
-
         if (Object.keys(setterPush).length){
           finder.push({
             store: shop,

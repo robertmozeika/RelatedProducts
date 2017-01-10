@@ -22,7 +22,6 @@ router.get('/', function(req, res, next) {
   ]).then(function(){
     spModel.find({store: req.session.shop})
       .then(function(doc){
-
         allProducts = doc;
         return addAlsoBought(doc,req.session.shopifyconfig)
 

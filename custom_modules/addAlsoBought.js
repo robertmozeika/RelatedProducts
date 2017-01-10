@@ -64,15 +64,26 @@ function addAlsoBought(array, shopifyconfig,map){
                         return
                       }
                     })
-                    console.log('element',element)
-                    var abObj = {
-                      store: store,
-                      forProduct: productAtHand.productID.toString(),
-                      productID: element.product_id.toString(),
-                      title: map.get(element.product_id).title,
-                      price:map.get(element.product_id).price,
-                      image: image,
-                      howMany:1,
+                    if (map){
+                      var abObj = {
+                        store: store,
+                        forProduct: productAtHand.productID.toString(),
+                        productID: element.product_id.toString(),
+                        title: map.get(element.product_id).title,
+                        price:map.get(element.product_id).price,
+                        image: image,
+                        howMany:1,
+                      }
+                    } else {
+                      var abObj = {
+                        store: store,
+                        forProduct: productAtHand.productID.toString(),
+                        productID: element.product_id.toString(),
+                        title: element.title,
+                        price:element.price,
+                        image: image,
+                        howMany:1,
+                      }
                     }
                     if (abObj.forProduct !== abObj.productID){
                       alsoBoughtInsert.push(abObj)
