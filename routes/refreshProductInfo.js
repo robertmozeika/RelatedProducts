@@ -35,7 +35,6 @@ Array.prototype.equals = function (array) {
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
-  console.log(req)
   const { shop, shopifyconfig } = req.session;
 
   const shopMap = new Map();
