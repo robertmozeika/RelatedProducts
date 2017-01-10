@@ -7,7 +7,6 @@ const referenceMap = new Map();
 
 function prodFromShopify(values, shop, shopify){
 return new Promise(function(resolve, reject){
-  console.log('#',values[1][1])
 
     var products2Add = [];
     //gets put into add alsobought function
@@ -15,7 +14,6 @@ return new Promise(function(resolve, reject){
     if (values[0][1] !== undefined){
 
       values[1][0].forEach((shopProd) => {
-        // console.log('**',shopProd)
           var need2add = true;
           values[0][1].forEach((currentDb) => {
             // var cDB = currentDb.substring(0, currentDb.length - 1);
@@ -194,7 +192,6 @@ return new Promise(function(resolve, reject){
 
 
        else {
-         console.log('#',values[1][1])
          resolve([values[0],values[2],values[1][1]])
        }
     // }

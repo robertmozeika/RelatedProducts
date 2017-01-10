@@ -1,0 +1,40 @@
+<a class="close-btn btn btn-danger pull-right" ng-click="openSettings()"><span class="glyphicon glyphicon-remove"></span>
+</a>
+
+<br />
+
+<form class="form-inline">
+<div class="form-group">
+<label >Default Number of Related Items: </label>
+<select type="text" ng-model="defaultNR" class="form-control" ng-options="n for n in numbers"/>
+
+<span>Change all products to new default?</span>
+<input type="checkbox" ng-model="checkedDNR" />
+&nbsp;
+<button class="btn btn-primary"type="submit" ng-click="changeDefaultNR(defaultNR, checkedDNR)" uib-popover="Set!" popover-is-open="changeDefNumPop"  popdelay>Set</button>
+</div>
+</form>
+<form class="form-inline">
+<div class="form-group">
+<label>Set to Most Bought:</label>
+<div style="display:inline" ng-repeat="n in numbers">
+  <label>{{n}}</label>
+  <input type="checkbox"  ng-model="setAllChecked[$index]"/>
+  &nbsp;
+</div>
+<button class="btn btn-primary" ng-click="setAllMostBought(setAllChecked)" type="submit" uib-popover="Set!" popover-is-open="setMostBoughtPop"  popdelay>Set</button>
+
+
+</div>
+
+</form>
+<form class="form-inline">
+<div class="form-group">
+<label>Display Header:</label>
+<input ng-model="headerValues.header"/>
+
+<button class="btn btn-primary" ng-click="headerValues.setHeader(headerValues.header)" type="submit" uib-popover="Set!" popover-is-open="displayPop"  popdelay>Set</button>
+
+
+</div>
+</form>

@@ -1,0 +1,32 @@
+<table class="table">
+  <thead>
+    <tr>
+      <th class="checkHeading"><input id="checkAll" class="checkTable" ng-model="checkAllModel" type="checkbox" ng-click="checkAll()"/></th>
+      <th>Product Name</th>
+      <th>Number of Related</th>
+      <th>Related Products</th>
+
+    </tr>
+  </thead>
+  <tbody>
+    <tr ng-repeat="product in products | filter: {_collections:filterString._collections||undefined} as filteredProducts.products">
+      <td>
+        <input  ng-click="changeCheck(product, $index)" ng-checked="returnCheck(product.productID)" ng-model="checkMap[product.productID]" class="checkTable" type="checkbox" value="on">
+      </td>
+      <td>
+        {{product.title}}<br />
+        <a href="#" ng-click="showRPWindow(product)">Set Related Products</a>
+      </td>
+      <td>
+        <select ng-model="product.numOfRel" ng-options="n for n in numbers" ng-change="changeNR(product)">
+        </select>
+
+      </td>
+      <td>
+        <ul>
+          <li ng-repeat="product in product.relatedProducts | limitTo: product.numOfRel track by $index">{{product}}</li>
+        </ul>
+      </td>
+    </tr>
+  </tbody>
+</table>

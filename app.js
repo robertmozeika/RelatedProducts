@@ -29,12 +29,9 @@ app.use(session({
 var routes = require('./routes/index');
 var users = require('./routes/users');
 var finauth = require('./routes/finauth');
-var addProduct = require('./routes/addproduct.js');
-var addLiquid = require('./routes/addLiquid.js');
+
 var getJSON = require('./routes/getJSON.js');
 var getRP = require('./routes/getRP.js');
-var getAllProducts = require('./routes/getAllProducts.js');
-var changeProduct = require('./routes/changeProduct.js')
 var exchangetoken = require('./routes/exchange.js');
 var changeNumOfRel = require('./routes/changeNumOfRel.js');
 var changeDefNum = require('./routes/changeDefaultNum.js');
@@ -89,12 +86,9 @@ app.use(allowCrossDomain);
 app.use('/', routes);
 app.use('/users', users);
 app.use('/finish_auth', finauth);
-app.use('/addProduct', addProduct);
-app.use('/addLiquid', addLiquid);
+
 app.use('/getJSON', getJSON);
 app.use('/getRP', getRP);
-app.use('/getAllProducts', getAllProducts);
-app.use('/changeProduct', changeProduct);
 app.use('/exchange', exchangetoken);
 app.use ("/changeNumOfRel", changeNumOfRel);
 app.use ("/changeDefaultNum", changeDefNum);
@@ -150,7 +144,9 @@ app.use(function(err, req, res, next) {
   });
 });
 
-
+// setInterval(function() {
+//     console.log('hello')
+// }, 3000); // every 5 minutes (300000)
 
 
 

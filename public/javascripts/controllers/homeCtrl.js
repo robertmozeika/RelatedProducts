@@ -13,8 +13,11 @@ angular
     $scope.defaultCollect = null;
     $scope.filterString = {};
     $scope.filterString._collections = $scope.collections[0].value;
-    
 
+    $scope.templates= {
+      settings: 'templates/settings.html',
+      table: 'templates/products-table.html'
+    }
 
     //global variable from before scripts.min.js
     $scope.defaultNR = defaultNum.defaultNum;
@@ -77,14 +80,16 @@ angular
     }
 
     $scope.checkAllModel = false;
-
+    $scope.filteredProducts = {products: []}
     $scope.checkAll = function(){
-      console.log($scope.checkAllModel)
+      console.log($scope.checkAllModel);
+      console.log($scope.filteredProducts);
       if($scope.checkAllModel){
         $scope.filteredProducts.forEach((element)=>{
           if($scope.checkMap.get(element.productID)){
             console.log('already checked')
           } else {
+            console.log(element.productID)
             $scope.checkMap.set(element.productID, true);
             $scope.checkedProducts.push(element)
           }

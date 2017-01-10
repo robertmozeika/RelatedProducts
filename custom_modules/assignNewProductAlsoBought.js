@@ -4,7 +4,6 @@ var rpModel = require('../models/relatedProducts');
 
 function assignNewAB(products, allMostBought, shop,ab2Add){
   return new Promise ((resolve,reject)=>{
-    console.log('made ie hte')
     if(ab2Add.length){
       abModel.insertMany(ab2Add)
         .catch(function(err){
@@ -110,9 +109,7 @@ function assignNewAB(products, allMostBought, shop,ab2Add){
           products.forEach((product)=>{
             for (var i = 0; i < 6; i++){
 
-              console.log(i)
               if (!product.locks[i]){
-                console.log('did it')
                 if (!product.relatedProducts){
                   product.relatedProducts = [];
                 }

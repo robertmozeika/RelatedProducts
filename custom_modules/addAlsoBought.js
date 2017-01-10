@@ -4,7 +4,6 @@ var mongodb = require('mongodb');
 
 function addAlsoBought(array, shopifyconfig,map){
   return new Promise((resolve,reject)=>{
-    console.log('array',map)
       var alsoBoughtInsert = [];
 
       var shopify = new shopifyAPI(shopifyconfig)
@@ -33,7 +32,6 @@ function addAlsoBought(array, shopifyconfig,map){
             var productsAlsoBought = [];
             peopleWhoBoughtOrders.forEach((element)=>{
               element.line_items.forEach((item)=>{
-                console.log('items',item)
                 if (item.product_id !== productAtHand.productID){
                   productsAlsoBought.push(item)
                 }
