@@ -21,6 +21,34 @@ angular
 
       }
 
+      this.changeWPLock = function(index,bool){
+        // this.noNewModal = true;
+
+        this.checkedProducts.forEach((product)=>{
+          var pIdx = this.products.indexOf(product);
+          this.products[pIdx].locks[index] = bool;
+        })
+
+
+        let productIDs = [];
+
+        this.checkedProducts.forEach((element)=>{
+          productIDs.push(element.productID)
+        })
+
+
+        var postData = {
+          bool: true,
+          productIDs: productIDs,
+          index: index,
+        }
+        $http.post('/changeLock/multiple', postData).then(function(data){
+          console.log(data)
+        })
+      }
+
+
+
 
 
   }])

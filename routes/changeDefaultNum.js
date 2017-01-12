@@ -11,12 +11,8 @@ router.get('/', function(req, res, next) {
     var defNum = Number(req.query.defNum);
     var changeAll = req.query.changeAll;
     var oldNum = Number(req.query.old);
-    var toMostBought1 = req.query.toMostBought1;
-    var toMostBought2 = req.query.toMostBought2;
-    var toMostBought3 = req.query.toMostBought3;
-    var toMostBought4 = req.query.toMostBought4;
-    var toMostBought5 = req.query.toMostBought5;
-    var toMostBought6 = req.query.toMostBought6;
+
+    var { toMostBought1,toMostBought2,toMostBought3,toMostBought4,toMostBought5,toMostBought6 } = req.query;
     console.log(toMostBought6)
     var toMostBought = [req.query.toMostBought1,req.query.toMostBought2,req.query.toMostBought3,req.query.toMostBought4,req.query.toMostBought5,req.query.toMostBought6];
     var whichMostBought = [];

@@ -40,4 +40,7 @@ a {
   float: right;
   cursor: pointer; }
 
+.wp-buttons .popover {
+  width: 150px; }
+
 /*# sourceMappingURL=style.css.map */
