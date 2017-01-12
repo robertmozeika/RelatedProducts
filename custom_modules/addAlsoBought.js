@@ -54,25 +54,28 @@ function addAlsoBought(array, shopifyconfig,map){
                     var store = element.vendor.replace(/ /g, "-");
                     store = store.toLowerCase();
 
-                    var image;
-                    array.some((imageSearch)=>{
 
-                      if (imageSearch.productID == element.product_id){
-                        image = imageSearch.image;
-                        return
-                      }
-                    })
                     if (map){
+                      let gotMap = map.get(element.product_id)
                       var abObj = {
                         store: store,
                         forProduct: productAtHand.productID.toString(),
                         productID: element.product_id.toString(),
-                        title: map.get(element.product_id).title,
-                        price:map.get(element.product_id).price,
-                        image: image,
+                        title: gotMap.title,
+                        price:gotMap.price,
+                        handle:gotMap.handle,
+                        image: gotMap.image,
                         howMany:1,
                       }
                     } else {
+                      var image;
+                      array.some((imageSearch)=>{
+
+                        if (imageSearch.productID == element.product_id){
+                          image = imageSearch.image;
+                          return
+                        }
+                      })
                       var abObj = {
                         store: store,
                         forProduct: productAtHand.productID.toString(),

@@ -66,6 +66,7 @@ function assignNewAB(products, allMostBought, shop,ab2Add){
                         image: currentEntry.image,
                         locked: false,
                         price: currentEntry.price,
+                        handle: currentEntry.handle,
                       };
                       insert2RP.push(insObj)
                     } else {
@@ -78,6 +79,7 @@ function assignNewAB(products, allMostBought, shop,ab2Add){
                         order: index,
                         image: null,
                         locked: false,
+                        handle: null,
                       };
                       insert2RP.push(insObj)
                     }
@@ -99,6 +101,7 @@ function assignNewAB(products, allMostBought, shop,ab2Add){
                           order: index,
                           image: null,
                           locked: false,
+                          handle: null,
                         };
                         insert2RP.push(insObj)
                     }
@@ -122,6 +125,7 @@ function assignNewAB(products, allMostBought, shop,ab2Add){
                   order: i,
                   image: null,
                   locked: false,
+                  handle: null,
                 };
                 insert2RP.push(insObj)
 

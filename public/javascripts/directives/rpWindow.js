@@ -90,6 +90,21 @@ angular
 
         scope.changeLock = ChangeLock.changeLock.bind(scope);
 
+        scope.setRPBlank = function(index){
+          scope.noNewModal = true;
+          let blankProduct = {
+            productID: "blank",
+            title: "blank",
+            image: null,
+            price: null,
+          }
+          ChangeRP.changeRP(index,scope.rpWindowProduct.productID,blankProduct);
+          var index = scope.products.indexOf(scope.rpWindowProduct);
+          scope.products[index].relatedProducts[scope.order] = "blank";
+
+
+        }
+
 
 
       },

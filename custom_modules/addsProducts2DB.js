@@ -57,7 +57,7 @@ return new Promise(function(resolve, reject){
             else{
               image = null;
             }
-            referenceMap.set(shopProd.id, {price:shopProd.variants[0].price, title:shopProd.title});
+            referenceMap.set(shopProd.id, {price:shopProd.variants[0].price, title:shopProd.title, handle:shopProd.handle, image:image,});
             ids2Add.push({productID: shopProd.id, image: image,price:shopProd.variants[0].price,})
           }
       });

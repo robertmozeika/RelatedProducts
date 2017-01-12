@@ -30,14 +30,34 @@ router.get('/', function(req, res){
   //           // return res.status(200).json({success:"ok"});
   //           console.log('same')
   //        }
+  console.log(req)
+  if(req.query.code || req.query.protocol) {
+    console.log('there is a code')
+    if (verifyHMAC(req.query)){
+      console.log('did this')
+      var store = req.session.shop;
+      var shopify = req.session.shopifyconfig;
+      // res.send(shopify)
+      renderMain(res, store, shopify)
+    } else {
 
-  if (verifyHMAC(req.query)){
-    var store = req.session.shop;
-    var shopify = req.session.shopifyconfig;
-    // res.send(shopify)
-    renderMain(res, store, shopify)
+      res.send('Cannot validate request is coming from shopify. If you are receiving this message in error, please email the developer at robertmozeika20@gmail.com')
+    }
   } else {
-    res.send('Cannot validate request is coming from shopify. If you are receiving this message in error, please email the developer at robertmozeika20@gmail.com')
+    console.log('no code')
+    console.log(req.headers.referer)
+    if (verifyHMAC(req.headers.referer,true)){
+      console.log('did this')
+      var store = req.session.shop;
+      var shopify = req.session.shopifyconfig;
+      // res.send(shopify)
+      renderMain(res, store, shopify)
+    } else {
+
+
+      res.send('Cannot validate request is coming from shopify. If you are receiving this message in error, please email the developer at robertmozeika20@gmail.com')
+    }
+
   }
 
 

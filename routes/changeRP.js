@@ -9,8 +9,9 @@ const verifyHMAC = require('../custom_modules/verifyHMAC.js');
 /* GET users listing. */
 router.post('/', function(req, res, next) {
   if (verifyHMAC(req.headers.referer,true)){
-
     var postData = req.body;
+    console.log(postData.newProduct)
+    const { productID, title, image, price, handle } = postData.newProduct;
 
     postData.store = req.session.shop;
     var query = {
@@ -19,10 +20,11 @@ router.post('/', function(req, res, next) {
       store:postData.store
     };
     var newData = {
-      'productID': postData.newProduct.productID,
-      'title': postData.newProduct.title,
-      'image': postData.newProduct.image,
-      'price': postData.newProduct.price,
+      productID,
+      title,
+      image,
+      price,
+      handle,
     }
 
     rpModel.findOneAndUpdate(query, newData, {upsert:false}, function(err, doc){
@@ -58,7 +60,8 @@ router.get('/', function(req,res,next){
 
 router.post('/multiple',function(req,res,next){
   if (verifyHMAC(req.headers.referer,true)){
-      const { products, order,productID,title,image,ow,price } = req.body;
+      const { products, order,productID,title,image,ow,price,handle } = req.body;
+      console.log('handle',handle)
       const allIDs =[];
       products.forEach((element)=>{
         if(ow){
@@ -79,6 +82,7 @@ router.post('/multiple',function(req,res,next){
         title,
         image,
         price,
+        handle,
       }
 
       rpModel.update(queryData,updateData,{multi:true},function(err,doc){

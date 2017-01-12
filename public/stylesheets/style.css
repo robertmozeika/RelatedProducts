@@ -35,4 +35,9 @@ a {
 #refresh-button {
   padding-bottom: 5px; }
 
+.remove-rp {
+  margin-left: 4px;
+  float: right;
+  cursor: pointer; }
+
 /*# sourceMappingURL=style.css.map */

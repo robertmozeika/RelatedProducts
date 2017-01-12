@@ -20,15 +20,16 @@ function renderPromises(res,shop,shopify){
     // console.log(values)
         console.log(values[2])
         console.log('rendering')
-          values[0][0].render('layout', {
-                  title: 'Related Products',
-                  shop: values[0][3],
-                  numOfRelPass: values[0][1],
-                  defaultNum: values[1],
-                  relatedProducts: values[0][2],
-                  collections: values[2]
-
-
+        values[0][0].set({
+          'X-Frame-Options': 'ALLOW-FROM https://myshopify.com/'
+        })
+        values[0][0].render('layout', {
+                title: 'Related Products',
+                shop: values[0][3],
+                numOfRelPass: values[0][1],
+                defaultNum: values[1],
+                relatedProducts: values[0][2],
+                collections: values[2]
         });
 
 

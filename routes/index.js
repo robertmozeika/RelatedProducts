@@ -5,6 +5,7 @@ var authorize = require('../custom_modules/authorize.js')
 /* GET home page. */
 router.get('/', function(req, res, next) {
   console.log(req.session)
+  console.log('here?')
   //ensure this is coming from shopify, otherwise people would be able to act like they are another shop
   var toRouter = req.query.shop.replace('.myshopify.com', "");
   toRouter = toRouter.replace('.com', "")

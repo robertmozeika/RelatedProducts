@@ -12,19 +12,19 @@ var http = require('http');
  * Get port from environment and store in Express.
  */
 
-var port = normalizePort(process.env.PORT || '3000');
+var port = normalizePort(process.env.PORT || '8888');
 app.set('port', port);
 
 /**
  * Create HTTP server.
  */
 
-//  var fs = require('fs');
-// var https = require('https');
-// var options = {
-//    key  : fs.readFileSync('server.key'),
-//    cert : fs.readFileSync('server.crt')
-// };
+ var fs = require('fs');
+var https = require('https');
+var options = {
+   key  : fs.readFileSync('server.key'),
+   cert : fs.readFileSync('server.crt')
+};
 
 
 
@@ -35,8 +35,8 @@ app.set('port', port);
 
 
 
-var server = http.createServer(app);
-// var server = https.createServer(options, app)
+// var server = http.createServer(app);
+var server = https.createServer(options, app)
 
 /**
  * Listen on provided port, on all network interfaces.

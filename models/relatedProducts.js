@@ -9,6 +9,7 @@ var rpSchema = mongoose.Schema({
   image: String,
   locked: Boolean,
   price: String,
+  handle: String,
 
 }, {collection:'RelatedProducts'})
 
