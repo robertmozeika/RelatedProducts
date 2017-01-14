@@ -91,8 +91,10 @@ function updateStores(shopifyconfig,shop){
 
             const dbMapVal = dbMap.get(key)
             const setterPush = {};
-            // console.log(dbMap)
-            // console.log(dbMapVal)
+            console.log(key)
+            console.log(value)
+            console.log(dbMapVal)
+            console.log(dbMap)
             if (dbMapVal.image == value.image){
               console.log('same images')
             } else {

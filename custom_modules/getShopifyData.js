@@ -21,7 +21,6 @@ function prodFromShopify(shopifyconfig){
           shopify.get('/admin/products.json',  function(err, data, headers){
                   // var stringdata = JSON.stringify(data.products);
                         // resolve(JSON.parse(stringdata))
-                        console.log('$$',data.products)
                         resolve(data.products)
 
                         if (err){
@@ -99,7 +98,6 @@ function prodFromShopify(shopifyconfig){
         collectionMap.forEach((val)=>{
         collectionArray.push({value: val, display: val})
         })
-        console.log('$',collectionArray);
 
 
         collects.forEach((collect)=>{

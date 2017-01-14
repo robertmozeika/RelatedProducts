@@ -4,14 +4,9 @@ var authorize = require('../custom_modules/authorize.js')
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  console.log(req.session)
-  console.log('here?')
-  //ensure this is coming from shopify, otherwise people would be able to act like they are another shop
-  var toRouter = req.query.shop.replace('.myshopify.com', "");
-  toRouter = toRouter.replace('.com', "")
-  // router.shop_id = toRouter;
-  req.session.shop = toRouter;
-  console.log(req.session.shop)
+  //saves shop name for later use with accessing database
+  req.session.shop = req.query.shop.replace('.myshopify', "").replace('.com', "");
+  console.log('session: ',req.session)
   authorize.connectShop(req.session.shop, req, res)
 
 });
