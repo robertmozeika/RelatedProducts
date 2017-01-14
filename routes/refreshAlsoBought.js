@@ -75,6 +75,12 @@ router.get('/', function(req, res, next) {
                 console.log('different title');
                 setterPush.title = value.title;
               }
+              if (dbMapVal.title == value.title){
+                console.log('same title');
+              } else {
+                console.log('different title');
+                setterPush.title = value.title;
+              }
               console.log('$$',dbMapVal._collections);
               console.log(value.collections)
               if (value.collections){

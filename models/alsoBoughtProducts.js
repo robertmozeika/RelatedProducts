@@ -5,6 +5,7 @@ var bpSchema = mongoose.Schema({
   forProduct: String,
   title: String,
   howMany: Number,
+  handle: String,
   store: String,
   image: String,
   price: String,

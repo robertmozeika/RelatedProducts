@@ -84,6 +84,7 @@ function addAlsoBought(array, shopifyconfig,map){
                         price:element.price,
                         image: image,
                         howMany:1,
+                        handle: element.handle,
                       }
                     }
                     if (abObj.forProduct !== abObj.productID){

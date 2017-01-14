@@ -99,8 +99,9 @@ angular
             price: null,
           }
           ChangeRP.changeRP(index,scope.rpWindowProduct.productID,blankProduct);
-          var index = scope.products.indexOf(scope.rpWindowProduct);
-          scope.products[index].relatedProducts[scope.order] = "blank";
+          var idx = scope.products.indexOf(scope.rpWindowProduct);
+          scope.products[idx].relatedProducts[index] = "blank";
+        
 
 
         }

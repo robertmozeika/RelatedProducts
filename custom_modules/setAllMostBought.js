@@ -1,6 +1,9 @@
 var mongodb = require('mongodb');
 var shopModel = require('../models/shops.js');
-var abModel = require('../models/alsoBoughtProducts.js')
+var abModel = require('../models/alsoBoughtProducts.js');
+var rpModel = require('../models/relatedProducts.js');
+
+
 
 
 function setAlsoBought(whichMostBought,shop_session,abProds){
@@ -142,11 +145,14 @@ function setAlsoBought(whichMostBought,shop_session,abProds){
                         order: i,
                         locked: false,
                       });
+                      console.log(finder)
+
                       setter.push({
                         productID: mostBoughtOrdered[propertyNumber][propertyName].productID,
                         title: mostBoughtOrdered[propertyNumber][propertyName].title,
                         image: mostBoughtOrdered[propertyNumber][propertyName].image,
                         price: mostBoughtOrdered[propertyNumber][propertyName].price,
+                        handle: mostBoughtOrdered[propertyNumber][propertyName].handle,
                       })
                     }
                   }
@@ -173,8 +179,10 @@ function setAlsoBought(whichMostBought,shop_session,abProds){
                       var collection = db.collection('RelatedProducts');
 
                       for (var i = 0; i < finder.length; i++){
-
-
+                        console.log(finder[i])
+                        rpModel.find(finder[i],function(err,result){
+                          console.log('resulthere;',result)
+                        })
                         collection.update(finder[i], {$set: setter[i]}, function(err, result){
                             if (err){
                               console.log("error at set alsobought");
