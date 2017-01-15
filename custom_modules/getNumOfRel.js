@@ -7,7 +7,6 @@ function getRelatedProducts(inp, shop){
   return new Promise(function(resolve, reject){
      rpModel.find({"store":shop}).sort('order')
       .then(function(result){
-          console.log('$$',result)
          var rpPass = {};
          if (result !== undefined){
           console.log("connection successful at getRel")
@@ -22,9 +21,19 @@ function getRelatedProducts(inp, shop){
 
           })
 
-          inp.forEach((ele)=>{
+          console.log('$inp1',inp)
+          var newResult = [];
+          var objArr = [{name:'bob'}]
+          inp.forEach(function(ele,index){
             ele.relatedProducts = rpPass[ele.productID];
+            console.log('**',rpPass[ele.productID])
+            newResult.push(ele)
+            newResult[index]["relatedProducts"] = rpPass[ele.productID];
+
           })
+          // inp[0].relatedProducts = ['bark']
+          console.log('$inp2',inp);
+
           resolve(rpPass);
 
 
@@ -50,24 +59,14 @@ function getRelatedProducts(inp, shop){
 
 function getNumOfRel(res, shop){
   return new Promise(function(resolve, reject){
- // var MongoClient = mongodb.MongoClient;
- //
- // var url = "mongodb://robertm:testpass@ds155418.mlab.com:55418/relatedproducts"
- // MongoClient.connect(url, function(err, db){
- //   if(err){
- //     console.log('Unable to connect' + err)
- //   } else {
- //     console.log('Connection between Database Success');
- //
- //     var collection = db.collection("StoreProducts");
 
-     spModel.find({"store":shop})
-      .then((result)=>{
+     spModel.find({"store":shop}).lean()
+      .then(function(result){
          if (result !== undefined){
-           console.log('##',result)
-          getRelatedProducts(result, shop).then(function(inp){
+           let result2 = result;
+          getRelatedProducts(result2, shop).then(function(inp){
+            console.log('pimp',inp)
             var passPromise = [res, result, inp, shop]
-
             resolve(passPromise)
           })
 
@@ -84,13 +83,13 @@ function getNumOfRel(res, shop){
 
      }).catch(err=>{
        console.log('Err at getNumOfRel in getNumOfRel.js',err);
-     });//
+     });
 
- //   }
- // })
 });
 
 }
+
+
 
 
 module.exports = getNumOfRel

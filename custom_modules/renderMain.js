@@ -9,6 +9,7 @@ function renderPromises(res,shop,shopify){
     getShop(shopify),
     getDefaultNum(shop)
   ]).then(function(values){
+    console.log('checkhere',values[0])
     return addProducts2DB(values, shop, shopify)
   }).then(function(values){
     // console.log(values)
