@@ -1,43 +1,86 @@
 const crypto = require('crypto');
 
+class VerifyHMAC {
+  constructor(query,post,successCallback,res){
+    this.query = query;
+    this.post = post;
+    this.successCallback = successCallback;
+    this.res = res;
+    this.init = this.init();
+  }
+  init(){
+    let message;
+    if (this.post){
+      message = this.constructPostMessage();
+    } else {
+      message = this.constructGetMessage();
+    }
+    this.compare(this.computeHMAC(message));
+
+  }
+  constructPostMessage(){
+    const messageReplace = this.query.substring(indexOfQuery);
+    const test = /hmac=[\d\w]+&/;
+    const hmacExec = test.exec(messageReplace);
+    this._hmac = hmacExec[0].replace('hmac=',"").replace('&',"");
+    return messageReplace.replace(test,"");
+  }
+  constructGetMessage(){
+    let message = "";
+    Object.keys(this.query).sort().forEach(key =>{
+      if (key == 'hmac'){
+        this._hmac = this.query[key]
+      } else {
+        message = this.addQuery(message,key,this.query[key]);
+      }
+    })
+    return message;
+  }
+  addQuery(message,key,value){
+    let andSign="";
+    if (!message == ""){
+      andSign = "&"
+    }
+    message += `${andSign}${key}=${value}`
+    return message
+  }
+  computeHMAC(message){
+    return crypto.createHmac('sha256', '6815b758b2996ee3ef116c112432a085').update(message).digest('hex');
+  }
+  compare(computedHMAC){
+    if (computedHMAC == this._hmac) {
+      return this.successCallback();
+    } else {
+      return this.verifyFailed.call(this);
+    }
+  }
+  verifyFailed(){
+    this.res.send('Cannot validate request is coming from shopify. If you are receiving this message in error, please email the developer at robertmozeika20@gmail.com')
+  }
+
+
+}
+
+// var testClass = new verifyHMAC({hmac:'123',taco:'yummy'});
+// console.log(testClass)
+// testClass.init()
 
 function verifyHMAC(query,post){
-  console.log('made it to function')
 
   if (post){
-    console.log('got to post')
     const indexOfQuery = query.indexOf('?') + 1;
-    console.log('got to post1')
     let messageReplace = query.substring(indexOfQuery);
-    console.log('got to post2')
-
     var test = /hmac=[\d\w]+&/;
-    console.log('got to post4')
-
     var hmacExec = test.exec(messageReplace);
-    console.log('got to post5')
-    console.log(messageReplace)
-
     var hmac = hmacExec[0].replace('hmac=',"")
     hmac = hmac.replace('&',"")
-
-
     var message = messageReplace.replace(test,"")
-    console.log('got to post7')
-
-
-
   } else {
-    console.log('made it to else')
     var { hmac, code, shop, timestamp, state, protocol } = query;
-    console.log(query)
     var message = "";
-    console.log('declared message')
     if (code){
       message += `code=${code}`
     }
-    console.log('code')
-    console.lo
     if (protocol) {
       if (message == ""){
         var andSign = ""
@@ -72,13 +115,10 @@ function verifyHMAC(query,post){
       message += `${andSign}timestamp=${timestamp}`
 
     }
-    console.log('message', message)
 
-    // var message = `code=${code}&shop=${shop}&state=${state}&timestamp=${timestamp}`;
 
   }
-
-  console.log(message)
+console.log('$$',message)
 
 
   // recompute hmac
@@ -100,4 +140,4 @@ function verifyHMAC(query,post){
 }
 
 
-module.exports = verifyHMAC
+module.exports = VerifyHMAC

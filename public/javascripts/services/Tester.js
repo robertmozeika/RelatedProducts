@@ -7,6 +7,8 @@ function callingMom(){
 }
 class Tester {
   constructor(){
+    this.dad = "dads name"
+    this._mom = "mom's name"
 
   }
   callHome(){
