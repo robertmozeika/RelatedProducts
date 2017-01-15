@@ -1,14 +1,17 @@
 var express = require('express');
 var router = express.Router();
-var renderMain = require('../custom_modules/renderMain.js');
-const VerifyHMAC = require('../custom_modules/verifyHMAC.js');
 const FinAuth = require('../custom_modules/FinAuth.js')
 
 // Again assuming you are using the express framework
 /* GET users listing. */
 
-router.get('/', function(req, res){
+router.get('/', FinAuth)
 
+// router.get('/', function(req, res){
+//   const finAuth = new FinAuth(res,req,req.session.shop,req.session.shopifyconfig)
+// });
+
+module.exports = router;
 
   // function sendGood(){
   //   res.send('good')
@@ -22,8 +25,6 @@ router.get('/', function(req, res){
   // verifyHMAC.init();
 
 
-  const finAuth = new FinAuth(res,req,req.session.shop,req.session.shopifyconfig)
-  console.log(finAuth.init())
   //
   // if(req.query.code || req.query.protocol) {
   //   console.log('there is a code')
@@ -55,12 +56,3 @@ router.get('/', function(req, res){
   //   }
   //
   // }
-
-
-
-
-
-
-});
-
-module.exports = router;
