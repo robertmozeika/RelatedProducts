@@ -12,17 +12,17 @@ function renderPromises(res,shop,shopConfig){
     getShop.init(),
     getDefaultNum(shop)
   ]).then(function(values){
-    console.log('checkhere',values[0])
-    return addProducts2DB(values, shop, shopConfig)
+    var AddProducts2DB = new addProducts2DB(values, shop, shopConfig)
+    return AddProducts2DB.init()
+    // return addProducts2DB(values, shop, shopConfig)
   }).then(function(values){
-      // const [ res, products ] = values[0];
       res.set({
         'X-Frame-Options': 'ALLOW-FROM https://myshopify.com/'
       })
       res.render('layout', {
               title: 'Related Products',
               shop: shop,
-              numOfRelPass: values[0],
+              numOfRelPass: values[0],//from getNumOfRel plus added from the addsProducts2DB function
               defaultNum: values[1],
               collections: values[2]
       });

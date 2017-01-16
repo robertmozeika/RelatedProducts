@@ -3,9 +3,10 @@ angular
   .controller('homeCtrl',['$scope', 'ChangeNR', 'HeaderService','$timeout', 'Tester', function($scope, ChangeNR, HeaderService,$timeout,Tester){
     //global variable from before scripts.min.js
 
-  
+
 
     $scope.products = products;
+    console.log('scopeproducts',products)
     console.log($scope.products)
     $scope.numbers = [1,2,3,4,5,6];
     $scope.collections = collections;

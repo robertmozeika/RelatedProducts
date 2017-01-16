@@ -7,11 +7,14 @@
 <% var stringPass =  JSON.stringify(numOfRelPass);
 var parsedPass = JSON.parse(stringPass); %>
 var products = <%-stringPass%>;
+console.log('products',products)
 <% var stringDef = JSON.stringify(defaultNum)%>
 var defaultNum = <%-stringDef%>
+console.log('defaultNum',defaultNum)
+
 <% var stringCol = JSON.stringify(collections)%>
 var collections = <%-stringCol%>
 collections.unshift({value:null,display:'All'});
-console.log(collections)
+console.log('collections',collections)
 </script>
 <script src="/javascripts/scripts.min.js"></script>

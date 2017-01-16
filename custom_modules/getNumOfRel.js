@@ -67,7 +67,7 @@ class GetNumOfRel {
 
            var passPromise = [this.res, []]
 
-           resolve(passPromise)
+           resolve([])
          }
        }).catch(function(err){
          console.log('Err at getRelatedProducts in getNumOfRel.js',err);
