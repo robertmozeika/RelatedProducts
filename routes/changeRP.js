@@ -37,26 +37,24 @@ router.post('/', function(req, res, next) {
 
 
   });
-
 router.get('/', function(req,res,next){
-  if (verifyHMAC(req.headers.referer,true)){
+  const VerifyHMAC = new verifyHMAC(req.headers.referer,true,verifySuccess,res);
+  function verifySuccess(){
     var query = {
       store: req.session.shop,
       forProduct: req.query.productID,
     }
-
-    console.log(query)
-
     bpModel.find(query)
       .then(function(doc){
         console.log('returned successful');
         console.log(doc)
         res.send(doc)
       })
-    } else {
-      res.send('Cannot validate request is coming from shopify. If you are receiving this message in error, please email the developer at robertmozeika20@gmail.com')
-    }
-  })
+  }
+})
+
+
+
 
 router.post('/multiple',function(req,res,next){
   if (verifyHMAC(req.headers.referer,true)){

@@ -1,6 +1,10 @@
 const rpModel = require('../models/relatedProducts.js')
 const spModel = require('../models/storeProducts.js')
 
+
+//Promise called by renderMain;
+//Retrieves all products from storeproducts DB then adds the related products in an array onto the product object
+//Product array will be passed as the main products array to the client via ejs
 class GetNumOfRel {
   constructor(res,shop){
     this.res = res;
@@ -20,7 +24,7 @@ class GetNumOfRel {
        })
        .then(result=>{
          console.log('passing promise?')
-         const passPromise = [this.res, result, false, this.shop]
+         const passPromise = [this.res, result[0],result[1]]
          resolve(passPromise)
        })
        .catch(err=>{
@@ -33,6 +37,7 @@ class GetNumOfRel {
   storeFindError(err){
     console.log('Error at storeFind in getNumOfRel: ',err);
   }
+  //retrieves related products and adds them to main product array from storeproductsdb
   getRelatedProducts(inp){
     return new Promise((resolve, reject)=>{
        rpModel.find({"store":this.shop}).sort('order')
@@ -57,7 +62,7 @@ class GetNumOfRel {
 
 
             })
-            resolve(inp);
+            resolve([inp,rpPass]);
            }
          else {
            console.log('passing nothing at getRel');

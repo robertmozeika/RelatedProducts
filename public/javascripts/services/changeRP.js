@@ -14,13 +14,16 @@ angular
 
       this.getBP = function(product){
         return $http.get('/changeRP?productID=' + product).then(function(response){
+          console.log(response)
           return response.data;
+        }).catch(function(err){
+          console.log('caught err ', err)
         })
       }
 
       this.changeMultipleRP = function(products,order,product,ow){
         console.log(products,order, product);
-        
+
         const { productID, image, title, price, handle } = product;
         console.log(productID,image)
         const postData = {
