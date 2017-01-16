@@ -15,15 +15,15 @@ function renderPromises(res,shop,shopConfig){
     console.log('checkhere',values[0])
     return addProducts2DB(values, shop, shopConfig)
   }).then(function(values){
-      values[0][0].set({
+      // const [ res, products ] = values[0];
+      res.set({
         'X-Frame-Options': 'ALLOW-FROM https://myshopify.com/'
       })
-      values[0][0].render('layout', {
+      res.render('layout', {
               title: 'Related Products',
-              shop: values[0][3],
-              numOfRelPass: values[0][1],
+              shop: shop,
+              numOfRelPass: values[0],
               defaultNum: values[1],
-              relatedProducts: values[0][2],
               collections: values[2]
       });
   }).catch(reason =>{

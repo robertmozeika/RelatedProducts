@@ -11,11 +11,11 @@ return new Promise(function(resolve, reject){
     var products2Add = [];
     //gets put into add alsobought function
     var ids2Add = [];
-    if (values[0][1] !== undefined){
+    if (values[0] !== undefined){
 
       values[1][0].forEach((shopProd) => {
           var need2add = true;
-          values[0][1].forEach((currentDb) => {
+          values[0].forEach((currentDb) => {
             // var cDB = currentDb.substring(0, currentDb.length - 1);
             if (shopProd.id == currentDb.productID){
               need2add = false;
@@ -140,7 +140,7 @@ return new Promise(function(resolve, reject){
                    }
 
                    completeInsert.push(inserter)
-                   values[0][1].push(inserter)
+                   values[0].push(inserter)
                    collection.insert(inserter,  function(err, result){
                      if (err) {
                       errors.push(err);
@@ -163,7 +163,7 @@ return new Promise(function(resolve, reject){
 
                db.close();
                resolve(completeInsert)
-                 //add complete insert retuned to values[0][1] down here instead
+                 //add complete insert retuned to values[0] down here instead
                 //  products2Add(data)
                 //  resolve([values[0],values[2]]);
 

@@ -18,13 +18,12 @@ class GetNumOfRel {
            return this.getRelatedProducts.call(this,result)
          } else {
            console.log('passing nothing at getRel');
-           var passPromise = [res, []]
-           resolve(passPromise)
+          //  var passPromise = [res, []]
+           resolve([])
          }
        })
        .then(result=>{
-         const passPromise = [this.res, result[0],result[1]]
-         resolve(passPromise)
+         resolve(result)
        })
        .catch(err=>{
          this.storeFindError(err)
@@ -61,7 +60,7 @@ class GetNumOfRel {
 
 
             })
-            resolve([inp,rpPass]);
+            resolve(inp);
            }
          else {
            console.log('passing nothing at getRel');
