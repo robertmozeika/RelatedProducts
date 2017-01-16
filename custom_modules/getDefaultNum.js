@@ -1,17 +1,16 @@
 const shopModel = require('../models/shops.js');
 
+//gets default number of related products the user set, or sets it to 3 if they don't have a profile set up yet
 function getDefault(shop){
   return new Promise(function(resolve, reject){
      shopModel.find({"name": shop})
        .then(result=>{
          if (result.length > 0){
-             var defaultNum = result[0].defaultNumOfRelated;
-             var allMostBought = result[0].allMostBought;
-             var header = result[0].header;
-             var defNumPass = {
-               defaultNum: defaultNum,
-               allMostBought: allMostBought,
-               header: header,
+             const { defaultNumOfRelated, allMostBought, header } = result[0];
+             const defNumPass = {
+               defaultNum: defaultNumOfRelated,
+               allMostBought,
+               header,
              }
              resolve(defNumPass)
          }
