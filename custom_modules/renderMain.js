@@ -1,17 +1,19 @@
 const GetNumOfRel = require('./getNumOfRel.js');
-var getShop = require('./getShopifyData.js');
+var GetShop = require('./getShopifyData.js');
 var addProducts2DB = require('./addsProducts2DB.js');
 var getDefaultNum = require('./getDefaultNum.js');
 
-function renderPromises(res,shop,shopify){
+function renderPromises(res,shop,shopConfig){
   const getNumOfRel = new GetNumOfRel(res,shop);
+  const getShop = new GetShop(shopConfig);
+
   Promise.all([
     getNumOfRel.init(),
-    getShop(shopify),
+    getShop.init(),
     getDefaultNum(shop)
   ]).then(function(values){
     console.log('checkhere',values[0])
-    return addProducts2DB(values, shop, shopify)
+    return addProducts2DB(values, shop, shopConfig)
   }).then(function(values){
     // console.log(values)
         console.log(values[2])

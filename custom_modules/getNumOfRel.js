@@ -23,7 +23,6 @@ class GetNumOfRel {
          }
        })
        .then(result=>{
-         console.log('passing promise?')
          const passPromise = [this.res, result[0],result[1]]
          resolve(passPromise)
        })
