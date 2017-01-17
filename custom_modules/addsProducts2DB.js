@@ -1,6 +1,6 @@
 var mongodb = require('mongodb');
 var getNumOfRel = require('./getNumOfRel.js');
-var addAlsoBought = require('./addAlsoBought');
+var AddAlsoBought = require('./addAlsoBought');
 var assignNewAB = require('./assignNewProductAlsoBought');
 const spModel = require('../models/storeProducts.js')
 
@@ -13,7 +13,7 @@ function ProductInsert(product,image,defaultNum){
     this.price = product.variants[0].price;
     this.handle = product.handle;
     this.locks = [false,false,false,false,false,false];
-    this.acollections = product.collections;
+    this._collections = product.collections;
 }
 
 class AddProducts2DB {
@@ -31,11 +31,11 @@ class AddProducts2DB {
   init(){
     return new Promise((resolve,reject)=>{
       if (this.products2Add.length){
-
         this.dbProducts = this.dbProducts.concat(this.products2Add);
+        const addAlsoBought = new AddAlsoBought(this.products2Add, this.shopify,this.referenceMap)
         Promise.all([
           spModel.insertMany(this.products2Add),
-          addAlsoBought(this.products2Add, this.shopify,this.referenceMap)
+          addAlsoBought.init(),
         ])
         .then(function(data){
           return assignNewAB(this.products2Add, this.defaultNum.allMostBought, this.shop,data[1])
@@ -62,17 +62,6 @@ class AddProducts2DB {
         })
         if (need2add == true){
           const image = this.makeImageString(shopProd.image)
-          // var inserter = {
-          //   "productID" : shopProd.id.toString(),
-          //   "title": shopProd.title,
-          //   "numOfRel": this.defaultNum.defaultNum,
-          //   "store":this.shop,
-          //   "image": image,
-          //   "price": shopProd.variants[0].price,
-          //   "handle": shopProd.handle,
-          //   "locks": [false,false,false,false,false,false],
-          //   "_collections": shopProd.collections,
-          // }
           this.referenceMap.set(shopProd.id, {price:shopProd.variants[0].price, title:shopProd.title, handle:shopProd.handle, image:image,});
           const productInsert = new ProductInsert(shopProd,image,this.defaultNum.defaultNum);
           products2Add.push(productInsert)

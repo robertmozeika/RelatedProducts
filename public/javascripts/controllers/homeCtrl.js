@@ -6,11 +6,8 @@ angular
 
 
     $scope.products = products;
-    console.log('scopeproducts',products)
-    console.log($scope.products)
     $scope.numbers = [1,2,3,4,5,6];
     $scope.collections = collections;
-    console.log('$',$scope.collections);
     $scope.defaultCollect = null;
     $scope.filterString = {};
     $scope.filterString._collections = $scope.collections[0].value;
