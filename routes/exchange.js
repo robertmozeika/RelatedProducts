@@ -23,7 +23,7 @@ router.get('/', function(req, res){
 
     }
 
-
+    console.log(req.session.shopifyconfig)
       shopify.exchange_temporary_token(query_params, function(err, data){
         shopify.post('/admin/script_tags.json', post_data, function(err, data, headers){
           console.log(err, data)
@@ -33,7 +33,12 @@ router.get('/', function(req, res){
     // The module will automatically update your config with the new access token
     // It is also available here as data['access_token']
       // console.log("error here ", err, "data here ", data)
-      authorize.saveAccessToken(shop_session, data['access_token'], res)
+      if (err){
+        res.send(err)
+      } else {
+        console.log('DATADATA',data)
+        authorize.saveAccessToken(shop_session, data['access_token'], res)
+      }
   });
 
 

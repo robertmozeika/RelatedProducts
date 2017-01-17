@@ -8,8 +8,8 @@ const verifyHMAC = require('../custom_modules/verifyHMAC.js');
 
 /* GET users listing. */
 router.post('/', function(req, res, next) {
-  if (verifyHMAC(req.headers.referer,true)){
-
+  const VerifyHMAC = new verifyHMAC(req.headers.referer,true,verifySuccess,res);
+  function verifySuccess(){
     console.log(req.body);
 
     // var selectedProduct = new spMode(spSchema);
@@ -74,9 +74,78 @@ router.post('/', function(req, res, next) {
       console.log(err);
       res.send(err)
     })
-  } else {
-    res.send('Cannot validate request is coming from shopify. If you are receiving this message in error, please email the developer at robertmozeika20@gmail.com')
   }
+
+
+  // if (verifyHMAC(req.headers.referer,true)){
+  //
+  //   console.log(req.body);
+  //
+  //   // var selectedProduct = new spMode(spSchema);
+  //
+  //   var spSchema = {
+  //     'store': req.session.shop,
+  //     'productID': req.body.productID,
+  //
+  //   }
+  //
+  //   var specifiedLock = 'locks.' + req.body.index.toString();
+  //   console.log(specifiedLock)
+  //   var setter = {};
+  //   setter[specifiedLock] = req.body.bool;
+  //
+  //   function updateSP(){
+  //     return new Promise((resolve,reject)=>{
+  //         spModel.findOneAndUpdate(spSchema,{$set:setter}, {upsert: false}, function(err,suc){
+  //           if (err){
+  //             reject(err)
+  //
+  //           } else{
+  //             resolve(suc)
+  //           }
+  //         })
+  //     })
+  //   }
+  //
+  //   var { bool } = req.body;
+  //   const rpSchema = {
+  //     store: req.session.shop,
+  //     forProduct: req.body.productID,
+  //     order: req.body.index,
+  //   }
+  //
+  //   function updateRP(){
+  //     return new Promise((resolve,reject)=>{
+  //         // rpModel.find(rpSchema)
+  //         //   .then((doc)=>{
+  //         //     console.log('##',doc),
+  //         //     res.send(doc)
+  //         //   })
+  //         rpModel.findOneAndUpdate(rpSchema,{$set:{locked:bool}}, {upsert: false}, function(err,suc){
+  //           if (err){
+  //             reject(err)
+  //
+  //           } else{
+  //             console.log('##',suc)
+  //             resolve(suc)
+  //           }
+  //         })
+  //       })
+  //   }
+  //
+  //   Promise.all([
+  //     updateSP(),
+  //     updateRP(),
+  //   ]).then((values)=>{
+  //     res.send(values)
+  //     console.log(values)
+  //   }).catch((err)=>{
+  //     console.log(err);
+  //     res.send(err)
+  //   })
+  // } else {
+  //   res.send('Cannot validate request is coming from shopify. If you are receiving this message in error, please email the developer at robertmozeika20@gmail.com')
+  // }
 
 
 

@@ -14,7 +14,10 @@ class GetNumOfRel {
     return new Promise((resolve,reject)=>{
        spModel.find({"store":this.shop}).lean()
        .then(result=>{
+         console.log('result',result)
+
          if (result){
+           console.log(result)
            return this.getRelatedProducts.call(this,result)
          } else {
            console.log('passing nothing at getRel');

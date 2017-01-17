@@ -14,6 +14,7 @@ function createShopConfig(shop,access_token){
 
   } else {
     config.redirect_uri = 'https://localhost:8888/exchange';
+    config.nonce = (Math.random() * 1000000).toString();
   }
   return config;
 }

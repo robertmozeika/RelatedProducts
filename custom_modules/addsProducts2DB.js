@@ -4,11 +4,11 @@ var AddAlsoBought = require('./addAlsoBought');
 var assignNewAB = require('./assignNewProductAlsoBought');
 const spModel = require('../models/storeProducts.js')
 
-function ProductInsert(product,image,defaultNum){
+function ProductInsert(product,image,defaultNum,shop){
     this.productID  = product.id.toString();
     this.title = product.title;
     this.numOfRel = defaultNum;
-    this.store = this.shop;
+    this.store = shop;
     this.image = image;
     this.price = product.variants[0].price;
     this.handle = product.handle;
@@ -51,6 +51,7 @@ class AddProducts2DB {
   }
   createProducts2Add(){
     const products2Add = [];
+    console.log('dbProducts',this.dbProducts)
     if (this.dbProducts){
       this.shopProducts.forEach(shopProd=>{
         let need2add = true;
@@ -63,7 +64,8 @@ class AddProducts2DB {
         if (need2add == true){
           const image = this.makeImageString(shopProd.image)
           this.referenceMap.set(shopProd.id, {price:shopProd.variants[0].price, title:shopProd.title, handle:shopProd.handle, image:image,});
-          const productInsert = new ProductInsert(shopProd,image,this.defaultNum.defaultNum);
+          const productInsert = new ProductInsert(shopProd,image,this.defaultNum.defaultNum,this.shop);
+          console.log('productInsert',productInsert)
           products2Add.push(productInsert)
         }
       })

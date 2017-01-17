@@ -12,6 +12,7 @@ function renderPromises(res,shop,shopConfig){
     getShop.init(),
     getDefaultNum(shop)
   ]).then(function(values){
+    console.log('values0',values)
     var addProducts2DB = new AddProducts2DB(values, shop, shopConfig)
     return addProducts2DB.init()
   }).then(function(values){

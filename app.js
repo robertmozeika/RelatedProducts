@@ -27,6 +27,8 @@ app.use(session({
 }))
 
 var routes = require('./routes/index');
+var install = require('./routes/install');
+
 var users = require('./routes/users');
 var finauth = require('./routes/finauth');
 
@@ -84,6 +86,8 @@ app.use(allowCrossDomain);
 
 
 app.use('/', routes);
+app.use('/install', install);
+
 app.use('/users', users);
 app.use('/finish_auth', finauth);
 

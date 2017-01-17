@@ -12,11 +12,14 @@ class VerifyHMAC {
     console.log('Initialized verification')
     let message;
     if (this.post){
+      this.query = decodeURIComponent(this.query);
+      console.log('look;',this.query)
       console.log('poast is true')
       message = this.constructPostMessage();
     } else {
       message = this.constructGetMessage();
     }
+    console.log('comparing message...', message)
     this.compare(this.computeHMAC(message));
 
   }
@@ -59,6 +62,7 @@ class VerifyHMAC {
     }
   }
   verifyFailed(){
+    console.log('verify failed!')
     this.res.send('Cannot validate request is coming from shopify. If you are receiving this message in error, please email the developer at robertmozeika20@gmail.com')
   }
 
