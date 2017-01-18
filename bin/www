@@ -33,9 +33,13 @@ var options = {
 // });
 
 
+if (global.url == "https://simple-related-products.herokuapp.com/"){
+  var server = http.createServer(app);
+} else {
+  var server = https.createServer(options, app)
+}
 
-var server = http.createServer(app);
-// var server = https.createServer(options, app)
+
 
 /**
  * Listen on provided port, on all network interfaces.
@@ -106,3 +110,5 @@ function onListening() {
     : 'port ' + addr.port;
   debug('Listening on ' + bind);
 }
+
+global.url = "https://localhost:3000/"

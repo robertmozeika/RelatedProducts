@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var authorize = require('../custom_modules/authorize.js')
 
+console.log(global.url)
 /* GET home page. */
 router.get('/', function(req, res, next) {
   //saves shop name for later use with accessing database

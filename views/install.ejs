@@ -63,7 +63,7 @@
       $(function() {
         $('form').submit(function(){
           var x = document.forms['install']['shop'].value;
-            window.location = 'https://simple-related-products.herokuapp.com/?shop=' + x;
+            window.location = '<%-url%>?shop=' + x;
           return false;
         });
       });

@@ -1,5 +1,6 @@
 var shopifyAPI = require('shopify-node-api');
 
+
 function createShopConfig(shop,access_token){
   const config = {
     shop: shop, // MYSHOP.myshopify.com
@@ -10,10 +11,12 @@ function createShopConfig(shop,access_token){
   }
   if (access_token){
     config.access_token = access_token;
-    config.redirect_uri = 'https://simple-related-products.herokuapp.com/finish_auth';
+    // config.redirect_uri = 'https://simple-related-products.herokuapp.com/finish_auth';
+    config.redirect_uri = global.url + 'finish_auth';
+
 
   } else {
-    config.redirect_uri = 'https://simple-related-products.herokuapp.com/exchange';
+    config.redirect_uri = global.url + 'exchange';
     config.nonce = (Math.random() * 1000000).toString();
   }
   return config;
