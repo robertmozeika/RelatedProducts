@@ -37,7 +37,6 @@ class AddAlsoBought {
       const productsAlsoBought = this.createAlsoBoughtOrders(peopleWhoBoughtOrders,toAddProduct);
       alsoBoughtInsert = alsoBoughtInsert.concat(this.singleProductAlsoBoughtInsert(productsAlsoBought,toAddProduct));
     })
-    console.log('$$$',alsoBoughtInsert)
     return alsoBoughtInsert;
   }
   //creates an array of all emails who bought the product at thend in createInsert for loop
@@ -71,13 +70,9 @@ class AddAlsoBought {
   //turns raw orders into organized list such as {1: [product,product] 2: [product,product]}
   singleProductAlsoBoughtInsert(productsAlsoBought,toAddProduct){
     const singleProductAlsoBoughtInsert = [];
-    console.log('productsalsobought',productsAlsoBought)
     productsAlsoBought.forEach((element)=>{
-      console.log('$$$$$$')
         const seenAlready = this.checkIfInInsertAlready(singleProductAlsoBoughtInsert,element,toAddProduct);
-        console.log(seenAlready)
         if (seenAlready.seen){
-          console.log('woreked eh!')
           singleProductAlsoBoughtInsert[seenAlready.atIndex].howMany = singleProductAlsoBoughtInsert[seenAlready.atIndex].howMany + 1;
         } else {
           let store = element.vendor.replace(/ /g, "-");
@@ -100,14 +95,10 @@ class AddAlsoBought {
   //if it is it will return where that product is in the insert so it can add plus one in the howmany property in the next step
   checkIfInInsertAlready(singleProductAlsoBoughtInsert,element,toAddProduct){
     var seenAlready = {};
-    console.log('!!!',toAddProduct)
     for(var j = 0; j < singleProductAlsoBoughtInsert.length; ++j) {
         if(singleProductAlsoBoughtInsert[j].productID == element.product_id && singleProductAlsoBoughtInsert[j].forProduct == toAddProduct.productID){
-          console.log('seen!')
          seenAlready.seen = true;
          seenAlready.atIndex = j;
-         console.log('seen within',seenAlready);
-         console.log(seenAlready.seen)
          return seenAlready;
        }
     }

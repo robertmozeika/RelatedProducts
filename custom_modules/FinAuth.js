@@ -26,11 +26,7 @@ class FinAuth {
     const { res, shop, shopifyconfig } = this;
     renderMain(res,shop,shopifyconfig);
   }
-  verifyFail() {
-    // return false
-    console.log('didnt work')
-    this.res.send('Reques')
-  }
+
 
 }
 

@@ -51,7 +51,6 @@ class AddProducts2DB {
   }
   createProducts2Add(){
     const products2Add = [];
-    console.log('dbProducts',this.dbProducts)
     if (this.dbProducts){
       this.shopProducts.forEach(shopProd=>{
         let need2add = true;
@@ -65,7 +64,6 @@ class AddProducts2DB {
           const image = this.makeImageString(shopProd.image)
           this.referenceMap.set(shopProd.id, {price:shopProd.variants[0].price, title:shopProd.title, handle:shopProd.handle, image:image,});
           const productInsert = new ProductInsert(shopProd,image,this.defaultNum.defaultNum,this.shop);
-          console.log('productInsert',productInsert)
           products2Add.push(productInsert)
         }
       })
