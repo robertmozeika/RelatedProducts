@@ -33,7 +33,7 @@ var authorize = {
       name: shopname,
       access_token: access_token,
       defaultNumOfRelated: 3,
-      header: "Related Products",
+      header: "People Also Bought",
       allMostBought: [false,false,false,false,false,false]
     }
 
