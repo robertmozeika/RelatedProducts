@@ -38,7 +38,7 @@ angular
 
 
         var postData = {
-          bool: true,
+          bool,
           productIDs: productIDs,
           index: index,
         }

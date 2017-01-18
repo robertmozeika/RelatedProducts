@@ -179,6 +179,7 @@ router.post('/multiple', function(req, res, next) {
     }
 
     var { bool } = req.body;
+    console.log('BOOL', bool)
     const rpSchema = {
       store: req.session.shop,
       forProduct: {$in: req.body.productIDs},
