@@ -10,10 +10,10 @@ function createShopConfig(shop,access_token){
   }
   if (access_token){
     config.access_token = access_token;
-    config.redirect_uri = 'https://localhost:8888/finish_auth';
+    config.redirect_uri = 'https://simple-related-products.herokuapp.com/finish_auth';
 
   } else {
-    config.redirect_uri = 'https://localhost:8888/exchange';
+    config.redirect_uri = 'https://simple-related-products.herokuapp.com/exchange';
     config.nonce = (Math.random() * 1000000).toString();
   }
   return config;

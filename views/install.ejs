@@ -45,7 +45,7 @@
             <h2>Install Simple Related Products</h3>
           </div>
           <hr>
-          <form name="install" action"https://localhost:8888/" method="GET">
+          <form name="install" action"https://simple-related-products.herokuapp.com/" method="GET">
             <div class="form-group">
               <label>Name of your store:</label>
               <input name="shop" type="text" class="form-control"/>
@@ -63,7 +63,7 @@
       $(function() {
         $('form').submit(function(){
           var x = document.forms['install']['shop'].value;
-            window.location = 'https://localhost:8888/?shop=' + x;
+            window.location = 'https://simple-related-products.herokuapp.com/?shop=' + x;
           return false;
         });
       });
