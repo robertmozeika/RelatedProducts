@@ -16,9 +16,6 @@ function renderPromises(res,shop,shopConfig){
     var addProducts2DB = new AddProducts2DB(values, shop, shopConfig)
     return addProducts2DB.init()
   }).then(function(values){
-      res.set({
-        'X-Frame-Options': 'ALLOW-FROM https://myshopify.com/'
-      })
       res.render('layout', {
               title: 'Related Products',
               shop: shop,
