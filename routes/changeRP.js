@@ -84,39 +84,71 @@ router.get('/', function(req,res,next){
 
 
 router.post('/multiple',function(req,res,next){
-  if (verifyHMAC(req.headers.referer,true)){
-      const { products, order,productID,title,image,ow,price,handle } = req.body;
-      console.log('handle',handle)
-      const allIDs =[];
-      products.forEach((element)=>{
-        if(ow){
+  const VerifyHMAC = new verifyHMAC(req.headers.referer,true,verifySuccess,res);
+  function verifySuccess(){
+    const { products, order,productID,title,image,ow,price,handle } = req.body;
+    console.log('handle',handle)
+    const allIDs =[];
+    products.forEach((element)=>{
+      if(ow){
+        allIDs.push(element.productID)
+      } else {
+        if (!element.locks[order]){
           allIDs.push(element.productID)
-        } else {
-          if (!element.locks[order]){
-            allIDs.push(element.productID)
-          }
         }
-      })
-      const queryData = {
-        store: req.session.shop,
-        order,
-        forProduct: {$in: allIDs},
       }
-      const updateData = {
-        productID,
-        title,
-        image,
-        price,
-        handle,
-      }
+    })
+    const queryData = {
+      store: req.session.shop,
+      order,
+      forProduct: {$in: allIDs},
+    }
+    const updateData = {
+      productID,
+      title,
+      image,
+      price,
+      handle,
+    }
 
-      rpModel.update(queryData,updateData,{multi:true},function(err,doc){
-        console.log(err,doc)
-        res.send('worked')
-      })
-  } else {
-    res.send('Cannot validate request is coming from shopify. If you are receiving this message in error, please email the developer at robertmozeika20@gmail.com')
+    rpModel.update(queryData,updateData,{multi:true},function(err,doc){
+      console.log(err,doc)
+      res.send('worked')
+    })
   }
+  // if (verifyHMAC(req.headers.referer,true)){
+  //     const { products, order,productID,title,image,ow,price,handle } = req.body;
+  //     console.log('handle',handle)
+  //     const allIDs =[];
+  //     products.forEach((element)=>{
+  //       if(ow){
+  //         allIDs.push(element.productID)
+  //       } else {
+  //         if (!element.locks[order]){
+  //           allIDs.push(element.productID)
+  //         }
+  //       }
+  //     })
+  //     const queryData = {
+  //       store: req.session.shop,
+  //       order,
+  //       forProduct: {$in: allIDs},
+  //     }
+  //     const updateData = {
+  //       productID,
+  //       title,
+  //       image,
+  //       price,
+  //       handle,
+  //     }
+  //
+  //     rpModel.update(queryData,updateData,{multi:true},function(err,doc){
+  //       console.log(err,doc)
+  //       res.send('worked')
+  //     })
+  // } else {
+  //   res.send('Cannot validate request is coming from shopify. If you are receiving this message in error, please email the developer at robertmozeika20@gmail.com')
+  // }
 })
 
 
