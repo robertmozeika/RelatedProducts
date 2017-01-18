@@ -10,3 +10,6 @@ Currently undergoing testing.
 
 Starts from client going to /install, in routes/install,
 Gets redirected to routes/index.js, which gets authorized by shopify then sent to routes/finauth.js where the user interface is set up.
+
+
+Demo Install and Setup: https://www.youtube.com/watch?v=iFeHI7sWOvI
