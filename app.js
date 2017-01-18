@@ -35,10 +35,7 @@ var users = require('./routes/users');
 var finauth = require('./routes/finauth');
 
 var getJSON = require('./routes/getJSON.js');
-var getRP = require('./routes/getRP.js');
 var exchangetoken = require('./routes/exchange.js');
-var changeNumOfRel = require('./routes/changeNumOfRel.js');
-var changeDefNum = require('./routes/changeDefaultNum.js');
 var changeNR = require('./routes/changeNR.js');
 var changeRP = require('./routes/changeRP.js');
 var setAllMostBought = require('./routes/setAllMostBought.js');
@@ -94,10 +91,7 @@ app.use('/users', users);
 app.use('/finish_auth', finauth);
 
 app.use('/getJSON', getJSON);
-app.use('/getRP', getRP);
 app.use('/exchange', exchangetoken);
-app.use ("/changeNumOfRel", changeNumOfRel);
-app.use ("/changeDefaultNum", changeDefNum);
 app.use ("/changeNR", changeNR);
 app.use ("/changeRP", changeRP);
 app.use ("/setAllMostBought", setAllMostBought);
