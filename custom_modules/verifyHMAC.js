@@ -52,7 +52,11 @@ class VerifyHMAC {
     return message
   }
   computeHMAC(message){
-    return crypto.createHmac('sha256', '6815b758b2996ee3ef116c112432a085').update(message).digest('hex');
+    let secret = '6815b758b2996ee3ef116c112432a085';
+    if (global.url == "https://localhost:3000/"){
+      secret = "09669da38e6cedc214415e9bc147860d";
+    }
+    return crypto.createHmac('sha256', secret).update(message).digest('hex');
   }
   compare(computedHMAC){
     if (computedHMAC == this._hmac) {

@@ -27,7 +27,7 @@ class GetShopData {
     return new Promise((resolve,reject)=>{
       this.shopify.get('/admin/products.json',  function(err, data, headers){
           if (err){
-            console.log("reject is " + err)
+            console.log("reject is ", err)
             reject(err);
           } else {
             resolve(data.products)
@@ -40,7 +40,7 @@ class GetShopData {
     return new Promise((resolve,reject)=>{
       this.shopify.get('/admin/custom_collections.json', function(err, data, headers){
           if (err){
-            console.log("reject is " + err)
+            console.log("reject is ", err)
             reject(err);
           } else {
             resolve(data.custom_collections)

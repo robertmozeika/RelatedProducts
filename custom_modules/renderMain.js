@@ -20,7 +20,8 @@ function renderPromises(res,shop,shopConfig){
               shop: shop,
               numOfRelPass: values[0],//from getNumOfRel plus added from the addsProducts2DB function
               defaultNum: values[1],
-              collections: values[2]
+              collections: values[2],
+              api: global.api,
       });
   }).catch(reason =>{
     console.log(reason)
