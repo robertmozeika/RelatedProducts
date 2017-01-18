@@ -11,7 +11,7 @@ router.get('/', function(req, res, next) {
     console.log('session: ',req.session)
     authorize.connectShop(req.session.shop, req, res)
   } else {
-    res.send('Please go to /install')
+    res.send('Please go to <a href="' + global.url + 'install">' + global.url + 'install</a>')
   }
 });
 
