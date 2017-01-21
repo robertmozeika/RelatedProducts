@@ -1,7 +1,7 @@
 var mongodb = require('mongodb');
 var getNumOfRel = require('./getNumOfRel.js');
 var AddAlsoBought = require('./addAlsoBought');
-var assignNewAB = require('./assignNewProductAlsoBought');
+var AssignNewAB = require('./assignNewProductAlsoBought');
 const spModel = require('../models/storeProducts.js')
 
 function ProductInsert(product,image,defaultNum,shop){
@@ -32,14 +32,18 @@ class AddProducts2DB {
     return new Promise((resolve,reject)=>{
       if (this.products2Add.length){
         this.dbProducts = this.dbProducts.concat(this.products2Add);
+        console.log('#this.db',this.dbProducts)
         const addAlsoBought = new AddAlsoBought(this.products2Add, this.shopify,this.referenceMap)
         Promise.all([
           spModel.insertMany(this.products2Add),
           addAlsoBought.init(),
         ])
         .then(function(data){
-          return assignNewAB(this.products2Add, this.defaultNum.allMostBought, this.shop,data[1])
+          const assignNewAB = new assignNewAB(this.products2Add, this.defaultNum.allMostBought, this.shop,data[1]);
+          //assigns new products their related products (if most bought positions are checked those will automatically be filled in), also gives them their related products arr as property
+          return assignNewAB.init()
         }.bind(this)).then(function(data){
+          //now dbProducts will have relatedproducts arr  as a property
           resolve([this.dbProducts,this.defaultNum,this.collectionArr])
         }.bind(this)).catch(function(err){
           console.log('error at addProducts2DB', err)
