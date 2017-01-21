@@ -22,7 +22,7 @@ class AssignNewAB {
             trackMostBought++;
             this.fillCheckedMostBoughtSpot(mostBoughtOrdered,trackMostBought,index)
           } else {
-            this.fillUnCheckedMostBoughtSpot();
+            this.fillUnCheckedMostBoughtSpot(index);
           }
         })
       } else {
@@ -34,7 +34,7 @@ class AssignNewAB {
           reject(err)
         })
       //sends products back now that they have the related products arr attached, will be combined with all the products already in db
-      resolve(products)
+      resolve(this.products)
 
 
     })
@@ -57,7 +57,7 @@ class AssignNewAB {
     let leftovers = this.abInsert;
     let leftOversToReplace = [];
     const mostBoughtOrdered = {};
-    for (var i = 0; i < this.allMostBought.length; i++){
+    for (var i = 0; i < this.allMostBoughtArr.length; i++){
       mostBoughtOrdered[i+1] = {};
 
 
@@ -101,7 +101,7 @@ class AssignNewAB {
       }
     })
   }
-  fillUnCheckedMostBoughtSpot(){
+  fillUnCheckedMostBoughtSpot(index){
     this.products.forEach((product)=>{
         if (!product.locks[index]){
             if (!product.relatedProducts){
@@ -130,6 +130,9 @@ class AssignNewAB {
     })
   }
   RelatedProductInsert(product,index,currentEntry){
+    if (!currentEntry){
+      currentEntry = {};
+    }
     const obj = {
       store: this.shop,
       forProduct: product.productID,

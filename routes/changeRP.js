@@ -8,33 +8,6 @@ const verifyHMAC = require('../custom_modules/verifyHMAC.js');
 
 /* GET users listing. */
 router.post('/', function(req, res, next) {
-  // if (verifyHMAC(req.headers.referer,true)){
-  //   var postData = req.body;
-  //   console.log(postData.newProduct)
-  //   const { productID, title, image, price, handle } = postData.newProduct;
-  //
-  //   postData.store = req.session.shop;
-  //   var query = {
-  //     forProduct:postData.productID,
-  //     order: postData.order,
-  //     store:postData.store
-  //   };
-  //   var newData = {
-  //     productID,
-  //     title,
-  //     image,
-  //     price,
-  //     handle,
-  //   }
-  //
-  //   rpModel.findOneAndUpdate(query, newData, {upsert:false}, function(err, doc){
-  //       if (err) return res.send(500, { error: err });
-  //       return res.send("succesfully saved");
-  //   });
-  // } else {
-  //   res.send('Cannot validate request is coming from shopify. If you are receiving this message in error, please email the developer at robertmozeika20@gmail.com')
-  // }
-  console.log(req)
   const VerifyHMAC = new verifyHMAC(req.headers.referer,true,verifySuccess,res);
   function verifySuccess(){
     console.log('verified change!')
@@ -63,7 +36,9 @@ router.post('/', function(req, res, next) {
   }
 
 
-  });
+});
+
+
 router.get('/', function(req,res,next){
   const VerifyHMAC = new verifyHMAC(req.headers.referer,true,verifySuccess,res);
   function verifySuccess(){
