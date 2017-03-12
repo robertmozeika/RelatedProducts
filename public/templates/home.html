@@ -1,75 +1,80 @@
 
-<a class="btn btn-primary pull-right" id="refresh-button" href="/refreshAlsoBought"><span class="glyphicon glyphicon-refresh"></span>&nbsp;Product Data</a><br /><br />
+<!--<a class="btn btn-primary pull-right" id="refresh-button" href="/refreshAlsoBought"><span class="glyphicon glyphicon-refresh"></span>&nbsp;Product Data</a><br /><br />-->
 
-  <a class="btn btn-primary pull-right" ng-hide="settings.show" ng-click="openSettings()" ><span class="glyphicon glyphicon-cog"></span>&nbsp;Settings</a>
+<a class="btn btn-primary pull-right" ng-hide="customizer.show" ng-click="openCustomizer()" ><span class="glyphicon glyphicon-cog"></span>&nbsp;Settings</a>
 <div my-directive="some string" another-param="another string"></div>
 
-<div class="well settings" ng-hide="!settings.show">
+<!--<div class="well settings" ng-hide="!customizer.show">-->
+<div class="well settings">
+
 
   <div ng-include src="templates.settings"></div>
 
 </div>
 
 <div ui-view=""></div>
-
-<h3>Products</h3>
-
-
-<form class="form-inline">
-  <div class="form-group">
-    <label >Search Products: </label>
-    <input type="text" ng-model="filterString.title" class="form-control" />
-    <label >Collection: </label>
-    <!-- <input class="form-control" list="browsers" ng-model="filterString._collections"> -->
-      <select class="form-control" id="browsers" ng-model="filterString._collections">
-        <option  ng-selected="{{defaultCollect == collect.value}}" ng-repeat="collect in collections" value="{{collect.value}}">{{collect.display}}</option>
-      </select>
-  </div>
-</form><br />
-
-
-
-
-<button id="changeChecked" class="btn btn-default" ng-click="openModal()" popover-enable="{{wpPopEnable()}}" uib-popover="No products selected" popover-is-open="changeMultiplePop"  popdelay>Set Checked</button>
-
-
-<!-- <div ng-include src="templates.table"></div> -->
-<table class="table">
-  <thead>
-    <tr>
-      <th class="checkHeading"><input id="checkAll" class="checkTable" ng-model="checkAllModel" type="checkbox" ng-click="checkAll()"/></th>
-      <th>Product Name</th>
-      <th>Number of Related</th>
-      <th>Related Products</th>
-
-    </tr>
-  </thead>
-  <tbody>
-    <tr ng-repeat="product in products | filter: {_collections:filterString._collections||undefined} as filteredProducts">
-      <td>
-        <input  ng-click="changeCheck(product, $index)" ng-checked="returnCheck(product.productID)" ng-model="checkMap[product.productID]" class="checkTable" type="checkbox" value="on">
-      </td>
-      <td>
-        {{product.title}}<br />
-        <a href="#" ng-click="showRPWindow(product)">Set Related Products</a>
-      </td>
-      <td>
-        <select ng-model="product.numOfRel" ng-options="n for n in numbers" ng-change="changeNR(product)">
+<div ng-hide="!customizer.show">
+  
+  <h3>Products</h3>
+  
+  
+  <form class="form-inline">
+    <div class="form-group">
+      <label >Search Products: </label>
+      <input type="text" ng-model="filterString.title" class="form-control" />
+      <label >Collection: </label>
+      <!-- <input class="form-control" list="browsers" ng-model="filterString._collections"> -->
+        <select class="form-control" id="browsers" ng-model="filterString._collections">
+          <option  ng-selected="{{defaultCollect == collect.value}}" ng-repeat="collect in collections" value="{{collect.value}}">{{collect.display}}</option>
         </select>
+    </div>
+  </form><br />
+  
+  
+  
+  
+  <button id="changeChecked" class="btn btn-default" ng-click="openModal()" popover-enable="{{wpPopEnable()}}" uib-popover="No products selected" popover-is-open="changeMultiplePop"  popdelay>Set Checked</button>
+  
+  
+  <!-- <div ng-include src="templates.table"></div> -->
+  <table class="table">
+    <thead>
+      <tr>
+        <th class="checkHeading"><input id="checkAll" class="checkTable" ng-model="checkAllModel" type="checkbox" ng-click="checkAll()"/></th>
+        <th>Product Name</th>
+        <th>Number of Related</th>
+        <th>Related Products</th>
+  
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="product in products | filter: {_collections:filterString._collections||undefined} as filteredProducts">
+        <td>
+          <input  ng-click="changeCheck(product, $index)" ng-checked="returnCheck(product.productID)" ng-model="checkMap[product.productID]" class="checkTable" type="checkbox" value="on">
+        </td>
+        <td>
+          {{product.title}}<br />
+          <a href="#" ng-click="showRPWindow(product)">Set Related Products</a>
+        </td>
+        <td>
+          <select ng-model="product.numOfRel" ng-options="n for n in numbers" ng-change="changeNR(product)">
+          </select>
+  
+        </td>
+        <td>
+          <ul>
+            <li ng-repeat="product in product.relatedProducts | limitTo: product.numOfRel track by $index">{{product}}</li>
+          </ul>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  
+  <!-- <show-Details detail-contact="detailContact"></show-Details> -->
+  <rp-window rp-window-product="rpWindowProduct" products="products"></rp-window>
+  <!-- <multiple-window checked-products="checkedProducts"></multiple-window> -->
+  <multiple-window checked-products="checkedProducts"> </multiple-window>
 
-      </td>
-      <td>
-        <ul>
-          <li ng-repeat="product in product.relatedProducts | limitTo: product.numOfRel track by $index">{{product}}</li>
-        </ul>
-      </td>
-    </tr>
-  </tbody>
-</table>
-
-
-
-<!-- <show-Details detail-contact="detailContact"></show-Details> -->
-<rp-window rp-window-product="rpWindowProduct" products="products"></rp-window>
-<!-- <multiple-window checked-products="checkedProducts"></multiple-window> -->
-<multiple-window checked-products="checkedProducts"> </multiple-window>
+</div>  

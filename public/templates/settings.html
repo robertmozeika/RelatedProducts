@@ -1,5 +1,4 @@
-<a class="close-btn btn btn-danger pull-right" ng-click="openSettings()"><span class="glyphicon glyphicon-remove"></span>
-</a>
+<!--<a class="close-btn btn btn-danger pull-right" ng-click="openCustomizer()"><span class="glyphicon glyphicon-remove"></span></a>-->
 
 <br />
 
@@ -34,8 +33,13 @@
 <input ng-model="headerValues.header"/>
 
 <button class="btn btn-primary" ng-click="headerValues.setHeader(headerValues.header)" type="submit" uib-popover="Set!" popover-is-open="displayPop"  popdelay>Set</button>
-<br />
-<a href="/getJSON/removeProducts">Remove Products From App Database</a><br />
-
+<br /><br>
 </div>
 </form>
+
+<div class="row">
+  <div class="col-md-4"><a class="btn btn-success" id="refresh-button" href="/refreshAlsoBought"><span class="glyphicon glyphicon-refresh"></span>&nbsp;Refresh Product Data</a></div class="col-md-4">
+  <div class="col-md-4"><a class="btn btn-primary" ng-click="openCustomizer()">Customize Individual Products</a></div class="col-md-4">
+  <div class="col-md-4"><a class="btn btn-danger" href="/getJSON/removeProducts">Remove Products From App Database</a></div><br />
+</div>
+

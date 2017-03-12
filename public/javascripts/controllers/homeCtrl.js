@@ -54,11 +54,11 @@ angular
       })
     };
 
-    $scope.settings = {show: false };
+    $scope.customizer = {show: false };
 
-    $scope.openSettings = function(){
-      $scope.settings.show = !$scope.settings.show;
-      console.log($scope.settings.show)
+    $scope.openCustomizer = function(){
+      $scope.customizer.show = !$scope.customizer.show;
+      console.log($scope.customizer.show)
     }
 
     $scope.headerValues = HeaderService.getValues();
