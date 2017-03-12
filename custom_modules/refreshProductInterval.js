@@ -96,6 +96,9 @@ function updateStores(shopifyconfig,shop){
             console.log(value)
             console.log(dbMapVal)
             console.log(dbMap)
+            if (dbMapVal == undefined || value == undefined){
+              console.log('pause')
+            }
             if (dbMapVal.image == value.image){
               console.log('same images')
             } else {
