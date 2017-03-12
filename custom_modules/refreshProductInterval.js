@@ -9,7 +9,7 @@ var abModel = require('../models/alsoBoughtProducts.js');
 var rpModel = require('../models/relatedProducts.js');
 var spModel = require('../models/storeProducts.js');
 
-const getShopData = require('../custom_modules/getShopifyData');
+const GetShopData = require('../custom_modules/getShopifyData');
 const fixImage = require('../custom_modules/imageToMedium.js');
 
 
@@ -62,9 +62,10 @@ function refreshProductInterval(){
 function updateStores(shopifyconfig,shop){
     const shopMap = new Map();
     const dbMap = new Map();
+    const getShopData = new GetShopData(shopifyconfig);
 
       return Promise.all([
-        getShopData(shopifyconfig),
+        getShopData.init(),
         spModel.find({store: shop})
       ]).then(([ shopProducts, dbProducts ])=>{
 
