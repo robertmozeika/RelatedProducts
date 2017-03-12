@@ -20,6 +20,8 @@ angular
     //global variable from before scripts.min.js
     $scope.defaultNR = defaultNum.defaultNum;
 
+    //auto sets the checkmark to change all products to new default
+    $scope.checkedDNR = true;
 
 
     $scope.changeNR = ChangeNR.changeNR;
