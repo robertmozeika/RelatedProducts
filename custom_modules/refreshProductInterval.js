@@ -1,13 +1,14 @@
 const shopModel = require('../models/shops.js');
 const shopifyAPI = require('shopify-node-api');
 
-var addAlsoBought = require('../custom_modules/addAlsoBought.js');
-var setAllMostBought = require('../custom_modules/setAllMostBought.js');
-var assignNewProductAlsoBought = require('../custom_modules/assignNewProductAlsoBought.js')
+const AddAlsoBought = require('../custom_modules/addAlsoBought.js');
+//not need below
+const setAllMostBought = require('../custom_modules/setAllMostBought.js');
+const AssignNewProductAlsoBought = require('../custom_modules/assignNewProductAlsoBought.js');
 
-var abModel = require('../models/alsoBoughtProducts.js');
-var rpModel = require('../models/relatedProducts.js');
-var spModel = require('../models/storeProducts.js');
+const abModel = require('../models/alsoBoughtProducts.js');
+const rpModel = require('../models/relatedProducts.js');
+const spModel = require('../models/storeProducts.js');
 
 const GetShopData = require('../custom_modules/getShopifyData');
 const fixImage = require('../custom_modules/imageToMedium.js');
@@ -30,8 +31,8 @@ function refreshProductInterval(){
             verbose: false,
           }
 
-          updateStores(shopifyconfig,element.name)
-
+          updateProductInfo(shopifyconfig,element.name);
+          updateAlsoBought(shopifyconfig,element.name);
           // shopify.get('/admin/products.json',  function(err, data, headers){
           //         // var stringdata = JSON.stringify(data.products);
           //               // resolve(JSON.parse(stringdata))
@@ -51,7 +52,7 @@ function refreshProductInterval(){
         // res.redirect(auth_url);
       }
     })
-
+}
 //
 //   const { shop, shopifyconfig } = req.session;
 //
@@ -59,7 +60,7 @@ function refreshProductInterval(){
 //   const dbMap = new Map();
 //
 //
-function updateStores(shopifyconfig,shop){
+function updateProductInfo(shopifyconfig,shop){
     const shopMap = new Map();
     const dbMap = new Map();
     const getShopData = new GetShopData(shopifyconfig);
@@ -158,44 +159,41 @@ function updateStores(shopifyconfig,shop){
           // res.send([finder,setter]);
           console.log('completed Update')
         })
+    }).catch(function(err){
+      console.log('error here', err)
+    })
+}
 
-
-
-
-      }).catch(function(err){
-        console.log('error here', err)
-      })
-
-    var abProds = [];
-    var allProducts = [];
-
+function updateAlsoBought(shopifyconfig,shop){
+    let abProds;
+    let allProducts;
+    console.log('hello! im doing something!')
     Promise.all([
     rpModel.find({locked:false}).remove(),
     abModel.find({}).remove()
     ]).then(function(){
-    spModel.find({store: req.session.shop})
+    spModel.find({store: shop})
       .then(function(doc){
         allProducts = doc;
-        return addAlsoBought(doc,req.session.shopifyconfig)
+        const addAlsoBought = new AddAlsoBought(doc,shopifyconfig)
+        return addAlsoBought.init();
 
       }).then(function(data){
         abProds = data;
-
-        return shopModel.find({name:req.session.shop})
+        return shopModel.find({name: shop})
       }).then(function(doc){
       // console.log(doc)
       // console.log(abProds)
-
-        return assignNewProductAlsoBought(allProducts,doc[0].allMostBought,req.session.shop,abProds)
+        const assignNewProductAlsoBought = new AssignNewProductAlsoBought(allProducts,doc[0].allMostBought,shop,abProds)
+        return assignNewProductAlsoBought.init();
       }).then(function(data){
         // res.send('respond with a resource');
-        return refreshProductInfo()
-
+        // return refreshProductInfo()
+        console.log('hopefully complete!')
       }).catch(function(err){
-        res.send(err);
+        console.log(err);
       })
     });
-}
 }
 
 
