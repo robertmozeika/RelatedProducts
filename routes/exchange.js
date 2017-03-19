@@ -18,7 +18,7 @@ router.get('/', function(req, res){
     var post_data = {
       "script_tag": {
       "event": "onload",
-      "src": "https:\/\/dl.dropboxusercontent.com\/s\/rzer5jwfc6f742c\/example.js"
+      "src": "https:\/\/simple-related-products.herokuapp.com\/related-products-front.js"
     }
 
     }
