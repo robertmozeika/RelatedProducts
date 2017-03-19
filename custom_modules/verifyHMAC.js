@@ -60,8 +60,10 @@ class VerifyHMAC {
   }
   compare(computedHMAC){
     if (computedHMAC == this._hmac) {
+      console.log('verified');
       return this.successCallback();
     } else {
+      console.log('verification failed');
       return this.verifyFailed.call(this);
     }
   }
