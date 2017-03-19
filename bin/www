@@ -111,4 +111,4 @@ function onListening() {
   debug('Listening on ' + bind);
 }
 
-global.url = "https://localhost:3000/"
+global.url = "https://simple-related-products.herokuapp.com/"
