@@ -15,7 +15,6 @@ global.url = "https://localhost:3000/"
 var app = express();
 
 mongoose.connect('mongodb://robertm:testpass@ds155418.mlab.com:55418/relatedproducts');
-// mongoose.connect('mongodb://localhost:27017/shopify')
 
 mongoose.Promise = global.Promise;
 
@@ -145,10 +144,10 @@ app.use(function(err, req, res, next) {
   });
 });
 
-// const refreshProductInterval = require('./custom_modules/refreshProductInterval.js')
-// setInterval(function() {
-//     refreshProductInterval();
-// }, 20000); // every 5 minutes (300000)
+const refreshProductInterval = require('./custom_modules/refreshProductInterval.js')
+setInterval(function() {
+    refreshProductInterval();
+}, 3000); // every 5 minutes (300000)
 
 
 
