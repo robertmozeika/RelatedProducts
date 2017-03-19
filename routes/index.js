@@ -5,6 +5,7 @@ var authorize = require('../custom_modules/authorize.js')
 console.log(global.url)
 /* GET home page. */
 router.get('/', function(req, res, next) {
+  console.log('receiving command')
   //saves shop name for later use with accessing database
   if (req.query.shop){
     req.session.shop = req.query.shop.replace('.myshopify', "").replace('.com', "");
