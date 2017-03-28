@@ -144,10 +144,10 @@ app.use(function(err, req, res, next) {
   });
 });
 
-const refreshProductInterval = require('./custom_modules/refreshProductInterval.js')
-setInterval(function() {
-    refreshProductInterval();
-}, 300000); // every 5 minutes (300000)
+// const refreshProductInterval = require('./custom_modules/refreshProductInterval.js')
+// setInterval(function() {
+//     refreshProductInterval();
+// }, 300000); // every 5 minutes (300000)
 
 // var http = require("http");
 // setInterval(function() {
