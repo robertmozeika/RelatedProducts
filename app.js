@@ -9,13 +9,12 @@ var mongoose = require('mongoose');
 var session = require('express-session');
 var MongoStore = require('connect-mongo')(session);
 
-global.url = "https://localhost:3000/"
-// global.url = "https://simple-related-products.herokuapp.com/"
+// global.url = "https://localhost:3000/"
+global.url = "https://simple-related-products.herokuapp.com/"
 
 var app = express();
 
 mongoose.connect('mongodb://robertm:testpass@ds155418.mlab.com:55418/relatedproducts');
-// mongoose.connect('mongodb://localhost:27017/shopify')
 
 mongoose.Promise = global.Promise;
 
@@ -145,10 +144,10 @@ app.use(function(err, req, res, next) {
   });
 });
 
-// const refreshProductInterval = require('./custom_modules/refreshProductInterval.js')
-// setInterval(function() {
-//     refreshProductInterval();
-// }, 20000); // every 5 minutes (300000)
+const refreshProductInterval = require('./custom_modules/refreshProductInterval.js')
+setInterval(function() {
+    refreshProductInterval();
+}, 300000); // every 5 minutes (300000)
 
 
 
