@@ -19,7 +19,7 @@ router.get('/', function(req, res, next) {
                   shopify_shared_secret: '6815b758b2996ee3ef116c112432a085', // Your Shared Secret
                   access_token: element.access_token,
                   shopify_scope: 'read_products,write_script_tags,read_script_tags,read_orders',
-                  redirect_uri: 'https://simple-related-products.herokuapp.com/finish_auth',
+                  redirect_uri: global.url + 'finish_auth',
                   verbose: false,
                 }
 
