@@ -123,7 +123,7 @@ class AssignNewAB {
             product.relatedProducts = [];
           }
           product.relatedProducts[i] = "blank";
-          var insObj = this.RelatedProductInsert(product,index)
+          var insObj = this.RelatedProductInsert(product,i)
           this._insert2RP.push(insObj)
         }
       }
