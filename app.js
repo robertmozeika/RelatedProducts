@@ -9,8 +9,8 @@ var mongoose = require('mongoose');
 var session = require('express-session');
 var MongoStore = require('connect-mongo')(session);
 
-// global.url = "https://localhost:3000/"
-global.url = "https://simple-related-products.herokuapp.com/"
+global.url = "https://localhost:3000/"
+// global.url = "https://simple-related-products.herokuapp.com/"
 
 var app = express();
 
