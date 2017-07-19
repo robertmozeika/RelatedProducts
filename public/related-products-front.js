@@ -24,11 +24,12 @@ console.log(handle)
                         noBlanks.push(element)
                     }
                 })
+                debugger;
                 if (noBlanks.length){
                     var width = (1 / noBlanks.length);
                     noBlanks.forEach(function(element){
                         console.log('happened')
-                        var titleLink = element.handle; 
+                        var titleLink = element.handle;
 
                         if (element.image){
                            datastring = datastring.concat("<a style='display:block' href='" + titleLink + "'><div class='related-product'> <img src=" + element.image + "><div class='rpTitle'>"+ element.title + "</div><div class='rpPrice'>$" + element.price + "</div></div></a>")
@@ -92,4 +93,3 @@ console.log(handle)
 
 
 
-    

@@ -18,7 +18,6 @@ function createShopConfig(shop,access_token){
 
   if (access_token){
     config.access_token = access_token;
-    // config.redirect_uri = 'https://simple-related-products.herokuapp.com/finish_auth';
     config.redirect_uri = global.url + 'finish_auth';
 
 
